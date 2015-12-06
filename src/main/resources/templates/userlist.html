@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<a href="/adduserform">Add User</a>
+<ul>
+    <li th:each="user: ${userlist}">
+        <span th:text="${user.fullName+' - '+user.reputation}">User Not Found!</span>
+        <a href="#" th:href="'/delete/'+${user.getId()}">x</a>
+    </li>
+</ul>
+</body>
+</html>
