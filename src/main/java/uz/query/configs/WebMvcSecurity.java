@@ -14,7 +14,7 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/userlist").permitAll()
+                .antMatchers("/*").permitAll()
                 .anyRequest().authenticated();
     }
 }
