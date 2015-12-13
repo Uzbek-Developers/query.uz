@@ -16,6 +16,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @RequestMapping(value = {"/", "/home"})
+    public String home(Model model) {
+//        model.addAttribute("userlist", userRepository.findByisDeleted(false));
+        return "home";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model model) {
+//        model.addAttribute("userlist", userRepository.findByisDeleted(false));
+        return "login";
+    }
+
     @RequestMapping("/userlist")
     public String userlist(Model model) {
         model.addAttribute("userlist", userRepository.findByisDeleted(false));

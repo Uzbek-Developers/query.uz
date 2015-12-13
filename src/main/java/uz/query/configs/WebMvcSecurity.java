@@ -1,8 +1,11 @@
 package uz.query.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 /**
  * Created by Mirjalol Bahodirov on 11/28/15.
@@ -10,11 +13,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
 
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/*").permitAll()
+//                .anyRequest().authenticated();
+
         http
                 .authorizeRequests()
-                .antMatchers("/*").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/**").hasRole("USER")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                        // Example Remember Me Configuration
+                .rememberMe();
     }
+
 }

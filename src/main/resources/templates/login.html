@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/init :: head">
+    <title>Query.uz - LOGIN ga xush kelibsiz</title>
+</head>
+<body>
+<div th:replace="fragments/init :: header"></div>
+
+<div class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="content-box">
+
+                    <div class="post-wrap">
+                        <h3 class="title">Kirish</h3>
+
+                        <form class="form-login" th:action="@{/login}" method="post">
+                            <div class="field-row">
+                                <span class="label">Login:</span>
+
+                                <div class="form-field"><input type="text" name="username" max-length="240"/></div>
+                            </div>
+                            <div class="field-row">
+                                <span class="label">Parol:</span>
+
+                                <div class="form-field"><input type="password" name="password" max-length="240"/></div>
+                            </div>
+                            <div class="field-row" th:if="${param.error}">
+                                Loginda yoki parolda xatolik
+                            </div>
+
+                            <div class="field-row" th:if="${param.logout}">
+                                Siz profilingizdan chiqdingiz, qayta kiring.
+                            </div>
+
+                            <div class="field-row footer">
+                                <input type="submit" value="Kirish"/>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <div th:replace="fragments/right-side :: side-wrap"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/init :: footer"></div>
+</body>
+</html>

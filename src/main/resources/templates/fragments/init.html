@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+    <title>Query.uz ga xush kelibsiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" th:href="@{/css/font-awesome.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../css/grid.css" th:href="@{/css/grid.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css}"/>
+
+    <script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+    <!--<script th:src="@{/static/js/less.min.js}"></script>-->
+
+
+    <link rel="stylesheet" type="text/css" href="../static/js/google-code-prettify/prettify.css"
+          th:href="@{/js/google-code-prettify/prettify.css}"/>
+    <script type="text/javascript" src="../static/js/google-code-prettify/prettify.js"
+            th:src="@{/js/google-code-prettify/prettify.js}"></script>
+
+
+    <script type="text/javascript" src="../static/js/pagedown-78f4482fced9/Markdown.Converter.js"
+            th:src="@{/js/pagedown-78f4482fced9/Markdown.Converter.js}"></script>
+    <script type="text/javascript" src="../static/js/pagedown-78f4482fced9/Markdown.Sanitizer.js"
+            th:src="@{/js/pagedown-78f4482fced9/Markdown.Sanitizer.js}"></script>
+    <script type="text/javascript" src="../static/js/pagedown-78f4482fced9/Markdown.Editor.js"
+            th:src="@{/js/pagedown-78f4482fced9/Markdown.Editor.js}"></script>
+    <script type="text/javascript" src="../static/js/pagedown-78f4482fced9/local/Markdown.local.uz.js"
+            th:src="@{/js/pagedown-78f4482fced9/local/Markdown.local.uz.js}"></script>
+
+    <script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</head>
+<body>
+<div class="header" th:fragment="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="brand-box">
+                    <a href="#">
+                        <!--<img src="images/logo-two.png" alt="query.uz" height="40"/>-->
+                        <img src="../images/logo-yellow_white.png" alt="query.uz" height="32"/>
+                        <!--<span>Query</span><span>.</span><span>uz</span> -->
+                        <!--<i class="fa fa-caret-down"></i>-->
+                    </a>
+                    <!--<a href="#"><i class="fa fa-area-chart"></i></a>-->
+                    <!--<a href="#"><i class="fa fa-file-text"></i></a>-->
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <form action="#" class="form-search pull-left">
+                    <label for="srch">Izlash</label>
+                    <input type="text"/>
+                </form>
+                <ul class="list main-menu pull-right clearfix">
+                    <li class="active"><a href="#"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
+                    <li><a href="#"><i class="fa fa-tag"></i> <span>Taglar</span></a></li>
+                    <li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>
+                    <li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>
+                    <li class="add-question"><a href="#"><i class="fa fa-plus"></i> <span>Savol so'rash</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-wrap" th:fragment="footer">
+    <div class="container">
+        <div class="row extra-links">
+            <div class="col-xs-12 col-sm-4">
+                <h2 class="title">Qoidalar</h2>
+                <ul class="list">
+                    <li><a href="#">Foydalanish tartibi qanday?</a></li>
+                    <li><a href="#">Nimalar taqiqlangan?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <h2 class="title">Qoidalar</h2>
+                <ul class="list">
+                    <li><a href="#">Foydalanish tartibi qanday?</a></li>
+                    <li><a href="#">Nimalar taqiqlangan?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <h2 class="title">Qoidalar</h2>
+                <ul class="list">
+                    <li><a href="#">Foydalanish tartibi qanday?</a></li>
+                    <li><a href="#">Nimalar taqiqlangan?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                    <li><a href="#">Nima uchun foydalanuvchilar o'chiraldi?</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-7">
+                    <p>&copy; 2015-2016 - <a href="#">Query.uz</a> Hamma xuquqlar himoyalangan.</p>
+                </div>
+                <div class="col-xs-12 col-sm-5">
+                    <p class="right-side">Takliflar bo'lsa <a
+                            href="mailto:sherali.uz@gmail.com">sherali.uz@gmail.com</a> ga murojaat qiling</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--./ footer-wrap -->
+</body>
+</html>

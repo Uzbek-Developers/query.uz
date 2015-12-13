@@ -1,0 +1,106 @@
+h1, h2, h3, h4, h5, p, ul, ol, blockquote {
+  .set-margin(0 0 1em);
+}
+
+ul, ol {
+  .set-padding(0 0 0 1.4em);
+}
+
+img {
+  .set-max-width();
+}
+
+a {
+  color: @link-text-color;
+  text-decoration: none;
+  .set-transition();
+  &:hover {
+    text-decoration: underline;
+  }
+  //  &:visited {
+  //    color: @link-visited-text-color;
+  //  }
+}
+
+textarea, input {
+  font-family: @body-font-family;
+  .set-padding(5px);
+}
+
+input[type=text],
+input[type=password] {
+  border: 1px solid @color-black;
+  height: 28px;
+  .set-padding(0 5px);
+}
+
+*:focus {
+  outline: none;
+}
+
+.hide {
+  display: none;
+}
+
+.btn {
+  text-align: center;
+  background: @color-white;
+  text-transform: uppercase;
+  border: none;
+  .set-padding-margin(0, 10px 12px);
+  //  .set-box-shadow();
+}
+
+a.btn {
+  .set-display-ib();
+  &:hover {
+    text-decoration: none;
+  }
+  &:visited {
+
+  }
+}
+
+.shdw-1x {
+  .set-box-shadow();
+}
+
+.shdw-2x {
+  .set-box-shadow(0 2px 3px @color-gray-medium);
+}
+
+.btn-green {
+  background: @color-green;
+  color: @color-white;
+}
+
+.btn-blue {
+  background: @color-blue;
+  color: @color-white;
+}
+
+.btn-black {
+  background: @color-blue;
+  color: @color-white;
+}
+
+.field-row {
+  .set-padding-margin(0, 15px);
+  & + .field-row {
+    padding-top: 0;
+  }
+  &.footer {
+
+  }
+  .label {
+    color: @color-gray-normal;
+  }
+  input[type=text] {
+    width: 100%;
+    border: 1px solid @color-gray-medium;
+    font-size: 1.2em;
+    height: auto;
+    color: @color-gray;
+    .set-padding(5px);
+  }
+}
