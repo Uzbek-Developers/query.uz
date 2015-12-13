@@ -1,0 +1,52 @@
+<div th:fragment="ask-question">
+    <div class="post-wrap">
+        <h3 class="title"><a href="#" class="question-link">Qanday qilib JavaScriptda
+            Internet bor yo'qligini
+            tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
+
+        <div class="post-item ask-question">
+            <div class="field-row">
+                <span class="label">Savol sarlavhasi:</span>
+
+                <div class="form-field"><input type="text" name="heading" max-length="240"/></div>
+            </div>
+            <div class="field-row">
+                <span class="label">Savol matni: </span>
+
+                <div class="text-editor">
+                    <div class="wmd-panel">
+                        <div id="wmd-button-bar"></div>
+                        <textarea class="wmd-input" id="wmd-input">
+                            This is the *first* editor.
+                            Just plain **Markdown**, except that the input is sanitized:
+                            <marquee>I'm the ghost from the past!</marquee>
+
+                            and that it implements "fenced blockquotes" via a plugin:
+
+                            """
+                            Do it like this:
+
+                            1. Have idea.
+                            2. ???
+                            3. Profit!
+                            """
+                        </textarea>
+                    </div>
+
+                    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                </div>
+            </div>
+            <div class="field-row">
+                <span class="label">Teglarni kiriting:</span>
+
+                <div class="form-field"><input type="text" name="tags"/></div>
+            </div>
+            <div class="field-row footer">
+                <!--<div class="footer">-->
+                <a class="btn btn-green shdw-2x" href="#">Savol Berish</a>
+                <a href="#">Link</a>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,7 +19,6 @@ public class BaseModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
 
-
     @Column(nullable = false)
     private Boolean isDeleted = false;
 
