@@ -1,5 +1,7 @@
 package uz.query.models.base;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,13 +16,16 @@ public class BaseModel {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @ColumnDefault(value = "now()")
     private Date creationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @ColumnDefault(value = "now()")
     private Date modifiedDate;
 
 
     @Column(nullable = false)
+    @ColumnDefault(value = "false")
     private Boolean isDeleted = false;
 
     public Long getId() {

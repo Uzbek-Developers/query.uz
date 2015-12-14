@@ -1,5 +1,6 @@
 package uz.query.models;
 
+import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ public class User extends BaseModel {
     private String fullName;
     private String userName;
     private String password;
+    @ColumnDefault(value = "0")
     private Integer reputation;
 
     public String getFullName() {
