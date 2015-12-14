@@ -20,8 +20,8 @@
                         <li><a href="#" th:text="${tag.tagName}">Ajax</a></li>
                     </ul>
                     <div class="question-activity">
-                        <a href="#" th:text="${question.questionOwner.fullName}">Sardorjon</a>
-                        <span class="reputation" th:text="${'('+question.questionOwner.reputation+')'}"></span>
+                        <a href="#" th:text="${question.questionOwner.fullName}">Foydalanuvchi</a>
+                        <span class="reputation" th:text="${'('+question.questionOwner.+')'}"></span>
                         tomonidan 5 soat
                         avval savol berildi
                     </div>
@@ -29,7 +29,7 @@
 
                 <td class="number votes">
                     <div class="number-box">
-                        <span class="count" th:text="${question.voteCount}"></span>
+                        <span class="count" th:text="${question.voteCount}">0</span>
                         <span class="text">ovoz</span>
                     </div>
                 </td>
@@ -42,7 +42,7 @@
                 </td>
                 <td class="number views">
                     <div class="number-box">
-                        <span class="count" th:text="${question.seenCount}">28</span>
+                        <span class="count" th:text="${question.seenCount}">0</span>
                         <span class="text">ko'rilgan</span>
                     </div>
                 </td>
@@ -53,7 +53,7 @@
                 <li><a href="#">Prev</a></li>
                 <li th:each="i: ${#numbers.sequence(1, questionPage.getTotalPages())}"
                     th:classappend="${questionPage.getNumber()+1==i}?'active':''">
-                    <a href="" th:text="${i}" th:href="'?page='+${i-1}">1</a>
+                    <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
                 </li>
                 <li><a href="#">Next</a></li>
             </ul>

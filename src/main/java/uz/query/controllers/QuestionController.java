@@ -6,6 +6,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import uz.query.Constants;
 import uz.query.repositories.QuestionRepository;
 
 /**
@@ -18,7 +19,7 @@ public class QuestionController {
     private QuestionRepository questionRepository;
 
     @RequestMapping(value = {"/", "/home"})
-    public String home(Model model, @PageableDefault(size = 15) Pageable pageable) {
+    public String home(Model model, @PageableDefault(size = Constants.SMALL_PAGE_SIZE) Pageable pageable) {
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
         return "home";
     }
