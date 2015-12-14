@@ -5,48 +5,38 @@
             tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
 
         <div class="post-item ask-question">
-            <div class="field-row">
-                <span class="label">Savol sarlavhasi:</span>
+            <form action="#" th:action="@{/aks_question}" th:object="${question}" method="POST">
+                <div class="field-row">
+                    <span class="label">Savol sarlavhasi:</span>
 
-                <div class="form-field"><input type="text" name="heading" max-length="240"/></div>
-            </div>
-            <div class="field-row">
-                <span class="label">Savol matni: </span>
-
-                <div class="text-editor">
-                    <div class="wmd-panel">
-                        <div id="wmd-button-bar"></div>
-                        <textarea class="wmd-input" id="wmd-input">
-                            This is the *first* editor.
-                            Just plain **Markdown**, except that the input is sanitized:
-                            <marquee>I'm the ghost from the past!</marquee>
-
-                            and that it implements "fenced blockquotes" via a plugin:
-
-                            """
-                            Do it like this:
-
-                            1. Have idea.
-                            2. ???
-                            3. Profit!
-                            """
-                        </textarea>
-                    </div>
-
-                    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                    <div class="form-field"><input type="text" max-length="240"
+                                                   th:field="*{questionTitle}"/></div>
                 </div>
-            </div>
-            <div class="field-row">
-                <span class="label">Teglarni kiriting:</span>
+                <div class="field-row">
+                    <span class="label">Savol matni: </span>
 
-                <div class="form-field"><input type="text" name="tags"/></div>
-            </div>
-            <div class="field-row footer">
-                <!--<div class="footer">-->
-                <a class="btn btn-green shdw-2x" href="#">Savol Berish</a>
-                <a href="#">Link</a>
-                <!--</div>-->
-            </div>
+                    <div class="text-editor">
+                        <div class="wmd-panel">
+                            <div id="wmd-button-bar"></div>
+                            <textarea class="wmd-input" id="wmd-input" th:field="*{questionContent}"></textarea>
+                        </div>
+
+                        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <span class="label">Teglarni kiriting:</span>
+
+                    <div class="form-field"><input type="text" name="tags"/></div>
+                </div>
+                <div class="field-row footer">
+                    <!--<div class="footer">-->
+                    <input type="submit" value="Submit"/>
+                    <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
+                    <a href="#">Link</a>
+                    <!--</div>-->
+                </div>
+            </form>
         </div>
     </div>
 </div>

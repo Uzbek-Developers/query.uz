@@ -42,6 +42,15 @@ a:hover {
     text-decoration: underline;
 }
 
+[disabled] a,
+.disabled a,
+a.disabled,
+a[disabled] {
+    pointer-events: none !important;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 textarea,
 input {
     font-family: "Helvetice", Arial;
@@ -458,7 +467,7 @@ body {
 }
 
 .content-wrap .post-wrap .questions-table td {
-    padding: 10px;
+    padding: 10px 0;
     border-color: #eeeeee;
     border-width: 0 0 1px;
     border-style: solid;

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.query.models.Question;
+import uz.query.models.User;
 import uz.query.repositories.QuestionRepository;
+import uz.query.repositories.UserRepository;
 
 /**
  * Created by sherali on 12/13/15.
@@ -17,17 +19,25 @@ public class PostController {
 
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
-        model.addAttribute("question", new Question());
+        Question question = new Question();
+        question.setQuestionTitle("question title");
+        question.setQuestionContent("question content");
+
+        model.addAttribute("question", question);
         return "ask_question";
     }
 
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.POST)
-    public String addQuestionForm(@ModelAttribute Question question) {
+    public String addQuestionSubmit(@ModelAttribute Question question) {
+        User u = userRepository.findOne(Long.valueOf(1));
+        question.setQuestionOwner(u);
         questionRepository.save(question);
-        return "redirect:/ask_question";
+        return "redirect:/home";
     }
 }

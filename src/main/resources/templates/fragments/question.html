@@ -21,7 +21,7 @@
                     </ul>
                     <div class="question-activity">
                         <a href="#" th:text="${question.questionOwner.fullName}">Foydalanuvchi</a>
-                        <span class="reputation" th:text="${'('+question.questionOwner.+')'}"></span>
+                        <span class="reputation" th:text="${'('+question.questionOwner.reputation+')'}"></span>
                         tomonidan 5 soat
                         avval savol berildi
                     </div>
@@ -48,14 +48,15 @@
                 </td>
             </tr>
         </table>
-        <div class="pagination-wrap">
+        <div class="pagination-wrap" th:if="${questionPage.getTotalPages()>0}">
             <ul class="list pagination-list">
-                <li><a href="#">Prev</a></li>
+                <li th:if="${questionPage.hasPrevious()}"><a href="#">Prev</a></li>
                 <li th:each="i: ${#numbers.sequence(1, questionPage.getTotalPages())}"
-                    th:classappend="${questionPage.getNumber()+1==i}?'active':''">
+                    th:classappend="${questionPage.getNumber()+1==i}?'active':''"
+                    th:disabled="${questionPage.getNumber()+1==i}">
                     <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
                 </li>
-                <li><a href="#">Next</a></li>
+                <li th:if="${questionPage.hasNext()}"><a href="#">Next</a></li>
             </ul>
             <p>Siz <a href="#">javob berilmagan savollar</a>ga javob berishingiz mumkin. Undan tashqari
                 <a href="#">tanlagan taglaringiz</a> bo'yicha savollarni ko'rishingiz mumkin.</p>
