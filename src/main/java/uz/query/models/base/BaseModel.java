@@ -23,7 +23,6 @@ public class BaseModel {
     @ColumnDefault(value = "now()")
     private Date modifiedDate;
 
-
     @Column(nullable = false)
     @ColumnDefault(value = "false")
     private Boolean isDeleted = false;

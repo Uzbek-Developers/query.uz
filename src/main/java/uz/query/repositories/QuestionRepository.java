@@ -4,10 +4,14 @@ import org.springframework.stereotype.Repository;
 import uz.query.models.Question;
 import uz.query.repositories.base.BaseRepository;
 
+import java.util.List;
+
 /**
- * Created by Mirjalol Bahodirov on 12/14/15 with love.
+ * Created by sherali on 12/13/15.
  */
 @Repository
 public interface QuestionRepository extends BaseRepository<Question, Long> {
+
+    List<Question> findByisDeleted(boolean isDeleted);
 
 }

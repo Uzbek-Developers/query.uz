@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head th:include="fragments/init :: head"></head>
+<body>
+<div th:replace="fragments/init :: header"></div>
+<!--./ header -->
+
+<div class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="content-box">
+                    <div th:include="fragments/tag-content :: about"></div>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <div th:replace="fragments/right-side :: side-wrap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--./ container-wrap -->
+
+
+<div th:replace="fragments/init :: footer"></div>
+<!--./ footer-wrap -->
+</body>
+</html>
