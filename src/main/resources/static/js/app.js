@@ -7,10 +7,7 @@ var App = {
             App.editorConfig();
             if (prettyPrint)
                 prettyPrint();
-//            App.tagSelectorConfig();
-
         });
-
     },
     tagSelectorConfig: function () {
         var TagSelector = $("#tagSelector").tagSelector({
@@ -52,25 +49,26 @@ var App = {
     },
     editorConfig: function () {
         (function () {
+            if ($("[class*=wmd-panel]").length) {
+                var converter1 = Markdown.getSanitizingConverter();
 
-            var converter1 = Markdown.getSanitizingConverter();
-
-            converter1.hooks.chain("preBlockGamut", function (text, rbg) {
-                return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-                    return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+                converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+                    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+                    });
                 });
-            });
 
-            var help = function () {
-                alert("Sizga yordam kerakmi?");
+                var help = function () {
+                    alert("Sizga yordam kerakmi?");
+                }
+                var options = {
+                    helpButton: { handler: help },
+                    strings: Markdown.local.uz
+                };
+                var editor1 = new Markdown.Editor(converter1, "", options);
+
+                editor1.run();
             }
-            var options = {
-                helpButton: { handler: help },
-                strings: Markdown.local.uz
-            };
-            var editor1 = new Markdown.Editor(converter1, "", options);
-
-            editor1.run();
         })();
     }
 }
