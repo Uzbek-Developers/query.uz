@@ -5,10 +5,50 @@ var App = {
     init: function () {
         setTimeout(function () {
             App.editorConfig();
-
             if (prettyPrint)
                 prettyPrint();
-        })
+//            App.tagSelectorConfig();
+
+        });
+
+    },
+    tagSelectorConfig: function () {
+        var TagSelector = $("#tagSelector").tagSelector({
+            complete: function (searchWord) {
+                console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
+
+                var jsonArray = [
+                    {
+                        name: "Java" + parseInt(Math.random() * 100),
+                        stat: parseInt(Math.random() * 100),
+                        shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
+                            "the end of my game...Ok now i know that im not supposed to ask this kind of question " +
+                            "but i'm at the end of my game... " +
+                            "I just cannot find the name of this game.",
+                        moreLink: "www.so.com"
+                    },
+                    {
+                        name: "Java" + parseInt(Math.random() * 100),
+                        stat: parseInt(Math.random() * 100),
+                        shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
+                            "the end of my game...Ok now i know that im not supposed to ask this kind of question " +
+                            "but i'm at the end of my game... " +
+                            "I just cannot find the name of this game.",
+                        moreLink: "www.so.com"
+                    },
+                    {
+                        name: "Java" + parseInt(Math.random() * 100),
+                        stat: parseInt(Math.random() * 100),
+                        shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
+                            "the end of my game...Ok now i know that im not supposed to ask this kind of question ",
+                        moreLink: "www.so.com"
+                    }
+                ];
+
+                //API dan kelgan datani(array bulishi kerak, va yuqoridagi formatga utkazish kerak)
+                TagSelector.setOptionContent(jsonArray);
+            }
+        });
     },
     editorConfig: function () {
         (function () {

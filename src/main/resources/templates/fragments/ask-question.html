@@ -27,11 +27,13 @@
                 <div class="field-row">
                     <span class="label">Teglarni kiriting:</span>
 
-                    <div class="form-field"><input type="text" name="tags"/></div>
+                    <div class="form-field">
+                        <div id="tagSelector"></div>
+                    </div>
                 </div>
                 <div class="field-row footer">
                     <!--<div class="footer">-->
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
                     <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
                     <a href="#">Link</a>
                     <!--</div>-->
@@ -39,4 +41,10 @@
             </form>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            App.tagSelectorConfig();
+        });
+    </script>
 </div>
