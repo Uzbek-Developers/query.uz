@@ -5,6 +5,7 @@ import uz.query.models.base.BaseModel;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,7 +30,8 @@ public class Question extends BaseModel {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags = new ArrayList<Tag>();
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Answer> answers = new ArrayList<Answer>();
+    private List<Answer> answers = new LinkedList<>();// LinkedList ko`p yozish uchun tez ishlaydi
+    // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
 
     public String getQuestionTitle() {
         return questionTitle;

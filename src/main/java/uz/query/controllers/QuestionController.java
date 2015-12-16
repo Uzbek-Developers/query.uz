@@ -2,6 +2,7 @@ package uz.query.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,11 @@ public class QuestionController {
     private QuestionRepository questionRepository;
 
     @RequestMapping(value = {"/", "/home"})
-    public String home(Model model, @PageableDefault(size = Constants.SMALL_PAGE_SIZE) Pageable pageable) {
+    public String home(Model model,
+                       @PageableDefault(
+                               size = Constants.SMALL_PAGE_SIZE,
+                               sort = {"creationDate"},
+                               direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
         return "home";
     }

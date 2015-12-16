@@ -12,6 +12,7 @@ import uz.query.models.User;
 import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.UserRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,8 +31,8 @@ public class PostController {
     @RequestMapping(value = "/ask_question", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
         Question question = new Question();
-        question.setQuestionTitle("question title");
-        question.setQuestionContent("question content");
+//        question.setQuestionTitle("question title");
+//        question.setQuestionContent("question content");
 
         model.addAttribute("question", question);
         return "ask_question";
@@ -39,7 +40,8 @@ public class PostController {
 
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.POST)
-    public String addQuestionSubmit(@ModelAttribute Question question) {
+    public String addQuestionSubmit(@ModelAttribute Question question, HttpServletRequest request) {
+        String selectedTagList = request.getParameter("selectedTagList");
         User u = userRepository.findOne(Long.valueOf(1));
         question.setQuestionOwner(u);
         questionRepository.save(question);
