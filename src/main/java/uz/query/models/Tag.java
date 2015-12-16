@@ -1,8 +1,12 @@
 package uz.query.models;
 
+import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 /**
@@ -11,16 +15,23 @@ import java.util.List;
 @Entity
 public class Tag extends BaseModel {
 
-    private String tagName;
+    private String name;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    public String getTagName() {
-        return tagName;
+    @ColumnDefault(value = "0")
+    private Integer questionCount = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User tagOwner = new User();
+
+    public String getName() {
+        return name;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Question> getQuestions() {
@@ -29,5 +40,21 @@ public class Tag extends BaseModel {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public Integer getQuestionCount() {
+        return questionCount;
+    }
+
+    public void setQuestionCount(Integer questionCount) {
+        this.questionCount = questionCount;
+    }
+
+    public User getQuestionOwner() {
+        return tagOwner;
+    }
+
+    public void setQuestionOwner(User tagOwner) {
+        this.tagOwner = tagOwner;
     }
 }

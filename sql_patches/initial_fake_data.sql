@@ -1,11 +1,11 @@
 -- Ushbu patchlarni apply qilishdan oldin, databasedagi
 -- barcha jadvallarni o`chiring keyin projectni run qiling
-insert into tag(id, tag_name) values(1, 'java');
-insert into tag(id, tag_name) values(2, 'javascript');
-insert into tag(id, tag_name) values(3, 'ajax');
-insert into tag(id, tag_name) values(4, 'spring');
-insert into tag(id, tag_name) values(5, 'hibernate');
-insert into tag(id, tag_name) values(6, 'angular-js');
+insert into tag(id, name) values(1, 'java');
+insert into tag(id, name) values(2, 'javascript');
+insert into tag(id, name) values(3, 'ajax');
+insert into tag(id, name) values(4, 'spring');
+insert into tag(id, name) values(5, 'hibernate');
+insert into tag(id, name) values(6, 'angular-js');
 
 insert into my_user(id, full_name, user_name, password) values(1, 'Administrator', 'admin', '12345');
 

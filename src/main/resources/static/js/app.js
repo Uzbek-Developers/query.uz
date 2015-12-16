@@ -11,7 +11,7 @@ var App = {
     },
     tagSelectorConfig: function () {
         var TagSelector = $("#tagSelector").tagSelector({
-            complete: function (searchWord) {
+            search: function (searchWord) {
                 console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
 
                 var jsonArray = [

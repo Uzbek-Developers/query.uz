@@ -64,29 +64,42 @@ $(document).ready(function () {
                 });
                 this.attachHandler("." + this.dom.box.attr("class"), function (ev) {
                     var i = $(this).attr("data-index");
-                    var tagName = TS.arrayOfPopup[i].name;
-                    if (tagName) {
+                    var obj = TS.listOfOption[i];
+                    if (obj && obj.name) {
 
                         reset();
                         var tag = TS.dom.tag.clone();
-                        tag.html(tagName);
+                        tag.attr("data-id", obj.id);
+                        tag.html(obj.name);
                         TS.dom.tagGroup.append("\n");
                         TS.dom.close.text("x");
+
                         tag.append(TS.dom.close.clone());
                         TS.dom.tagGroup.append(tag);
                         TS.dom.tagGroup.append("\n");
 
-                        TS.selectedTagList.push(tagName);
-                        TS.dom.wrapper.attr("data-tags", TS.selectedTagList);
+                        TS.selectedTagNameList.push(obj.name);
+                        TS.selectedTagIdList.push(obj.id);
+                        TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
 
                         if ($.isFunction(settings.selectTag)) {
-                            settings.selectTag.call(TS, TS.selectedTagList);
+                            settings.selectTag.call(TS, TS.selectedTagNameList, TS.selectedTagIdList);
                         }
                     }
                 });
 
                 this.attachHandler(".close", function (ev) {
-                    $(this).parent().remove();
+                    var tag = $(this).parent();
+                    var id = tag.attr("data-id");
+                    var obj = TS.listOfOption.filter(function (item) {
+                        return item.id = id;
+                    });
+                    console.log(i, TS.listOfOption, TS.selectedTagIdList, obj);
+                    tag.remove();
+                    var findIndex = TS.selectedTagIdList.indexOf(obj.id);
+                    TS.selectedTagNameList.splice(findIndex, 1);
+                    TS.selectedTagIdList.splice(findIndex, 1);
+
                 });
 
                 this.attachHandler(this.dom.input, function (ev) {
@@ -96,8 +109,8 @@ $(document).ready(function () {
                     } else if (lastKey != TS.searchKey) {
                         TS.dom.optionBox.show();
 
-                        if ($.isFunction(settings.complete)) {
-                            settings.complete.call(TS, TS.searchKey);
+                        if ($.isFunction(settings.search)) {
+                            settings.search.call(TS, TS.searchKey);
                         }
                     }
                     lastKey = TS.searchKey;
@@ -108,6 +121,38 @@ $(document).ready(function () {
                     TS.dom.input.val("");
                     TS.dom.input.focus();
                     TS.dom.optionBox.hide();
+                }
+            },
+
+            setTagsList: function (list) {
+                TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
+                if ($.isFunction(settings.selectTag)) {
+                    settings.selectTag.call(TS, TS.selectedTagNameList, TS.selectedTagIdList);
+                }
+            },
+            setOptionContent: function (array) {
+
+                if (Array.isArray(array) && array.length) {
+                    this.listOfOption = array;
+                    var html = "";
+                    this.dom.optionBox.html(html);
+                    for (i = 0, len = array.length; i < len; i++) {
+                        html = '<div>';
+                        html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].name + '</span> ';
+                        html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
+                        html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
+                        html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
+                        html += '</div> ';
+                        var box = this.dom.box.clone();
+                        box.attr("data-index", i);
+                        box.attr("id", array[i].id);
+                        box.attr("tabindex", 103);
+
+                        box.html(html)
+                        this.dom.optionBox.append(box);
+                    }
+                } else {
+                    alert("Please, give me array( [ {name:, stat:, moreLink:, shortDesc:, desc:}, ...])")
                 }
             },
 
@@ -122,31 +167,7 @@ $(document).ready(function () {
                         option.type = "text";
                         break;
                 }
-                return $("<" + dom.tagName + "/>", {"class": dom.className});
-            },
-            setOptionContent: function (array) {
-
-                if (Array.isArray(array) && array.length) {
-                    this.arrayOfPopup = array;
-                    var html = "";
-                    this.dom.optionBox.html(html);
-                    for (i = 0, len = array.length; i < len; i++) {
-                        html = '<div>';
-                        html += '<span class="tag-item">' + array[i].name + '</span> ';
-                        html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
-                        html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
-                        html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
-                        html += '</div> ';
-                        var box = this.dom.box.clone();
-                        box.attr("data-index", i);
-                        box.attr("tabindex", 103);
-
-                        box.html(html)
-                        this.dom.optionBox.append(box);
-                    }
-                } else {
-                    alert("Please, give me array( [ {name:, stat:, moreLink:, shortDesc:, desc:}, ...])")
-                }
+                return $("<" + dom.tagName + "/>", option);
             },
 
             setCSSLeft: function (elem, left) {
@@ -199,8 +220,9 @@ $(document).ready(function () {
             },
             width: null,
             searchKey: "",
-            selectedTagList: [],
-            arrayOfPopup: []
+            selectedTagNameList: [],
+            selectedTagIdList: [],
+            listOfOption: []
         };
 
         return TS.initialize($(this));
@@ -211,7 +233,7 @@ $(document).ready(function () {
         search: null,//function
         selectTag: null,
         load: null,//function
-        complete: null//function
+        search: null//function
     };
 });
 function TagObject(name, stat, moreLink, shortDesc, desc) {

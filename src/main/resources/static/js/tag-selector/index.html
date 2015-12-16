@@ -13,7 +13,7 @@
     <script>
         $(document).ready(function () {
             var TagSelector = $("#tagsIt").tagSelector({
-                complete: function (searchWord) {
+                search: function (searchWord) {
                     console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
 
                     var jsonArray = [

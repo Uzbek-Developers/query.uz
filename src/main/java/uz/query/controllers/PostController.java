@@ -10,12 +10,13 @@ import uz.query.models.Question;
 import uz.query.models.Tag;
 import uz.query.models.User;
 import uz.query.repositories.QuestionRepository;
+import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by sherali on 12/13/15.
@@ -27,6 +28,8 @@ public class PostController {
     private QuestionRepository questionRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
@@ -35,16 +38,24 @@ public class PostController {
 //        question.setQuestionContent("question content");
 
         model.addAttribute("question", question);
+//        model.addAttribute("tagIdList", new String[]{"josd", "v"});
         return "ask_question";
     }
 
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Question question, HttpServletRequest request) {
-        String selectedTagList = request.getParameter("selectedTagList");
+        String selectedTagList = request.getParameter("tagIdList");
+        List<String> ids = Arrays.asList(selectedTagList.split(","));
+        List<Tag> list = new LinkedList<Tag>();
+        for (String id : ids) {
+            list.add(tagRepository.findOne(Long.valueOf(id)));
+        }
+        question.setTags(list);
         User u = userRepository.findOne(Long.valueOf(1));
         question.setQuestionOwner(u);
         questionRepository.save(question);
+
         return "redirect:/home";
     }
 }

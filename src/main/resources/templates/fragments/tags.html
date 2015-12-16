@@ -1,0 +1,32 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="tag-list">
+    <div class="post-wrap">
+        <table class="questions-table">
+            <tr th:each="tag: ${tagPage}">
+                <td class="text">
+                    <a href="#" class="tag-link" th:text="${tag.name}"></a>
+
+                    <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
+                    <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
+                    <!--</ul>-->
+                    <div class="tag-activity">
+                        <a href="#" th:text="${tag}">Foydalanuvchi</a>
+                        <!--<span class="reputation" th:text="${'('+tag.tagOwner.reputation+')'}"></span>-->
+                        tomonidan 5 soat
+                        avval savol berildi
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="pagination-wrap" th:if="${tagPage.getTotalPages()>0}">
+            <ul class="list pagination-list">
+                <li th:if="${tagPage.hasPrevious()}"><a th:href="'?page='+${tagPage.number-1}">Prev</a></li>
+                <li th:each="i: ${#numbers.sequence(1, tagPage.getTotalPages())}"
+                    th:classappend="${tagPage.getNumber()+1==i}?'active':''"
+                    th:disabled="${tagPage.getNumber()+1==i}">
+                    <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
+                </li>
+                <li th:if="${tagPage.hasNext()}"><a th:href="'?page='+${tagPage.number+1}">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
