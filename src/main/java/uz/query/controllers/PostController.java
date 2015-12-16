@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.query.models.Question;
+import uz.query.models.Tag;
 import uz.query.models.User;
 import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.UserRepository;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by sherali on 12/13/15.

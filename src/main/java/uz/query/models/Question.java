@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,16 +20,16 @@ public class Question extends BaseModel {
 
     //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak
     @ColumnDefault(value = "0")
-    private Integer voteCount;
+    private Integer voteCount = 0;
     @ColumnDefault(value = "0")
-    private Integer seenCount;
+    private Integer seenCount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User questionOwner;
+    private User questionOwner = new User();
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Tag> tags;
+    private List<Tag> tags = new ArrayList<Tag>();
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<Answer>();
 
     public String getQuestionTitle() {
         return questionTitle;

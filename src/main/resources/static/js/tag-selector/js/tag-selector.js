@@ -71,12 +71,17 @@ $(document).ready(function () {
                         var tag = TS.dom.tag.clone();
                         tag.html(tagName);
                         TS.dom.tagGroup.append("\n");
-
                         TS.dom.close.text("x");
                         tag.append(TS.dom.close.clone());
                         TS.dom.tagGroup.append(tag);
                         TS.dom.tagGroup.append("\n");
 
+                        TS.selectedTagList.push(tagName);
+                        TS.dom.wrapper.attr("data-tags", TS.selectedTagList);
+
+                        if ($.isFunction(settings.selectTag)) {
+                            settings.selectTag.call(TS, TS.selectedTagList);
+                        }
                     }
                 });
 
@@ -92,7 +97,6 @@ $(document).ready(function () {
                         TS.dom.optionBox.show();
 
                         if ($.isFunction(settings.complete)) {
-                            1
                             settings.complete.call(TS, TS.searchKey);
                         }
                     }
@@ -195,6 +199,7 @@ $(document).ready(function () {
             },
             width: null,
             searchKey: "",
+            selectedTagList: [],
             arrayOfPopup: []
         };
 
@@ -204,6 +209,7 @@ $(document).ready(function () {
     $.fn.tagSelector.defaultOptions = {
         placeholder: "Tegni kiriting!",
         search: null,//function
+        selectTag: null,
         load: null,//function
         complete: null//function
     };

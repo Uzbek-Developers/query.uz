@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="brand-box">
-                    <a href="#">
-                        <!--<img src="images/logo-two.png" alt="query.uz" height="40"/>-->
+                    <a th:href="@{/}">
+                    <!--<img src="images/logo-two.png" alt="query.uz" height="40"/>-->
                         <img src="../images/logo-yellow_white.png" alt="query.uz" height="32"/>
                         <!--<span>Query</span><span>.</span><span>uz</span> -->
                         <!--<i class="fa fa-caret-down"></i>-->
@@ -58,11 +58,15 @@
                     <input type="text"/>
                 </form>
                 <ul class="list main-menu pull-right clearfix">
-                    <li class="active"><a href="#"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a
+                            th:href="@{/}"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
                     <li><a href="#"><i class="fa fa-tag"></i> <span>Taglar</span></a></li>
                     <li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>
                     <li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>
-                    <li class="add-question"><a href="#"><i class="fa fa-plus"></i> <span>Savol so'rash</span></a></li>
+                    <li class="add-question"
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/ask_question' ? 'active':''}"><a
+                            th:href="@{/ask_question}"><i class="fa fa-plus"></i>
+                        <span>Savol so'rash</span></a></li>
                 </ul>
             </div>
         </div>
