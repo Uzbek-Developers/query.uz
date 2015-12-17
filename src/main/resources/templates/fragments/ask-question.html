@@ -72,53 +72,10 @@
                 },
                 search: function (searchWord) {
                     console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
-
-                    $.ajax({
-                        url: 'getTagList',
-                        type: "POST",
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        dataType: "json",//Stringified Json Object
-                        data: "{name: " + searchWord + "}",
-                        success: function (resposeJsonObject) {
-                            console.log("res", resposeJsonObject)
-
-                        }});
-                    var jsonArray = [
-                        {
-                            id: "1",
-                            name: "Java" + parseInt(Math.random() * 100),
-                            stat: parseInt(Math.random() * 100),
-                            shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
-                                    "the end of my game...Ok now i know that im not supposed to ask this kind of question " +
-                                    "but i'm at the end of my game... " +
-                                    "I just cannot find the name of this game.",
-                            moreLink: "www.so.com"
-                        },
-                        {
-                            id: "2",
-                            name: "Java" + parseInt(Math.random() * 100),
-                            stat: parseInt(Math.random() * 100),
-                            shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
-                                    "the end of my game...Ok now i know that im not supposed to ask this kind of question " +
-                                    "but i'm at the end of my game... " +
-                                    "I just cannot find the name of this game.",
-                            moreLink: "www.so.com"
-                        },
-                        {
-                            id: "3",
-                            name: "Java" + parseInt(Math.random() * 100),
-                            stat: parseInt(Math.random() * 100),
-                            shortDesc: "Ok now i know that im not supposed to ask this kind of question but i'm at" +
-                                    "the end of my game...Ok now i know that im not supposed to ask this kind of question ",
-                            moreLink: "www.so.com"
-                        }
-                    ];
-
-                    //API dan kelgan datani(array bulishi kerak, va yuqoridagi formatga utkazish kerak)
-                    TagSelector.setOptionContent(jsonArray);
+                    $.getJSON('getTagList', {key: searchWord}, function (data) {
+//                        console.log(data);
+                        TagSelector.setOptionContent(data);
+                    });
                 }
             });
         });

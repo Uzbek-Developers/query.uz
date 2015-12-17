@@ -47,7 +47,7 @@ public class PostController {
     public String addQuestionSubmit(@ModelAttribute Question question, HttpServletRequest request) {
         String selectedTagList = request.getParameter("tagIdList");
         List<String> ids = Arrays.asList(selectedTagList.split(","));
-        List<Tag> list = new LinkedList<Tag>();
+        List<Tag> list = new LinkedList<>();
         for (String id : ids) {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
