@@ -14,10 +14,11 @@
             <tr th:each="question: ${questionPage}"
                 th:classappend="${question.answers.size()>0}?important:''">
                 <td class="text">
-                    <a href="#" class="question-link" th:text="${question.questionTitle}"></a>
+                    <a th:href="@{/question/}+${question.id}" class="question-link"
+                       th:text="${question.questionTitle}"></a>
 
-                    <ul class="list tag-list" th:each="tag: ${question.tags}" th:if="${question.tags.size()}">
-                        <li><a href="#" th:text="${tag.name}">Ajax</a></li>
+                    <ul class="list tag-list" th:if="${question.tags.size()}">
+                        <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.name}">Ajax</a></li>
                     </ul>
                     <div class="question-activity">
                         <a href="#" th:text="${question.questionOwner.fullName}">Foydalanuvchi</a>

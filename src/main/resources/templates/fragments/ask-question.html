@@ -5,46 +5,49 @@
             tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
 
         <div class="post-item ask-question">
-            <form action="#" th:action="@{/ask_question}" th:object="${question}" method="POST">
-                <div class="field-row">
-                    <span class="label">Savol sarlavhasi:</span>
+            <div class="box-content">
+                <form action="#" th:action="@{/ask_question}" th:object="${question}" method="POST">
+                    <div class="field-row">
+                        <span class="label">Savol sarlavhasi:</span>
 
-                    <div class="form-field"><input type="text" max-length="240"
-                                                   th:field="*{questionTitle}"/></div>
-                </div>
-                <div class="field-row">
-                    <span class="label">Savol matni: </span>
+                        <div class="form-field"><input type="text" max-length="240"
+                                                       th:field="*{questionTitle}"/></div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Savol matni: </span>
 
-                    <div class="text-editor">
-                        <div class="wmd-panel">
-                            <div id="wmd-button-bar"></div>
-                            <textarea class="wmd-input" id="wmd-input" th:field="*{questionContent}"></textarea>
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" th:field="*{questionContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
                         </div>
-
-                        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
                     </div>
-                </div>
-                <div class="field-row">
-                    <span class="label">Teglarni kiriting:</span>
+                    <div class="field-row">
+                        <span class="label">Teglarni kiriting:</span>
 
 
-                    <div class="form-field">
-                        <!--<input name="tagNameList" id="tagNameList" type="hidden" th:field="*{tags}"/>-->
-                        <!--<input name="tagIdList" id="tagIdList" type="hidden" value="1,2"/>-->
-                        <input type="hidden" name="tagIdList" id="tagIdList"/>
+                        <div class="form-field">
+                            <!--<input name="tagNameList" id="tagNameList" type="hidden" th:field="*{tags}"/>-->
+                            <!--<input name="tagIdList" id="tagIdList" type="hidden" value="1,2"/>-->
+                            <input type="hidden" name="tagIdList" id="tagIdList"/>
+                            <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
 
-                        <div id="tagSelector"></div>
+                            <div id="tagSelector"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="field-row footer">
-                    <!--<div class="footer">-->
+                    <div class="field-row footer">
+                        <!--<div class="footer">-->
 
-                    <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
-                    <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
-                    <a href="#">Link</a>
-                    <!--</div>-->
-                </div>
-            </form>
+                        <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
+                        <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
+                        <a href="#">Link</a>
+                        <!--</div>-->
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

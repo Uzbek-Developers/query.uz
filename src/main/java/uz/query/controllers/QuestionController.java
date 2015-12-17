@@ -6,7 +6,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import uz.query.Constants;
 import uz.query.repositories.QuestionRepository;
 
@@ -27,6 +29,19 @@ public class QuestionController {
                                direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
         return "home";
+    }
+
+    @RequestMapping(value = "/question/{id}")
+    public String detail(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("question", questionRepository.findOne(id));
+
+        return "details";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deleteResource(Model model, @PathVariable Long id) {
+        questionRepository.delete(id);
+        return "redirect:/home";
     }
 
     private interface Data {
