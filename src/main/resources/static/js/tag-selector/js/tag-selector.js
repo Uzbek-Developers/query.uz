@@ -25,7 +25,7 @@ $(document).ready(function () {
                 this.dom.wrapper.append(this.dom.inputBox);
 
                 this.dom.input = this.appendDOMElement(this.dom.input);
-                this.dom.input.attr("tabindex", 103);
+                this.dom.input.attr("tabindex", 3);
                 this.dom.inputBox.append(this.dom.input);
 
 
@@ -65,7 +65,7 @@ $(document).ready(function () {
                 this.attachHandler("." + this.dom.box.attr("class"), function (ev) {
                     var i = $(this).attr("data-index");
                     var obj = TS.listOfOption[i];
-                    if (obj && obj.name) {
+                    if (obj && obj.name && TS.selectedTagIdList.indexOf(obj.id) === -1) {
 
                         reset();
                         var tag = TS.dom.tag.clone();
@@ -107,11 +107,12 @@ $(document).ready(function () {
                     if (!TS.searchKey) {
                         TS.dom.optionBox.hide();
                     } else if (lastKey != TS.searchKey) {
-                        TS.dom.optionBox.show();
+
 
                         if ($.isFunction(settings.search)) {
                             settings.search.call(TS, TS.searchKey);
                         }
+
                     }
                     lastKey = TS.searchKey;
                 }, "keyup");
@@ -131,28 +132,32 @@ $(document).ready(function () {
                 }
             },
             setOptionContent: function (array) {
-
                 if (Array.isArray(array) && array.length) {
                     this.listOfOption = array;
                     var html = "";
                     this.dom.optionBox.html(html);
                     for (i = 0, len = array.length; i < len; i++) {
-                        html = '<div>';
-                        html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].name + '</span> ';
-                        html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
-                        html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
-                        html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
-                        html += '</div> ';
-                        var box = this.dom.box.clone();
-                        box.attr("data-index", i);
-                        box.attr("id", array[i].id);
-                        box.attr("tabindex", 103);
+                        if (this.selectedTagIdList.indexOf(array[i].id) === -1) {
+                            html = '<div>';
+                            html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].name + '</span> ';
+                            html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
+                            html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
+                            html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
+                            html += '</div> ';
+                            var box = this.dom.box.clone();
+                            box.attr("data-index", i);
+                            box.attr("id", array[i].id);
+                            box.attr("tabindex", 3);
 
-                        box.html(html)
-                        this.dom.optionBox.append(box);
+                            box.html(html)
+                            this.dom.optionBox.append(box);
+                            TS.dom.optionBox.show();
+                        }
                     }
                 } else {
-                    alert("Please, give me array( [ {name:, stat:, moreLink:, shortDesc:, desc:}, ...])")
+//                    this.dom.optionBox.html("");
+                    TS.dom.optionBox.hide();
+
                 }
             },
 
