@@ -25,7 +25,7 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
 //                .authorizeRequests()
 //                .antMatchers("/*").permitAll()
 //                .anyRequest().authenticated();
-
+//        http.csrf().disable();
         http
                 .authorizeRequests()
                 .antMatchers("/**").hasRole("USER")

@@ -9,5 +9,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Answer extends BaseModel {
+    public Answer() {
 
+    }
 }

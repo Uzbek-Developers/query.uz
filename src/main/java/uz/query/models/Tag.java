@@ -50,11 +50,11 @@ public class Tag extends BaseModel {
         this.questionCount = questionCount;
     }
 
-    public User getQuestionOwner() {
+    public User getTagOwner() {
         return tagOwner;
     }
 
-    public void setQuestionOwner(User tagOwner) {
+    public void setTagOwner(User tagOwner) {
         this.tagOwner = tagOwner;
     }
 }

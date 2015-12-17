@@ -73,6 +73,19 @@
                 search: function (searchWord) {
                     console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
 
+                    $.ajax({
+                        url: 'getTagList',
+                        type: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        dataType: "json",//Stringified Json Object
+                        data: "{name: " + searchWord + "}",
+                        success: function (resposeJsonObject) {
+                            console.log("res", resposeJsonObject)
+
+                        }});
                     var jsonArray = [
                         {
                             id: "1",
