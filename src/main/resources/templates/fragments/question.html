@@ -49,18 +49,6 @@
                 </td>
             </tr>
         </table>
-        <div class="pagination-wrap" th:if="${questionPage.getTotalPages()>0}">
-            <ul class="list pagination-list">
-                <li th:if="${questionPage.hasPrevious()}"><a th:href="'?page='+${questionPage.number-1}">Prev</a></li>
-                <li th:each="i: ${#numbers.sequence(1, questionPage.getTotalPages())}"
-                    th:classappend="${questionPage.getNumber()+1==i}?'active':''"
-                    th:disabled="${questionPage.getNumber()+1==i}">
-                    <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
-                </li>
-                <li th:if="${questionPage.hasNext()}"><a th:href="'?page='+${questionPage.number+1}">Next</a></li>
-            </ul>
-            <p>Siz <a href="#">javob berilmagan savollar</a>ga javob berishingiz mumkin. Undan tashqari
-                <a href="#">tanlagan taglaringiz</a> bo'yicha savollarni ko'rishingiz mumkin.</p>
-        </div>
+        <div th:replace="fragments/init :: pagination(page=${questionPage})"></div>
     </div>
 </div>

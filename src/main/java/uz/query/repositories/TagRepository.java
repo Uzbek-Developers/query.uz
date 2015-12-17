@@ -17,5 +17,4 @@ public interface TagRepository extends BaseRepository<Tag, Long> {
 
     List<Tag> findFirst10ByNameContaining(String key);
 
-
 }

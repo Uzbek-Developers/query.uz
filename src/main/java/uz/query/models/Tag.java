@@ -33,7 +33,7 @@ public class Tag extends BaseModel {
     private String shortDescription;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User tagOwner = new User();
+    private User tagOwner;
 
     public String getName() {
         return name;

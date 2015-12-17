@@ -17,16 +17,6 @@
                 </td>
             </tr>
         </table>
-        <div class="pagination-wrap" th:if="${tagPage.getTotalPages()>0}">
-            <ul class="list pagination-list">
-                <li th:if="${tagPage.hasPrevious()}"><a th:href="'?page='+${tagPage.number-1}">Prev</a></li>
-                <li th:each="i: ${#numbers.sequence(1, tagPage.getTotalPages())}"
-                    th:classappend="${tagPage.getNumber()+1==i}?'active':''"
-                    th:disabled="${tagPage.getNumber()+1==i}">
-                    <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
-                </li>
-                <li th:if="${tagPage.hasNext()}"><a th:href="'?page='+${tagPage.number+1}">Next</a></li>
-            </ul>
-        </div>
+        <div th:include="fragments/init :: pagination (page=${tagPage})"></div>
     </div>
 </div>
