@@ -4,136 +4,129 @@
     tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
 
 <div class="post-item question-item">
-    <div class="clearfix">
-        <div class="box-feature pull-right">
-            <div class="box vote  up">
-                <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
-                <div class="row number-box"><span class="count" th:text="${question.voteCount}"></span></div>
-                <div class="row icons"><i class="fa fa-angle-down"></i></div>
-            </div>
-            <div class="box bookmark marked">
-                <div class="row icons"><i class="fa fa-star marked"></i></div>
-                <div class="row number-box"><span class="count">5</span></div>
-            </div>
+    <div class="box-feature pull-right">
+        <div class="box vote  up">
+            <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
+            <div class="row number-box"><span class="count" th:text="${question.voteCount}"></span></div>
+            <div class="row icons"><i class="fa fa-angle-down"></i></div>
         </div>
-        <div class="box-content">
-            <div class="question-linked"><a href="#">JavaScriptda Internetni statusini
-                aniqlash</a></div>
-            <div class="text-editor">
-                <div class="wmd-panel">
-                    <!--<div id="wmd-button-bar"></div>-->
-                    <textarea class="wmd-input" style="display: none;" id="wmd-input"
-                              th:field="${question.questionContent}"></textarea>
-                </div>
+        <div class="box bookmark marked">
+            <div class="row icons"><i class="fa fa-star marked"></i></div>
+            <div class="row number-box"><span class="count">5</span></div>
+        </div>
+    </div>
+    <div class="box-content">
+        <div class="question-linked"><a href="#">JavaScriptda Internetni statusini
+            aniqlash</a></div>
+        <div th:uText="${question.questionContent}"></div>
+        <ul class="list tag-list" th:if="${question.tags.size()}">
+            <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.name}">Ajax</a></li>
+        </ul>
+        <div class="footer clearfix">
+            <div class="who-box pull-left">
+                <p class="date">15.05.2015 da savol berildi</p>
 
-                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                <div class="user-box">
+                    <div class="cover-bg">
+                        <img src="images/material-design-rainbow1.png" alt="photo"/>
+                    </div>
+                    <div class="clearfix">
+                        <div class="user-image pull-left">
+                            <a href="#"><img src="images/N5.jpg" alt="user"/></a>
+                        </div>
+                        <div class="user-short-content">
+                            <a class="name">Sharipov Bobur</a><br/>
+                                <span class="user-score">
+                                    <span class="reputation">25,655</span>
+                                    <span class="badge-gold"><i class="fa fa-star"></i> 25</span>
+                                    <span class="badge-silver"><i class="fa fa-star"></i> 25</span>
+                                    <span class="badge-bronze"><i class="fa fa-star"></i> 255</span>
+                                </span>
+                        </div>
+                        <div class="user-content">
+                            <h4 class="job">Full stack developer</h4>
+
+                            <p>Full stack developer Full stack developer Full stack developer Full stack
+                                developer</p>
+
+                            <p>Full <a href="#">stack developer Full stack developer Full stack developer</a> Full
+                                stack
+                                developer
+                            </p>
+                            <ul class="list extra-list">
+                                <li><i class="fa fa-location-arrow"></i> Address: <a href="#">O'zbekiston,
+                                    Tashkent</a>
+                                </li>
+                                <li><i class="fa fa-phone"></i> Tel: <a href="#">+99825 125-25-52</a></li>
+                                <li><i class="fa fa-facebook"></i> Facebook: <a href="#">O'zbekiston, Tashkent</a>
+                                </li>
+                                <li><i class="fa fa-twitter"></i> Twitter: <a href="#">O'zbekiston, Tashkent</a>
+                                </li>
+                            </ul>
+                            <div class="footer">
+                                <button class="btn btn-blue">Rezumeni ko'rish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul class="list tag-list" th:if="${question.tags.size()}">
-                <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.name}">Ajax</a></li>
+            <div class="who-box pull-left">
+                <p class="date"><a href="#">15.05.2015 da tahrir qilindi</a></p>
+
+                <div class="user-box">
+                    <div class="cover-bg">
+                        <img src="images/material-design-rainbow1.png" alt="photo"/>
+                    </div>
+                    <div class="clearfix">
+                        <div class="user-image pull-left">
+                            <a href="#"><img src="images/N5.jpg" alt="user"/></a>
+                        </div>
+                        <div class="user-short-content">
+                            <a class="name">Sharipov Bobur</a><br/>
+                                <span class="user-score">
+                                    <span class="reputation">25,655</span>
+                                    <span class="badge-gold"><i class="fa fa-star"></i> 25</span>
+                                    <span class="badge-silver"><i class="fa fa-star"></i> 25</span>
+                                    <span class="badge-bronze"><i class="fa fa-star"></i> 255</span>
+                                </span>
+                        </div>
+                        <div class="user-content">
+                            <h4 class="job">Full stack developer</h4>
+
+                            <p>Full stack developer Full stack developer Full stack developer Full stack
+                                developer</p>
+
+                            <p>Full <a href="#">stack developer Full stack developer Full stack developer</a> Full
+                                stack
+                                developer
+                            </p>
+                            <ul class="list extra-list">
+                                <li><i class="fa fa-location-arrow"></i> Address: <a href="#">O'zbekiston,
+                                    Tashkent</a>
+                                </li>
+                                <li><i class="fa fa-phone"></i> Tel: <a href="#">+99825 125-25-52</a></li>
+                                <li><i class="fa fa-facebook"></i> Facebook: <a href="#">O'zbekiston, Tashkent</a>
+                                </li>
+                                <li><i class="fa fa-twitter"></i> Twitter: <a href="#">O'zbekiston, Tashkent</a>
+                                </li>
+                            </ul>
+                            <div class="footer">
+                                <button class="btn btn-blue">Rezumeni ko'rish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="list action-list pull-left">
+                <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
+                <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
+                    <span>Tahrirlash</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-warning"></i> <span>Ogohlantirish</span></a></li>
+                <li><a th:href="@{/question/delete/}+${question.id}"><i class="fa fa-trash"></i> <span>O'chirish</span></a>
+                </li>
             </ul>
-            <div class="footer clearfix">
-                <div class="who-box pull-left">
-                    <p class="date">15.05.2015 da savol berildi</p>
 
-                    <div class="user-box">
-                        <div class="cover-bg">
-                            <img src="img/material-design-rainbow1.png" alt="photo"/>
-                        </div>
-                        <div class="clearfix">
-                            <div class="user-image pull-left">
-                                <a href="#"><img src="img/N5.jpg" alt="user"/></a>
-                            </div>
-                            <div class="user-short-content">
-                                <a class="name">Sharipov Bobur</a><br/>
-                                <span class="user-score">
-                                    <span class="reputation">25,655</span>
-                                    <span class="badge-gold"><i class="fa fa-star"></i> 25</span>
-                                    <span class="badge-silver"><i class="fa fa-star"></i> 25</span>
-                                    <span class="badge-bronze"><i class="fa fa-star"></i> 255</span>
-                                </span>
-                            </div>
-                            <div class="user-content">
-                                <h4 class="job">Full stack developer</h4>
-
-                                <p>Full stack developer Full stack developer Full stack developer Full stack
-                                    developer</p>
-
-                                <p>Full <a href="#">stack developer Full stack developer Full stack developer</a> Full
-                                    stack
-                                    developer
-                                </p>
-                                <ul class="list extra-list">
-                                    <li><i class="fa fa-location-arrow"></i> Address: <a href="#">O'zbekiston,
-                                        Tashkent</a>
-                                    </li>
-                                    <li><i class="fa fa-phone"></i> Tel: <a href="#">+99825 125-25-52</a></li>
-                                    <li><i class="fa fa-facebook"></i> Facebook: <a href="#">O'zbekiston, Tashkent</a>
-                                    </li>
-                                    <li><i class="fa fa-twitter"></i> Twitter: <a href="#">O'zbekiston, Tashkent</a>
-                                    </li>
-                                </ul>
-                                <div class="footer">
-                                    <button class="btn btn-blue">Rezumeni ko'rish</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="who-box pull-left">
-                    <p class="date"><a href="#">15.05.2015 da tahrir qilindi</a></p>
-
-                    <div class="user-box">
-                        <div class="cover-bg">
-                            <img src="img/material-design-rainbow1.png" alt="photo"/>
-                        </div>
-                        <div class="clearfix">
-                            <div class="user-image pull-left">
-                                <a href="#"><img src="img/N5.jpg" alt="user"/></a>
-                            </div>
-                            <div class="user-short-content">
-                                <a class="name">Sharipov Bobur</a><br/>
-                                <span class="user-score">
-                                    <span class="reputation">25,655</span>
-                                    <span class="badge-gold"><i class="fa fa-star"></i> 25</span>
-                                    <span class="badge-silver"><i class="fa fa-star"></i> 25</span>
-                                    <span class="badge-bronze"><i class="fa fa-star"></i> 255</span>
-                                </span>
-                            </div>
-                            <div class="user-content">
-                                <h4 class="job">Full stack developer</h4>
-
-                                <p>Full stack developer Full stack developer Full stack developer Full stack
-                                    developer</p>
-
-                                <p>Full <a href="#">stack developer Full stack developer Full stack developer</a> Full
-                                    stack
-                                    developer
-                                </p>
-                                <ul class="list extra-list">
-                                    <li><i class="fa fa-location-arrow"></i> Address: <a href="#">O'zbekiston,
-                                        Tashkent</a>
-                                    </li>
-                                    <li><i class="fa fa-phone"></i> Tel: <a href="#">+99825 125-25-52</a></li>
-                                    <li><i class="fa fa-facebook"></i> Facebook: <a href="#">O'zbekiston, Tashkent</a>
-                                    </li>
-                                    <li><i class="fa fa-twitter"></i> Twitter: <a href="#">O'zbekiston, Tashkent</a>
-                                    </li>
-                                </ul>
-                                <div class="footer">
-                                    <button class="btn btn-blue">Rezumeni ko'rish</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list action-list pull-left">
-                    <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                    <li><a href="#"><i class="fa fa-edit"></i> <span>Tahrirlash</span></a></li>
-                    <li><a href="#"><i class="fa fa-warning"></i> <span>Ogohlantirish</span></a></li>
-                    <li><a href="#"><i class="fa fa-trash"></i> <span>O'chirish</span></a></li>
-                </ul>
-
-            </div>
         </div>
     </div>
     <div class="post-status">
@@ -144,7 +137,7 @@
         <p><strong>Sababi sifatida:</strong> Sizning savolingiz aynan yuqorida biriktirilgan linkdagi savol
             bilan bir xil. Bir xil savollar blocklanadi va avvalgisiga biriktiriladi!</p>
     </div>
-    <ul class="list comment-list">
+    <ul class="list comment-list hide">
         <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
             ni o'qib chiqing. <span class="date"><i
                     class="fa fa-calendar"></i> 21.01.2015</span></li>
@@ -172,7 +165,7 @@
         <li>
             <form action="#" class="form-comment">
 
-                <textarea class="textare-comment">Izoh</textarea>
+                <textarea class="textare-comment ">Izoh</textarea>
 
                 <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
             </form>
@@ -360,7 +353,7 @@
         <div class="text-editor">
 
             <div class="wmd-panel">
-                <div id="wmd-button-bar"></div>
+                <div id="wmd-button-bar" class="wmd-button-bar"></div>
                 <textarea class="wmd-input" id="wmd-input">This is the *first* editor. </textarea>
             </div>
 

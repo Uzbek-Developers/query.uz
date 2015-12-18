@@ -13,72 +13,6 @@ body {
 
 }
 
-.top-wrap {
-  display: none;
-  @img-size: 40px;
-  position: relative;
-  font-size: 1em;
-  z-index: 5;
-  //  background: @color-black;
-  background: @color-blue-dark2;
-
-  //  border-bottom: 1px solid @color-white;
-  //  border-bottom: 1px solid @color-black;
-  height: @img-size;
-  //  .set-box-shadow(0 1px 1px @color-gray-normal);
-  .auth-list {
-    > li {
-      line-height: @img-size;
-      float: left;
-      a {
-        .set-padding(0 10px);
-        display: block;
-        &:hover {
-          text-decoration: none;
-          background: @color-white-transparent;
-        }
-      }
-    }
-  }
-  a {
-    color: @color-white;
-  }
-  .brand-box,
-  .user-box {
-    display: block;
-    height: 40px;
-    line-height: 38px;
-    color: @color-white;
-    img {
-      height: 32px;
-    }
-  }
-  .brand-box {
-    text-align: right;
-    a {
-      display: inline-block;
-      font-size: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      text-shadow: 0 2px 2px rgba(0, 0, 0, .5);
-      color: @color-white;
-      img {
-        height: 36px;
-        vertical-align: middle;
-      }
-      span {
-        color: #71a807;
-      }
-      span + span {
-        color: rgba(255, 255, 255, .5);
-      }
-      span + span + span {
-        color: #e67e22;
-      }
-    }
-  }
-}
-
 .main-menu {
   @bg-color: @color-black;
   li {
@@ -169,7 +103,7 @@ body {
   //  min-height: 60px;
   //  background: @color-white;
   //  background: @color-blue-dark;
-  //  background: url("../../images/t1.jpg");
+  //  background: url("../../img/t1.jpg");
   //  -webkit-background-size: 224px;
   //  background-size: 224px;
   background: @bg-color;
@@ -177,15 +111,16 @@ body {
   //  border-top: 2px solid @bg-color;
   .set-padding-margin(0 0 25px, 0 0 0);
   .brand-box {
+
     a {
       display: block;
       text-decoration: none;
       font-weight: bold;
       color: @color-white;
-      line-height: 40px;
+      line-height: 34px;
 
       img {
-        height: 30px;
+        height: 28px;
         vertical-align: middle;
       }
       span {
@@ -199,6 +134,9 @@ body {
       }
     }
   }
+  .form-search {
+    .set-margin(3px 0 0);
+  }
   .main-menu {
     padding-top: 5px;
     li {
@@ -209,8 +147,7 @@ body {
       }
       a {
         display: block;
-        .set-padding(8px 12px);
-
+        .set-padding(5px 12px);
         background: @color-white-transparent;
         color: @color-black;
         .set-box-shadow(inset 0 -1px 2px @color-gray);
@@ -221,7 +158,6 @@ body {
         text-decoration: none;
         background: @body-bg-value;
         .set-box-shadow(none);
-
       }
     }
   }
@@ -306,7 +242,7 @@ body {
       //        background: @color-green;
       //      }
       td {
-        .set-padding(10px);
+        .set-padding(10px 0);
         border-color: @color-gray-light;
         //        .set-box-shadow();
         border-width: 0 0 1px;
@@ -353,9 +289,8 @@ body {
           .set-box-shadow(0 -1px 1px @color-gray-light)
         }
       }
-      .box-content,
-      .box-feature {
-        .set-padding(10px 15px);
+      .box-feature,
+      .box-content {
         .box {
           .set-margin(0 0 15px);
           &.vote {
@@ -403,9 +338,9 @@ body {
         .set-padding-margin(0 0 10px, 8px 10px);
       }
       .box-content {
-        margin-right: @width-vote-box;
         background: @color-white;
-        font-size: 1.15em;
+        font-size: 1.07em;
+
         .footer {
           .set-padding(15px 0 5px);
           .who-box {
@@ -425,14 +360,19 @@ body {
         pre {
           font-size: 0.85em;
           background: @color-gray-very-light;
+          overflow: auto;
           border-color: @color-gray-light;
           .set-padding-margin(0 0 1em, 5px 8px);
         }
       }
       .box-feature {
         color: @color-gray-normal;
-
+        .set-padding(10px 15px);
         width: @width-vote-box;
+        & + .box-content {
+          .set-padding(10px 15px);
+          margin-right: @width-vote-box;
+        }
       }
       .post-status {
         background: @color-blue-light;

@@ -23,8 +23,8 @@
                     <div class="question-activity">
                         <a href="#" th:text="${question.questionOwner.fullName}">Foydalanuvchi</a>
                         <span class="reputation" th:text="${'('+question.questionOwner.reputation+')'}"></span>
-                        tomonidan 5 soat
-                        avval savol berildi
+                        tomonidan <span th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span>
+                        da savol berildi
                     </div>
                 </td>
 

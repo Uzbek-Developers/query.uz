@@ -18,6 +18,8 @@ public class Question extends BaseModel {
     private String questionTitle;
     @Column(columnDefinition = "text")
     private String questionContent;
+    @Column(columnDefinition = "text")
+    private String questionEditorContent;
 
     //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak
     @ColumnDefault(value = "0")
@@ -28,7 +30,7 @@ public class Question extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User questionOwner = new User();
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Tag> tags = new ArrayList<Tag>();
+    private List<Tag> tags;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Answer> answers = new LinkedList<>();// LinkedList ko`p yozish uchun tez ishlaydi
     // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
@@ -47,6 +49,14 @@ public class Question extends BaseModel {
 
     public void setQuestionContent(String questionContent) {
         this.questionContent = questionContent;
+    }
+
+    public String getQuestionEditorContent() {
+        return questionEditorContent;
+    }
+
+    public void setQuestionEditorContent(String questionEditorContent) {
+        this.questionEditorContent = questionEditorContent;
     }
 
     public Integer getVoteCount() {

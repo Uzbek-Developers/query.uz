@@ -8,8 +8,7 @@
     min-width: 500px;
     .set-padding-margin(0 0 15px);
 
-    .wmd-button-bar,
-    #wmd-button-bar {
+    .wmd-button-bar {
       background: @body-bg-value;
       width: 100%;
       border: 1px solid @color-gray-medium;
@@ -72,7 +71,6 @@
       background: @color-white;
       border: 1px solid @color-gray-medium;
       resize: vertical;
-      font-size: 1.1em;
       .set-padding-margin(0, 10px);
       &:focus {
         border: 1px solid @color-black;
@@ -83,7 +81,6 @@
 
   .wmd-preview {
     background-color: @color-white;
-    font-size: 1.15em;
     overflow: auto;
     border-top: 1px dashed @color-gray-medium;
     border-bottom: 1px dashed @color-gray-medium;
@@ -94,14 +91,17 @@
       border: none;
       height: 1px;
     }
-    pre {
-      background: @color-gray-light;
-      .set-padding-margin(0, 5px 8px);
-    }
     code {
       background: @color-gray-light;
       .set-padding-margin(0, 1px 4px);
+    }
 
+    pre {
+      background: @color-gray-light;
+      .set-padding-margin(0, 5px 8px);
+      code {
+        background-color: transparent;
+      }
     }
 
     blockquote {

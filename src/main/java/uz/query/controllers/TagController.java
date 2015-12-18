@@ -44,4 +44,10 @@ public class TagController {
         return tagRepository.findFirst10ByNameContaining(key);
     }
 
+    @RequestMapping(value = "/getTagListByIds", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public List<Tag> getTagList(@RequestParam("ids") List<Long> idList) {
+
+        return tagRepository.findByIdIn(idList);
+    }
 }

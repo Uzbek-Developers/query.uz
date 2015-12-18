@@ -5,8 +5,10 @@ var App = {
     init: function () {
         setTimeout(function () {
             App.editorConfig();
-            if (prettyPrint)
+            if (prettyPrint) {
+                $("code").parent("pre").addClass("prettyprint");
                 prettyPrint();
+            }
         });
     },
     tagSelectorConfig: function () {
@@ -66,8 +68,16 @@ var App = {
                     strings: Markdown.local.uz
                 };
                 var editor1 = new Markdown.Editor(converter1, "", options);
-
                 editor1.run();
+//                var editorIdPostfixList = [];
+//                for (i = 0; i < 20; i++) {
+//                    editorIdPostfixList.push("-comment-" + i);
+//                }
+//                for (i = 0; i < editorIdPostfixList.length; i++) {
+//                    var editor1 = new Markdown.Editor(converter1, editorIdPostfixList[i], options);
+//                    editor1.run();
+//                }
+
             }
         })();
     }

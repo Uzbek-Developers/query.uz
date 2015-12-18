@@ -21,7 +21,7 @@ public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @RequestMapping(value = {"/", "/home"})
+    @RequestMapping(value = {"/", "/home", "/question/list"})
     public String home(Model model,
                        @PageableDefault(
                                size = Constants.SMALL_PAGE_SIZE,
@@ -38,8 +38,14 @@ public class QuestionController {
         return "details";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteResource(Model model, @PathVariable Long id) {
+    @RequestMapping(value = "/question/edit/{id}", method = RequestMethod.GET)
+    public String enterAddQuestionForm(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("question", questionRepository.findOne(id));
+        return "ask_question";
+    }
+
+    @RequestMapping(value = "/question/delete/{id}")
+    public String delete(@PathVariable("id") Long id, Model model) {
         questionRepository.delete(id);
         return "redirect:/home";
     }

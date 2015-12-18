@@ -43,7 +43,9 @@ $(document).ready(function () {
                 this.dom.wrapper.append(this.dom.optionBox);
 
                 this.dom.box = this.appendDOMElement(this.dom.box);
-
+                if ($.isFunction(settings.init)) {
+                    settings.init.call(TS, TS.init);
+                }
             },
 
             attachHandler: function (element, handler, eventType, options) {
@@ -83,7 +85,7 @@ $(document).ready(function () {
                         TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
 
                         if ($.isFunction(settings.selectTag)) {
-                            settings.selectTag.call(TS, TS.selectedTagNameList, TS.selectedTagIdList);
+                            settings.selectTag.call(this, TS.selectedTagNameList, TS.selectedTagIdList);
                         }
                     }
                 });
@@ -96,9 +98,16 @@ $(document).ready(function () {
                     });
                     console.log(i, TS.listOfOption, TS.selectedTagIdList, obj);
                     tag.remove();
-                    var findIndex = TS.selectedTagIdList.indexOf(obj.id);
-                    TS.selectedTagNameList.splice(findIndex, 1);
-                    TS.selectedTagIdList.splice(findIndex, 1);
+                    if (obj && obj.length) {
+                        var findIndex = TS.selectedTagIdList.indexOf(parseInt(obj[0].id));
+                        TS.selectedTagNameList.splice(findIndex, 1);
+                        TS.selectedTagIdList.splice(findIndex, 1);
+                        TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
+
+                        if ($.isFunction(settings.selectTag)) {
+                            settings.selectTag.call(this, TS.selectedTagNameList, TS.selectedTagIdList);
+                        }
+                    }
 
                 });
 
@@ -129,6 +138,32 @@ $(document).ready(function () {
                 TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
                 if ($.isFunction(settings.selectTag)) {
                     settings.selectTag.call(TS, TS.selectedTagNameList, TS.selectedTagIdList);
+                }
+            },
+            setDefaulTags: function (tagList) {
+                if (tagList.length) {
+                    console.log("sd");
+                    this.listOfOption = tagList;
+                    for (i = 0; i < tagList.length; i++) {
+                        var obj = tagList[i];
+                        console.log(tagList);
+                        var tag = TS.dom.tag.clone();
+                        tag.attr("data-id", obj.id);
+                        tag.html(obj.name);
+                        TS.dom.tagGroup.append("\n");
+                        TS.dom.close.text("x");
+
+                        tag.append(TS.dom.close.clone());
+                        this.dom.tagGroup.append(tag);
+                        this.dom.tagGroup.append("\n");
+                        this.selectedTagNameList.push(obj.name);
+                        this.selectedTagIdList.push(obj.id);
+                    }
+                    this.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
+
+                    if ($.isFunction(settings.selectTag)) {
+                        settings.selectTag.call(this, this.selectedTagNameList, this.selectedTagIdList);
+                    }
                 }
             },
             setOptionContent: function (array) {
@@ -235,6 +270,7 @@ $(document).ready(function () {
 
     $.fn.tagSelector.defaultOptions = {
         placeholder: "Tegni kiriting!",
+        init: null,
         search: null,//function
         selectTag: null,
         load: null,//function
