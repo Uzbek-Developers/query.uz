@@ -14,11 +14,21 @@ public class User extends BaseModel {
     private String fullName;
     private String userName;
     private String password;
+    private String email;
+
     @ColumnDefault(value = "0")
     private Integer reputation;
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setFullName(String fullName) {

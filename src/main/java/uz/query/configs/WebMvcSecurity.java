@@ -26,16 +26,30 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/*").permitAll()
 //                .anyRequest().authenticated();
 //        http.csrf().disable();
+//        http.csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .antMatchers("/js/**","/css/**", "/**").permitAll()
+//                .anyRequest().permitAll()
+//                .and();
+
         http
                 .authorizeRequests()
-                .antMatchers("/**").hasRole("USER")
-                .and()
+                .antMatchers("/registration").permitAll()
+                .anyRequest().hasAnyRole("USER")
+                .and();
+        http
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/", false)
+                .permitAll();
+        http
+                .logout()
                 .permitAll()
-                .and()
-                        // Example Remember Me Configuration
-                .rememberMe();
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
+
     }
 
 }

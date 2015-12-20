@@ -34,6 +34,7 @@ dependencies {
     compile("net.sourceforge.nekohtml:nekohtml:1.9.22")
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
+    compile('commons-validator:commons-validator:1.4.0')
     runtime('org.postgresql:postgresql:9.4-1201-jdbc41')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

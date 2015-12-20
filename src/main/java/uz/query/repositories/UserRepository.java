@@ -14,4 +14,7 @@ public interface UserRepository extends BaseRepository<User, Long> {
 
     List<User> findByisDeleted(boolean isDeleted);
 
+    User findByUserName(String UserName);
+
+    User findByEmail(String Email);
 }
