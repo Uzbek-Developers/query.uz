@@ -1,22 +1,90 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="tag-list">
+    <div class="filter-box clearfix">
+        <ul class="list filter-list clearfix pull-left">
+            <li><a href="#"><i class="box-count">Java</i> Haqida</a></li>
+            <li class="active"><a href="#"><i class="box-count">522</i> Oxirgi</a></li>
+            <li><a href="#"><span class="fa fa-caret-up"></span> Top</a></li>
+            <li><a href="#">Javobsiz <i class="box-count">522</i> </a></li>
+            <li><a href="#">Qiziq</a></li>
+        </ul>
+        <h3 class="title pull-right">Oxirgi taglar</h3>
+    </div>
     <div class="post-wrap">
-        <table class="questions-table">
-            <tr th:each="tag: ${tagPage}">
-                <td class="text">
-                    <a href="#" class="tag-link" th:text="${tag.name}"></a>
-
-                    <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
-                    <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
-                    <!--</ul>-->
-                    <div class="tag-activity">
-                        <a href="#" th:text="${tag.tagOwner.fullName}">Foydalanuvchi</a>
-                        <!--<span class="reputation" th:text="${'('+tag.tagOwner.reputation+')'}"></span>-->
-                        tomonidan 5 soat
-                        avval savol berildi
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="row">
+            <div class="col-md-3 text" th:each="tag: ${tagPage}">
+                <a href="#" class="tag-link" th:text="${tag.name}"></a>
+                <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
+                <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
+                <!--</ul>-->
+                <div class="tag-activity">
+                    <a href="#" th:text="${tag.tagOwner.fullName}">Foydalanuvchi</a>
+                    <!--<span class="reputation" th:text="${'('+tag.tagOwner.reputation+')'}"></span>-->
+                    tomonidan 5 soat
+                    avval savol berildi
+                </div>
+            </div>
+        </div>
         <div th:include="fragments/init :: pagination (page=${tagPage})"></div>
     </div>
+</div>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="add-tag">
+    <div class="post-wrap">
+        <h3 class="title">Yangi teg qo'shish</h3>
+
+        <div class="post-item ask-question">
+            <div class="box-content">
+                <form action="#" th:action="@{/tag/add}" th:object="${tag}" method="POST">
+                    <div class="field-row">
+                        <span class="label">Teg nomi:</span>
+
+                        <div class="form-field"><input type="text" max-length="240" tabindex="1" th:field="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Qisqa ma'lumot:</span>
+                        <textarea class="textare-comment" th:field="*{shortDescription}"></textarea>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Teg haqida to'liqroq: </span>
+
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" tabindex="2"
+                                          th:field="*{editorContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+
+                            <textarea id="txt-preview" class="hide" readonly="true"
+                                      th:field="*{content}"></textarea>
+                        </div>
+                    </div>
+                    <div class="field-row buttons">
+                        <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("[type=submit]").on("click", function () {
+                var hasError = false;
+                $(".field-row input[type=text],.field-row  textarea[readonly=false]").each(function () {
+                    var field = $(this);
+                    $("#txt-preview").val($("#wmd-preview").html());
+                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
+                        if (!hasError) hasError = !hasError ? true : hasError;
+                        field.addClass("error-field");
+                    } else {
+                        field.removeClass("error-field");
+                    }
+                })
+                if (hasError)
+                    return false;
+            });
+        });
+    </script>
 </div>

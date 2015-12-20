@@ -32,6 +32,12 @@ public class Tag extends BaseModel {
     @JsonProperty(value = "shortDesc")
     private String shortDescription;
 
+    @Column(columnDefinition = "text")
+    private String content;
+
+    @Column(columnDefinition = "text")
+    private String editorContent;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User tagOwner;
 
@@ -81,5 +87,21 @@ public class Tag extends BaseModel {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getEditorContent() {
+        return editorContent;
+    }
+
+    public void setEditorContent(String editorContent) {
+        this.editorContent = editorContent;
     }
 }
