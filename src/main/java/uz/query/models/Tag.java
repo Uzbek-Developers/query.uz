@@ -1,10 +1,9 @@
 package uz.query.models;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.ColumnDefault;
-import uz.query.models.base.BaseModel;
+import uz.query.models.base.Post;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,41 +12,23 @@ import java.util.List;
  * Created by Mirjalol Bahodirov on 12/14/15 with love.
  */
 @Entity
-@JsonIgnoreProperties({"questions", "tagOwner"})
-public class Tag extends BaseModel {
-
-    private String name;
+@JsonIgnoreProperties({"questions", "owner"})
+@Table(name = "tag")
+public class Tag extends Post {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Question> questions;
 
     @ColumnDefault(value = "0")
-    private Integer questionCount;
+    private Integer questionCount = 0;
 
     @ColumnDefault(value = "0")
     @JsonProperty(value = "stat")
-    private Long statisticCount;
+    private Integer statisticCount = 0;
 
     @Column(columnDefinition = "text")
     @JsonProperty(value = "shortDesc")
     private String shortDescription;
-
-    @Column(columnDefinition = "text")
-    private String content;
-
-    @Column(columnDefinition = "text")
-    private String editorContent;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User tagOwner;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Question> getQuestions() {
         return questions;
@@ -65,19 +46,11 @@ public class Tag extends BaseModel {
         this.questionCount = questionCount;
     }
 
-    public User getTagOwner() {
-        return tagOwner;
-    }
-
-    public void setTagOwner(User tagOwner) {
-        this.tagOwner = tagOwner;
-    }
-
-    public Long getStatisticCount() {
+    public Integer getStatisticCount() {
         return statisticCount;
     }
 
-    public void setStatisticCount(Long statisticCount) {
+    public void setStatisticCount(Integer statisticCount) {
         this.statisticCount = statisticCount;
     }
 
@@ -87,21 +60,5 @@ public class Tag extends BaseModel {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getEditorContent() {
-        return editorContent;
-    }
-
-    public void setEditorContent(String editorContent) {
-        this.editorContent = editorContent;
     }
 }

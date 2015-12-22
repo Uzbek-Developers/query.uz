@@ -14,7 +14,9 @@ public interface TagRepository extends BaseRepository<Tag, Long> {
 
     List<Tag> findByisDeleted(boolean isDeleted);
 
-    List<Tag> findFirst10ByNameContaining(String key);
+    List<Tag> findAll();
+
+    List<Tag> findFirst10ByTitleContaining(String key);
 
     List<Tag> findByIdIn(List<Long> idList);
 

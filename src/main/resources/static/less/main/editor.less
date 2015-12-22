@@ -3,117 +3,122 @@
     .set-padding-margin(0 0 15px, 0 0 10px);
     border-bottom: 1px dashed @color-gray-medium;
   }
-  .wmd-panel {
-    @width-size: 30px;
-    min-width: 500px;
-    .set-padding-margin(0 0 15px);
-
-    .wmd-button-bar {
-      background: @body-bg-value;
-      width: 100%;
-      border: 1px solid @color-gray-medium;
-      border-bottom: none;
-      overflow: hidden;
-      .wmd-button-row {
-        position: relative;
-        height: @width-size;
-        .set-padding-margin(5px);
-
-        .wmd-button {
-          width: @width-size;
-          height: @width-size;
-          padding-left: 2px;
-          padding-right: 3px;
-          position: absolute;
-          display: inline-block;
-          line-height: @width-size;
-          list-style: none;
-          background: @color-white;
-          cursor: pointer;
-          .set-padding(5px 0 0 5px);
-
-          > span {
-            background-image: url(../../images/wmd-buttons.png);
-            background-repeat: no-repeat;
-            background-position: 0px 0px;
-            width: @width-size - 10;
-            height: @width-size - 10;
-            display: inline-block;
-          }
-        }
-
-        .wmd-spacer {
-          width: 1px;
-          height: @width-size;
-          margin-left: 14px;
-          position: absolute;
-          background-color: Silver;
-          display: inline-block;
-          list-style: none;
-
-          &.wmd-spacer1 {
-            left: 50px;
-          }
-          &.wmd-spacer2 {
-            left: 175px;
-          }
-          &.wmd-spacer3 {
-            left: 300px;
-          }
-        }
-
-      }
-    }
-
-    .wmd-input {
-      height: 300px;
-      width: 100%;
-      background: @color-white;
-      border: 1px solid @color-gray-medium;
-      resize: vertical;
-      .set-padding-margin(0, 10px);
-      &:focus {
-        border: 1px solid @color-black;
-      }
-    }
-
-  }
-
-  .wmd-preview {
-    background-color: @color-white;
-    overflow: auto;
-    border-top: 1px dashed @color-gray-medium;
-    border-bottom: 1px dashed @color-gray-medium;
-    .set-padding(10px 0 0);
-
-    hr {
-      background: @color-gray-medium;
-      border: none;
-      height: 1px;
-    }
-    code {
-      background: @color-gray-light;
-      .set-padding-margin(0, 1px 4px);
-    }
-
-    pre {
-      background: @color-gray-light;
-      .set-padding-margin(0, 5px 8px);
-      code {
-        background-color: transparent;
-      }
-    }
-
-    blockquote {
-      border-left: 3px solid @color-gray-medium;
-      background: @color-yellow-light;
-      .set-padding(10px 10px 1px);
-    }
-  }
 
   .footer {
     border-top: 1px dashed @color-gray-medium;
     .set-padding-margin(0, 15px 0 0);
+  }
+
+  .wmd-preview {
+    border-top: 1px dashed @color-gray-medium;
+    border-bottom: 1px dashed @color-gray-medium;
+  }
+}
+
+.wmd-panel {
+  @width-size: 30px;
+  min-width: 500px;
+  .set-padding-margin(0 0 15px);
+
+  .wmd-button-bar {
+    background: @body-bg-value;
+    width: 100%;
+    border: 1px solid @color-gray-medium;
+    border-bottom: none;
+    overflow: hidden;
+    .wmd-button-row {
+      position: relative;
+      height: @width-size;
+      .set-padding-margin(5px);
+
+      .wmd-button {
+        width: @width-size;
+        height: @width-size;
+        padding-left: 2px;
+        padding-right: 3px;
+        position: absolute;
+        display: inline-block;
+        line-height: @width-size;
+        list-style: none;
+        background: @color-white;
+        cursor: pointer;
+        .set-padding(5px 0 0 5px);
+
+        > span {
+          background-image: url(../../images/wmd-buttons.png);
+          background-repeat: no-repeat;
+          background-position: 0px 0px;
+          width: @width-size - 10;
+          height: @width-size - 10;
+          display: inline-block;
+        }
+      }
+
+      .wmd-spacer {
+        width: 1px;
+        height: @width-size;
+        margin-left: 14px;
+        position: absolute;
+        background-color: Silver;
+        display: inline-block;
+        list-style: none;
+
+        &.wmd-spacer1 {
+          left: 50px;
+        }
+        &.wmd-spacer2 {
+          left: 175px;
+        }
+        &.wmd-spacer3 {
+          left: 300px;
+        }
+      }
+
+    }
+  }
+
+  .wmd-input {
+    height: 300px;
+    width: 100%;
+    background: @color-white;
+    border: 1px solid @color-gray-medium;
+    resize: vertical;
+    .set-padding-margin(0, 10px);
+    &:focus {
+      border: 1px solid @color-black;
+    }
+  }
+
+}
+
+.box-content,
+.wmd-preview {
+  background-color: @color-white;
+  overflow: auto;
+  .set-padding(10px 0 0);
+
+  hr {
+    background: @color-gray-medium;
+    border: none;
+    height: 1px;
+  }
+  code {
+    background: @color-gray-light;
+    .set-padding-margin(0, 1px 4px);
+  }
+
+  pre {
+    background: @color-gray-light;
+    .set-padding-margin(0, 5px 8px);
+    code {
+      background-color: transparent;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid @color-gray-medium;
+    background: @color-yellow-light;
+    .set-padding(10px 10px 1px);
   }
 }
 

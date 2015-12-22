@@ -1,10 +1,9 @@
 package uz.query.models;
 
 import org.hibernate.annotations.ColumnDefault;
-import uz.query.models.base.BaseModel;
+import uz.query.models.base.Post;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,14 +11,8 @@ import java.util.List;
  * Created by Mirjalol Bahodirov on 12/14/15 with love.
  */
 @Entity
-public class Question extends BaseModel {
-
-    @Column(columnDefinition = "text")
-    private String questionTitle;
-    @Column(columnDefinition = "text")
-    private String questionContent;
-    @Column(columnDefinition = "text")
-    private String questionEditorContent;
+@Table(name = "question")
+public class Question extends Post {
 
     //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak
     @ColumnDefault(value = "0")
@@ -27,45 +20,11 @@ public class Question extends BaseModel {
     @ColumnDefault(value = "0")
     private Integer seenCount = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User questionOwner = new User();
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Answer> answers = new LinkedList<>();// LinkedList ko`p yozish uchun tez ishlaydi
     // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
-
-    public String getQuestionTitle() {
-        return questionTitle;
-    }
-
-    public void setQuestionTitle(String questionTitle) {
-        this.questionTitle = questionTitle;
-    }
-
-    public String getQuestionContent() {
-        return questionContent;
-    }
-
-    public void setQuestionContent(String questionContent) {
-        this.questionContent = questionContent;
-    }
-
-    public String getQuestionEditorContent() {
-        return questionEditorContent;
-    }
-
-    public void setQuestionEditorContent(String questionEditorContent) {
-        this.questionEditorContent = questionEditorContent;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
 
     public Integer getSeenCount() {
         return seenCount;
@@ -73,14 +32,6 @@ public class Question extends BaseModel {
 
     public void setSeenCount(Integer seenCount) {
         this.seenCount = seenCount;
-    }
-
-    public User getQuestionOwner() {
-        return questionOwner;
-    }
-
-    public void setQuestionOwner(User questionOwner) {
-        this.questionOwner = questionOwner;
     }
 
     public List<Tag> getTags() {
@@ -97,5 +48,13 @@ public class Question extends BaseModel {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public Integer getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(Integer voteCount) {
+        this.voteCount = voteCount;
     }
 }

@@ -11,7 +11,7 @@
                         <span class="label">Savol sarlavhasi:</span>
 
                         <div class="form-field"><input type="text" max-length="240" tabindex="1"
-                                                       th:field="*{questionTitle}"/></div>
+                                                       th:field="*{title}"/></div>
                     </div>
                     <div class="field-row">
                         <span class="label">Savol matni: </span>
@@ -20,13 +20,13 @@
                             <div class="wmd-panel">
                                 <div id="wmd-button-bar" class="wmd-button-bar"></div>
                                 <textarea class="wmd-input" id="wmd-input" tabindex="2"
-                                          th:field="*{questionEditorContent}"></textarea>
+                                          th:field="*{editorContent}"></textarea>
                             </div>
 
                             <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
 
                             <textarea id="txt-preview" class="hide" readonly="true"
-                                      th:field="*{questionContent}"></textarea>
+                                      th:field="*{content}"></textarea>
                         </div>
                     </div>
                     <div class="field-row">
@@ -46,7 +46,7 @@
                     <div class="field-row buttons">
                         <!--<div class="footer">-->
 
-                        <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
+                        <input type="submit" class="btn btn-green shdw-1x" value="Savolni qo'shish"/>
                         <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
                         <a href="#">Link</a>
                         <!--</div>-->

@@ -12,13 +12,13 @@
     <div class="post-wrap">
         <div class="row">
             <div class="col-md-3 text" th:each="tag: ${tagPage}">
-                <a href="#" class="tag-link" th:text="${tag.name}"></a>
+                <a href="#" class="tag-link" th:text="${tag.title}"></a>
                 <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
                 <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
                 <!--</ul>-->
                 <div class="tag-activity">
-                    <a href="#" th:text="${tag.tagOwner.fullName}">Foydalanuvchi</a>
-                    <!--<span class="reputation" th:text="${'('+tag.tagOwner.reputation+')'}"></span>-->
+                    <a href="#" th:text="${tag.owner.fullName}">Foydalanuvchi</a>
+                    <!--<span class="reputation" th:text="${'('+tag.tagowner.reputation+')'}"></span>-->
                     tomonidan 5 soat
                     avval savol berildi
                 </div>
@@ -37,7 +37,7 @@
                     <div class="field-row">
                         <span class="label">Teg nomi:</span>
 
-                        <div class="form-field"><input type="text" max-length="240" tabindex="1" th:field="*{name}"/>
+                        <div class="form-field"><input type="text" max-length="240" tabindex="1" th:field="*{title}"/>
                         </div>
                     </div>
                     <div class="field-row">

@@ -5,6 +5,8 @@ var App = {
     init: function () {
         setTimeout(function () {
             App.editorConfig();
+            App.validateAddForm();
+
             if (prettyPrint) {
                 $("code").parent("pre").addClass("prettyprint");
                 prettyPrint();
@@ -48,6 +50,9 @@ var App = {
                 TagSelector.setOptionContent(jsonArray);
             }
         });
+    },
+    validateAddForm: function () {
+
     },
     editorConfig: function () {
         (function () {

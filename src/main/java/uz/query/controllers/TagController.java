@@ -14,7 +14,6 @@ import uz.query.models.User;
 import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public class TagController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/tags")
+    @RequestMapping(value = "/tag/list")
     public String tags(Model model,
                        @PageableDefault(
                                size = (Constants.SMALL_PAGE_SIZE * 4),
@@ -47,7 +46,8 @@ public class TagController {
     @RequestMapping(value = "/getTagList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<Tag> getTagList(@RequestParam("key") String key) {
-        return tagRepository.findFirst10ByNameContaining(key);
+        return tagRepository.findFirst10ByTitleContaining(key);
+//        return tagRepository.findAll();
     }
 
     @RequestMapping(value = "/getTagListByIds", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -68,10 +68,10 @@ public class TagController {
     @RequestMapping(value = "/tag/add", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Tag tag) {
         User u = userRepository.findOne(Long.valueOf(1));
-        tag.setTagOwner(u);
+        tag.setOwner(u);
         tagRepository.save(tag);
 
-        return "redirect:/home";
+        return "redirect:/tag/list";
     }
 
 }

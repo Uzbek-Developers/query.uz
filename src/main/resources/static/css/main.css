@@ -453,6 +453,10 @@ body {
     padding: 0;
 }
 
+.content-wrap .post-wrap .post-item.answer-item {
+    display: block;
+}
+
 .content-wrap .post-wrap .post-item.answer-item + .answer-item {
     border-top: 1px solid #cccccc;
     -webkit-box-shadow: 0 -1px 1px #eeeeee;
@@ -956,6 +960,21 @@ body {
     color: #cccccc;
 }
 
+.tag-box {
+    margin: 10px;
+    padding: 10px;
+}
+
+.tag-box .question-link {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.15em;
+}
+
+.tag-box .tag-list {
+    float: left;
+}
+
 .list {
     list-style-type: none;
     margin: 0;
@@ -975,13 +994,24 @@ body {
     border-bottom: 1px dashed #cccccc;
 }
 
-.text-editor .wmd-panel {
+.text-editor .footer {
+    border-top: 1px dashed #cccccc;
+    margin: 0;
+    padding: 15px 0 0;
+}
+
+.text-editor .wmd-preview {
+    border-top: 1px dashed #cccccc;
+    border-bottom: 1px dashed #cccccc;
+}
+
+.wmd-panel {
     min-width: 500px;
     margin: 0 0 15px;
     padding: 0;
 }
 
-.text-editor .wmd-panel .wmd-button-bar {
+.wmd-panel .wmd-button-bar {
     background: #f3f3f3;
     width: 100%;
     border: 1px solid #cccccc;
@@ -989,14 +1019,14 @@ body {
     overflow: hidden;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row {
+.wmd-panel .wmd-button-bar .wmd-button-row {
     position: relative;
     height: 30px;
     margin: 5px;
     padding: 0;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-button {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-button {
     width: 30px;
     height: 30px;
     padding-left: 2px;
@@ -1010,7 +1040,7 @@ body {
     padding: 5px 0 0 5px;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-button > span {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-button > span {
     background-image: url(../../images/wmd-buttons.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
@@ -1019,7 +1049,7 @@ body {
     display: inline-block;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer {
     width: 1px;
     height: 30px;
     margin-left: 14px;
@@ -1029,19 +1059,19 @@ body {
     list-style: none;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer1 {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer1 {
     left: 50px;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer2 {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer2 {
     left: 175px;
 }
 
-.text-editor .wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer3 {
+.wmd-panel .wmd-button-bar .wmd-button-row .wmd-spacer.wmd-spacer3 {
     left: 300px;
 }
 
-.text-editor .wmd-panel .wmd-input {
+.wmd-panel .wmd-input {
     height: 300px;
     width: 100%;
     background: #ffffff;
@@ -1051,50 +1081,48 @@ body {
     padding: 10px;
 }
 
-.text-editor .wmd-panel .wmd-input:focus {
+.wmd-panel .wmd-input:focus {
     border: 1px solid #000000;
 }
 
-.text-editor .wmd-preview {
+.box-content,
+.wmd-preview {
     background-color: #ffffff;
     overflow: auto;
-    border-top: 1px dashed #cccccc;
-    border-bottom: 1px dashed #cccccc;
     padding: 10px 0 0;
 }
 
-.text-editor .wmd-preview hr {
+.box-content hr,
+.wmd-preview hr {
     background: #cccccc;
     border: none;
     height: 1px;
 }
 
-.text-editor .wmd-preview code {
+.box-content code,
+.wmd-preview code {
     background: #eeeeee;
     margin: 0;
     padding: 1px 4px;
 }
 
-.text-editor .wmd-preview pre {
+.box-content pre,
+.wmd-preview pre {
     background: #eeeeee;
     margin: 0;
     padding: 5px 8px;
 }
 
-.text-editor .wmd-preview pre code {
+.box-content pre code,
+.wmd-preview pre code {
     background-color: transparent;
 }
 
-.text-editor .wmd-preview blockquote {
+.box-content blockquote,
+.wmd-preview blockquote {
     border-left: 3px solid #cccccc;
     background: #ffffbb;
     padding: 10px 10px 1px;
-}
-
-.text-editor .footer {
-    border-top: 1px dashed #cccccc;
-    margin: 0;
-    padding: 15px 0 0;
 }
 
 .wmd-prompt-background {

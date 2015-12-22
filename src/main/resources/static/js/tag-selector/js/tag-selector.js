@@ -67,12 +67,12 @@ $(document).ready(function () {
                 this.attachHandler("." + this.dom.box.attr("class"), function (ev) {
                     var i = $(this).attr("data-index");
                     var obj = TS.listOfOption[i];
-                    if (obj && obj.name && TS.selectedTagIdList.indexOf(obj.id) === -1) {
+                    if (obj && obj.title && TS.selectedTagIdList.indexOf(obj.id) === -1) {
 
                         reset();
                         var tag = TS.dom.tag.clone();
                         tag.attr("data-id", obj.id);
-                        tag.html(obj.name);
+                        tag.html(obj.title);
                         TS.dom.tagGroup.append("\n");
                         TS.dom.close.text("x");
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
                         TS.dom.tagGroup.append(tag);
                         TS.dom.tagGroup.append("\n");
 
-                        TS.selectedTagNameList.push(obj.name);
+                        TS.selectedTagNameList.push(obj.title);
                         TS.selectedTagIdList.push(obj.id);
                         TS.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
 
@@ -149,14 +149,14 @@ $(document).ready(function () {
                         console.log(tagList);
                         var tag = TS.dom.tag.clone();
                         tag.attr("data-id", obj.id);
-                        tag.html(obj.name);
+                        tag.html(obj.title);
                         TS.dom.tagGroup.append("\n");
                         TS.dom.close.text("x");
 
                         tag.append(TS.dom.close.clone());
                         this.dom.tagGroup.append(tag);
                         this.dom.tagGroup.append("\n");
-                        this.selectedTagNameList.push(obj.name);
+                        this.selectedTagNameList.push(obj.title);
                         this.selectedTagIdList.push(obj.id);
                     }
                     this.dom.wrapper.attr("data-tags", TS.selectedTagNameList);
@@ -174,7 +174,7 @@ $(document).ready(function () {
                     for (i = 0, len = array.length; i < len; i++) {
                         if (this.selectedTagIdList.indexOf(array[i].id) === -1) {
                             html = '<div>';
-                            html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].name + '</span> ';
+                            html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].title + '</span> ';
                             html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
                             html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
                             html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
@@ -277,8 +277,8 @@ $(document).ready(function () {
         search: null//function
     };
 });
-function TagObject(name, stat, moreLink, shortDesc, desc) {
-    this.name = name;
+function TagObject(title, stat, moreLink, shortDesc, desc) {
+    this.title = title;
     this.shortDesc = shortDesc;
     this.desc = desc;
     this.moreLink = moreLink;

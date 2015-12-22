@@ -1,0 +1,45 @@
+<div ui:fragment="user-box (object)">
+    <div class="user-box" th:object="${object}">
+        <div class="cover-bg">
+            <img th:src="@{/images/material-design-rainbow1.png}" alt="photo"/>
+        </div>
+        <div class="clearfix">
+            <div class="user-image pull-left">
+                <a href="#"><img th:src="@{/images/default-user-avatar.jpg}" alt="user"/></a>
+            </div>
+            <div class="user-short-content">
+                <a class="name">Sharipov Bobur</a><br/>
+                                <span class="user-score">
+                                    <span class="reputation">25,655</span>
+                                    <span class="badge-gold"><i class="fa fa-trophy"></i> 25</span>
+                                    <span class="badge-silver"><i class="fa fa-trophy"></i> 25</span>
+                                    <span class="badge-bronze"><i class="fa fa-trophy"></i> 255</span>
+                                </span>
+            </div>
+            <div class="user-content">
+                <h4 class="job">Full stack developer</h4>
+
+                <p>Full stack developer Full stack developer Full stack developer Full stack
+                    developer</p>
+
+                <p>Full <a href="#">stack developer Full stack developer Full stack developer</a> Full
+                    stack
+                    developer
+                </p>
+                <ul class="list extra-list">
+                    <li><i class="fa fa-location-arrow"></i> Address: <a href="#">O'zbekiston,
+                        Tashkent</a>
+                    </li>
+                    <li><i class="fa fa-phone"></i> Tel: <a href="#">+99825 125-25-52</a></li>
+                    <li><i class="fa fa-facebook"></i> Facebook: <a href="#">O'zbekiston, Tashkent</a>
+                    </li>
+                    <li><i class="fa fa-twitter"></i> Twitter: <a href="#">O'zbekiston, Tashkent</a>
+                    </li>
+                </ul>
+                <div class="footer">
+                    <button class="btn btn-blue">Rezumeni ko'rish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

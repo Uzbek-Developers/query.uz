@@ -15,14 +15,14 @@
                 th:classappend="${question.answers.size()>0}?important:''">
                 <td class="text">
                     <a th:href="@{/question/}+${question.id}" class="question-link"
-                       th:text="${question.questionTitle}"></a>
+                       th:text="${question.title}"></a>
 
-                    <ul class="list tag-list" th:if="${question.tags.size()}">
-                        <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.name}">Ajax</a></li>
+                    <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
+                        <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
                     </ul>
                     <div class="question-activity">
-                        <a href="#" th:text="${question.questionOwner.fullName}">Foydalanuvchi</a>
-                        <span class="reputation" th:text="${'('+question.questionOwner.reputation+')'}"></span>
+                        <a href="#" th:text="${question.owner.fullName}">Foydalanuvchi</a>
+                        <span class="reputation" th:text="${'('+question.owner.reputation+')'}"></span>
                         tomonidan <span th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span>
                         da savol berildi
                     </div>
