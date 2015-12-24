@@ -1088,7 +1088,7 @@ body {
 .box-content,
 .wmd-preview {
     background-color: #ffffff;
-    overflow: auto;
+    overflow-x: auto;
     padding: 10px 0 0;
 }
 

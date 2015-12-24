@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @MappedSuperclass
 @Inheritance
-public class Post extends BaseModel implements Serializable {
+public class Post extends BaseModel {
 
     @Column(columnDefinition = "text")
     private String title;

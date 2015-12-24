@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uz.query.Constants;
-import uz.query.models.Answer;
-import uz.query.models.Question;
-import uz.query.models.Tag;
-import uz.query.models.User;
+import uz.query.models.*;
 import uz.query.repositories.AnswerRepository;
 import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.TagRepository;
@@ -99,20 +96,24 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/question/add_answer", method = RequestMethod.POST)
-    public String addQuestionSubmit(@ModelAttribute("question") Question question, @ModelAttribute("newAnswer") Answer answer) {
+    public String addQuestionSubmit(HttpServletRequest request, @ModelAttribute("newAnswer") Answer answer) {
         User u = userRepository.findOne(Long.valueOf(1));
-        Question q = questionRepository.findOne(question.getId());
         answer.setOwner(u);
         answer = answerRepository.save(answer);
+
+        Long questionId = Long.parseLong(request.getParameter("questionId"));
+
+        Question q = questionRepository.findOne(questionId);
         List<Answer> otherAnswers = q.getAnswers();
         otherAnswers.add(answer);
+
         questionRepository.save(q);
 
-        return "redirect:/question/" + question.getId();
+        return "redirect:/question/" + questionId;
     }
 
-    private interface Data {
+    public interface Data {
         String QUESTION_PAGE = "questionPage";
     }
 
-}
+}}

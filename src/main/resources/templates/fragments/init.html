@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-    <title>Query.uz ga xush kelibsiz</title>
+    <title>Query.uz - </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="keyword" content="${_csrf.headerName}"/>
+    <meta name="description" content="${_csrf.token}"/>
     <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" th:href="@{/css/font-awesome.css}"/>
     <link rel="stylesheet" type="text/css" href="../../css/grid.css" th:href="@{/css/grid.css}"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/main.css" th:href="@{/css/main.css}"/>
@@ -47,6 +48,8 @@
                         <!--<span>Query</span><span>.</span><span>uz</span> -->
                         <!--<i class="fa fa-caret-down"></i>-->
                     </a>
+
+                    <h1 class="hide">Query.uz - Dasturlash bo'yicha Savol & Javob ko'rinishidagi loyiha</h1>
                     <!--<a href="#"><i class="fa fa-area-chart"></i></a>-->
                     <!--<a href="#"><i class="fa fa-file-text"></i></a>-->
                 </div>
