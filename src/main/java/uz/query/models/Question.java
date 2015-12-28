@@ -25,6 +25,8 @@ public class Question extends Post {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Answer> answers = new LinkedList<>();// LinkedList ko`p yozish uchun tez ishlaydi
     // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
+    @javax.persistence.Transient
+    private PostStatus postStatus;
 
     public Integer getSeenCount() {
         return seenCount;
@@ -57,4 +59,14 @@ public class Question extends Post {
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
+
+    public PostStatus getPostStatus() {
+        return postStatus;
+    }
+
+    public void setPostStatus(PostStatus postStatus) {
+        this.postStatus = postStatus;
+    }
+
 }
+

@@ -49,7 +49,10 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("question", questionRepository.findOne(id));
+        Question question = questionRepository.findOne(id);
+        PostStatus status = new PostStatus(question.getOwner());
+        question.setPostStatus(status);
+        model.addAttribute("question", question);
         model.addAttribute("newAnswer", new Answer());
 
         return "details";
@@ -90,6 +93,10 @@ public class QuestionController {
         question.setTags(list);
         User u = userRepository.findOne(Long.valueOf(1));
         question.setOwner(u);
+
+        PostStatus status = new PostStatus(u);
+        question.setPostStatus(status);
+
         questionRepository.save(question);
 
         return "redirect:/home";

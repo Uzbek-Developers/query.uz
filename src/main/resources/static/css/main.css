@@ -464,6 +464,10 @@ body {
     box-shadow: 0 -1px 1px #eeeeee;
 }
 
+.content-wrap .post-wrap .post-item.answer-item .box-content {
+    padding: 20px 15px 10px;
+}
+
 .content-wrap .post-wrap .post-item .box-feature .box,
 .content-wrap .post-wrap .post-item .box-content .box {
     margin: 0 0 15px;
@@ -471,7 +475,7 @@ body {
 
 .content-wrap .post-wrap .post-item .box-feature .box.vote,
 .content-wrap .post-wrap .post-item .box-content .box.vote {
-    font-size: 3.5em;
+    font-size: 2.5em;
     line-height: 1em;
     line-height: 0.9;
 }
@@ -483,7 +487,7 @@ body {
 
 .content-wrap .post-wrap .post-item .box-feature .box .row .count,
 .content-wrap .post-wrap .post-item .box-content .box .row .count {
-    font-size: .6em;
+    font-size: .8em;
 }
 
 .content-wrap .post-wrap .post-item .box-feature .box .row .fa,
@@ -492,6 +496,10 @@ body {
     font-weight: bold;
 }
 
+.content-wrap .post-wrap .post-item .box-feature .box.marked-up .up,
+.content-wrap .post-wrap .post-item .box-content .box.marked-up .up,
+.content-wrap .post-wrap .post-item .box-feature .box.marked-down .down,
+.content-wrap .post-wrap .post-item .box-content .box.marked-down .down,
 .content-wrap .post-wrap .post-item .box-feature .box.marked,
 .content-wrap .post-wrap .post-item .box-content .box.marked,
 .content-wrap .post-wrap .post-item .box-feature .box .marked,
@@ -783,7 +791,7 @@ body {
 .user-box {
     color: #000000;
     position: relative;
-    background: #ffffff;
+    background: #eeeeee;
     margin: 0;
     padding: 3px;
     -webkit-box-shadow: 0 1px 2px #cccccc;
@@ -809,8 +817,8 @@ body {
 }
 
 .user-box .user-image {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     text-align: center;
     overflow: hidden;
     margin: 0 3px 0 0;
@@ -820,7 +828,7 @@ body {
 
 .user-box .user-short-content {
     margin: 0;
-    padding: 5px 0 5px 54px;
+    padding: 5px 0 5px 40px;
 }
 
 .user-box .user-content {
@@ -973,6 +981,23 @@ body {
 
 .tag-box .tag-list {
     float: left;
+}
+
+.popup-wrap {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: #eeeeee;
+}
+
+.popup-wrap .box {
+    position: absolute;
+    background: #ffffff;
+    width: 500px;
+    margin-left: -250px;
+    top: 30%;
+    left: 50%;
 }
 
 .list {

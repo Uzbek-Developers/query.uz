@@ -1,10 +1,11 @@
 package uz.query.models.base;
 
-import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.User;
+import uz.query.models.Vote;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by sherali on 12/22/15.
@@ -24,6 +25,9 @@ public class Post extends BaseModel {
     private User owner;
     @ManyToOne(fetch = FetchType.LAZY)
     private User editor;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Vote> votes;
 
     public String getTitle() {
         return title;
@@ -65,4 +69,16 @@ public class Post extends BaseModel {
         this.editor = editor;
     }
 
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public short voteRank() {
+        Stream<Vote> list = votes.stream().filter(v -> v.getOwner().getId() == owner.getId());
+        return list.count() == 0 ? 0 : list.findFirst().get().getRank();
+    }
 }
