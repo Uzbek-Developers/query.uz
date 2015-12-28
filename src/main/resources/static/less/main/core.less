@@ -289,13 +289,17 @@ body {
           border-top: 1px solid @color-gray-medium;
           .set-box-shadow(0 -1px 1px @color-gray-light)
         }
+        .box-content {
+          .set-padding(20px 15px 10px);
+        }
+
       }
       .box-feature,
       .box-content {
         .box {
           .set-margin(0 0 15px);
           &.vote {
-            font-size: 3.5em;
+            font-size: 2.5em;
             line-height: 1em;
             line-height: 0.9;
 
@@ -304,7 +308,7 @@ body {
             text-align: center;
 
             .count {
-              font-size: .6em;
+              font-size: .8em;
             }
             .fa {
               line-height: 0.4;
@@ -312,6 +316,8 @@ body {
 
             }
           }
+          &.marked-up .up,
+          &.marked-down .down,
           &.marked,
           .marked {
             color: @color-blue;
@@ -586,7 +592,7 @@ body {
 .user-box {
   color: @color-black;
   position: relative;
-  background: @color-white;
+  background: @color-gray-light;
   .set-padding-margin(0, 3px);
   .set-box-shadow();
   &:hover {
@@ -602,7 +608,7 @@ body {
 
   }
   .user-image {
-    @img-size: 40px;
+    @img-size: 32px;
     width: @img-size;
     height: @img-size;
     text-align: center;
@@ -611,7 +617,7 @@ body {
     .set-padding-margin(8px 5px 5px, 0);
   }
   .user-short-content {
-    .set-padding-margin(0, 5px 0 5px 54px);
+    .set-padding-margin(0, 5px 0 5px 40px);
   }
   .user-content {
     border-top: 1px solid @color-gray-light;
@@ -747,4 +753,20 @@ body {
     float: left;
   }
 
+}
+
+.popup-wrap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: @color-gray-light;
+  .box {
+    position: absolute;
+    background: @color-white;
+    width: 500px;
+    margin-left: -250px;
+    top: 30%;
+    left: 50%;
+  }
 }

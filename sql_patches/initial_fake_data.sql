@@ -1,7 +1,7 @@
 ﻿-- Ushbu patchlarni apply qilishdan oldin, databasedagi
 -- barcha jadvallarni o`chiring keyin projectni run qiling
 
-insert into my_user(id, full_name, user_name, password) values(1, 'Administrator', 'admin', '12345');
+    insert into my_user(id, full_name, user_name, password) values(1, 'Administrator', 'admin', '12345');
 insert into tag(id, name, owner_id) values(1, 'java',1);
 insert into tag(id, name, owner_id) values(2, 'javascript',1);
 insert into tag(id, name, owner_id) values(3, 'ajax',1);

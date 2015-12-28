@@ -36,8 +36,8 @@
                 </td>
                 <td class="number answers">
                     <div class="number-box"
-                         th:classappend="${question.answers.size()>1}?'has-correct has-answer':''">
-                        <span class="count" th:text="${question.answers.size()}">0</span>
+                         th:classappend="${question.answers.size()>0}?'has-correct has-answer':''">
+                    <span class="count" th:text="${question.answers.size()}">0</span>
                         <span class="text">javob</span>
                     </div>
                 </td>

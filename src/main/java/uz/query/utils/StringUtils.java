@@ -1,4 +1,4 @@
-package uz.query.Utils;
+package uz.query.utils;
 
 /**
  * Created by sherali on 12/18/15.

@@ -1,236 +1,193 @@
 <div class="post-wrap" th:fragment="details">
-<h3 class="title"><a href="#" class="question-link" th:text="${question.title}">Qanday qilib JavaScriptda
-    Internet bor yo'qligini
-    tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
+    <h3 class="title"><a href="#" class="question-link" th:text="${question.title}">Qanday qilib JavaScriptda
+        Internet bor yo'qligini
+        tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
 
-<div class="post-item question-item">
-    <div class="box-feature pull-right">
-        <div class="box vote  up">
-            <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
-            <div class="row number-box"><span class="count" th:text="${question.voteCount}"></span></div>
-            <div class="row icons"><i class="fa fa-angle-down"></i></div>
-        </div>
-        <div class="box bookmark marked">
-            <div class="row icons"><i class="fa fa-star marked"></i></div>
-            <div class="row number-box"><span class="count">5</span></div>
-        </div>
-    </div>
-    <div class="box-content">
-        <div class="question-linked"><a href="#">JavaScriptda Internetni statusini
-            aniqlash</a></div>
-        <div th:uText="${question.content}"></div>
-        <ul class="list tag-list" th:if="${question.tags.size()}">
-            <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
-        </ul>
-        <div class="footer clearfix">
-            <div class="who-box pull-left">
-                <p class="date">15.05.2015 da savol berildi</p>
-
-                <div th:replace="fragments/user :: box(user = ${question.owner})"></div>
-            </div>
-            <div class="who-box pull-left">
-                <p class="date"><a href="#">15.05.2015 da tahrir qilindi</a></p>
-
-                <div th:replace="fragments/user :: box(user=${question.owner})"></div>
-
-            </div>
-            <ul class="list action-list pull-left">
-                <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
-                    <span>Tahrirlash</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-warning"></i> <span>Ogohlantirish</span></a></li>
-                <li><a th:href="@{/question/delete/}+${question.id}"><i class="fa fa-trash"></i> <span>O'chirish</span></a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
-    <!--<div class="post-status">-->
-    <!--<h4 class="title">Ushbu savol <a href="#">Jamshid</a>, <a href="#">Pay</a>, <a href="#">Hay</a>, <a-->
-    <!--href="#">Qani</a> tomonidan <a href="#" class="status">Nusxa olindi</a> statusi bilan-->
-    <!--belgilandi. Va yuqorida linkga biriktirildi.</h4>-->
-
-    <!--<p><strong>Sababi sifatida:</strong> Sizning savolingiz aynan yuqorida biriktirilgan linkdagi savol-->
-    <!--bilan bir xil. Bir xil savollar blocklanadi va avvalgisiga biriktiriladi!</p>-->
-    <!--</div>-->
-    <ul class="list comment-list hide">
-        <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
-            ni o'qib chiqing. <span class="date"><i
-                    class="fa fa-calendar"></i> 21.01.2015</span></li>
-        <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-            berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
-            kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
-                href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-            berish haqida</a> ni o'qib chiqing. <span class="date"><i
-                class="fa fa-calendar"></i> 21.01.2015</span></li>
-        <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
-            Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar!
-                        <span class="date"><i
-                                class="fa fa-calendar"></i> 21.01.2015</span>
-        </li>
-        <li>
-            <form action="#" class="form-comment">
-
-                <textarea class="textare-comment ">Izoh</textarea>
-
-                <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
-            </form>
-            <ul class="list buttons">
-                <li><a href="#">Izoh qo'shish</a></li>
-                <li>|</li>
-                <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<div class="filter-box clearfix">
-    <ul class="list filter-list clearfix pull-left">
-        <li><a href="#">Ovoz </a></li>
-        <li class="active"><a href="#">Oxirgi</a></li>
-        <li><a href="#">Faol</a></li>
-    </ul>
-    <h3 class="title pull-right">24 ta javob</h2>
-</div>
-<div class="post-item answer-item" th:each="answer: ${question.answers}">
-    <div class="clearfix">
+    <div class="post-item question-item">
         <div class="box-feature pull-right">
-            <div class="box vote up">
-                <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
-                <div class="row number-box"><span class="count">5</span></div>
-                <div class="row icons"><i class="fa fa-angle-down"></i></div>
+            <div class="box vote  up"
+                 th:classappend="${question.voteRank()>0?'marked-up':question.voteRank()<0?'marked-down':'a'}">
+                <div class="row icons up"><i class="fa fa-angle-up"></i></div>
+                <div class="row number-box">
+                    <span class="count" th:text="${question.voteCount}"></span>
+                </div>
+                <div class="row icons down"><i class="fa fa-angle-down"></i></div>
+            </div>
+            <div class="box bookmark marked">
+                <div class="row icons"><i class="fa fa-star marked"></i></div>
+                <div class="row number-box"><span class="count" th:text="${question.voteCount}">0</span></div>
             </div>
         </div>
         <div class="box-content">
-            <div th:uText="${answer.content}"></div>
-            <div class="footer clearfix">
-                <div class="who-box pull-left">
-                    <p class="date">15.05.2015 da savol berildi</p>
-
-                    <div th:replace="fragments/user :: box(user = ${answer.owner})"></div>
-                </div>
-                <div class="who-box pull-left">
-                    <p class="date"><a href="#">15.05.2015 da tahrir qilindi</a></p>
-
-                    <div th:replace="fragments/user :: box(user=${question.owner})"></div>
-
-                </div>
-                <ul class="list action-list pull-left">
-                    <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                    <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
-                        <span>Tahrirlash</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-warning"></i> <span>Ogohlantirish</span></a></li>
-                    <li><a th:href="@{/question/delete/}+${question.id}"><i class="fa fa-trash"></i>
-                        <span>O'chirish</span></a>
-                    </li>
-                </ul>
-
-            </div>
-
+            <div class="question-linked"><a href="#">JavaScriptda Internetni statusini
+                aniqlash</a></div>
+            <div th:uText="${question.content}"></div>
+            <ul class="list tag-list" th:if="${question.tags.size()}">
+                <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
+            </ul>
+            <div th:replace="fragments/post :: post-footer"></div>
         </div>
-    </div>
-    <ul class="list comment-list" class="hide">
-        <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
-            ni o'qib chiqing. <span class="date"><i
+
+        <div class="post-status" th:object="${question.postStatus}" th:if="${question.postStatus}">
+            <h4 class="title">Ushbu savol
+                <a href="#" th:if="*{owner}" th:text="*{owner.fullName}"></a>
+                tomonidan <a href="#" class="status" th:text="*{type.getTitle()}"></a> statusi bilan
+                belgilandi. Va yuqorida linkga biriktirildi.</h4>
+
+            <p><strong>Sababi sifatida:</strong> <span th:text="*{reason}"></span></p>
+        </div>
+        <ul class="list comment-list hide">
+            <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
+                ni o'qib chiqing. <span class="date"><i
+                        class="fa fa-calendar"></i> 21.01.2015</span></li>
+            <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+                berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
+                kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
+                    href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+                berish haqida</a> ni o'qib chiqing. <span class="date"><i
                     class="fa fa-calendar"></i> 21.01.2015</span></li>
-        <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-            berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
-            kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
-                href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-            berish haqida</a> ni o'qib chiqing. <span class="date"><i
-                class="fa fa-calendar"></i> 21.01.2015</span></li>
-        <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
-            Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-            qilganimni
-            bilmayapman. Iltimos yordam
-            bervoringlar!
+            <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
+                Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar!
                         <span class="date"><i
                                 class="fa fa-calendar"></i> 21.01.2015</span>
-        </li>
-        <li>
-            <form action="#" class="form-comment">
+            </li>
+            <li>
+                <form action="#" class="form-comment">
 
-                <textarea class="textare-comment">Izoh</textarea>
+                    <textarea class="textare-comment ">Izoh</textarea>
 
-                <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
-            </form>
-            <ul class="list buttons">
-                <li><a href="#">Izoh qo'shish</a></li>
-                <li>|</li>
-                <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<div class="post-item answer-item answer-form">
-    <form th:action="@{/question/add_answer}" th:object="${newAnswer}" method="POST">
-        <div class="field-row">
-
-            <h3 class="title">Sizning Javobingiz</h3>
-
-            <div class="text-editor">
-
-                <div class="wmd-panel">
-                    <div id="wmd-button-bar" class="wmd-button-bar"></div>
-                    <textarea class="wmd-input" id="wmd-input" th:field="*{editorContent}">This is the *first*
-                        editor. </textarea>
+                    <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
+                </form>
+                <ul class="list buttons">
+                    <li><a href="#">Izoh qo'shish</a></li>
+                    <li>|</li>
+                    <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="filter-box clearfix">
+        <ul class="list filter-list clearfix pull-left">
+            <li><a href="#">Ovoz </a></li>
+            <li class="active"><a href="#">Oxirgi</a></li>
+            <li><a href="#">Faol</a></li>
+        </ul>
+        <h3 class="title pull-right">24 ta javob</h2>
+    </div>
+    <div class="post-item answer-item" th:each="answer: ${question.answers}">
+        <div class="clearfix">
+            <div class="box-feature pull-right">
+                <div class="box vote up">
+                    <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
+                    <div class="row number-box"><span class="count" th:text="${answer.voteCount}">0</span></div>
+                    <div class="row icons"><i class="fa fa-angle-down"></i></div>
                 </div>
-
-                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-                <input type="hidden" name="questionId" th:value="${question.id}"/>
-                <textarea id="txt-preview" class="hide" readonly="true"
-                          th:field="*{content}"></textarea>
-
-
+            </div>
+            <div class="box-content">
+                <div th:uText="${answer.content}"></div>
+                <div th:replace="fragments/post :: post-footer"></div>
             </div>
         </div>
+        <ul class="list comment-list" class="hide">
+            <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
+                ni o'qib chiqing. <span class="date"><i
+                        class="fa fa-calendar"></i> 21.01.2015</span></li>
+            <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+                berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
+                kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
+                    href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+                berish haqida</a> ni o'qib chiqing. <span class="date"><i
+                    class="fa fa-calendar"></i> 21.01.2015</span></li>
+            <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
+                Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+                qilganimni
+                bilmayapman. Iltimos yordam
+                bervoringlar!
+                        <span class="date"><i
+                                class="fa fa-calendar"></i> 21.01.2015</span>
+            </li>
+            <li>
+                <form action="#" class="form-comment">
 
-        <div class="field-row footer">
-            <input type="submit" class="btn btn-green shdw-2x" value="Javob berish">
-        </div>
-        <script>
-            $(document).ready(function () {
-                $("[type=submit]").on("click", function () {
-                    var hasError = false;
-                    var parent = $(this).closest("form");
-                    parent.find("[type=text], textarea").each(function () {
-                        var field = $(this);
-                        if (!field.attr('readonly')) {
-                            $("#txt-preview").val($("#wmd-preview").html());
+                    <textarea class="textare-comment">Izoh</textarea>
 
-                            if ((field.is("input") || field.is("textarea") ) && !field.val()) {
-                                hasError = true;
-                                field.addClass("error-field");
-                            } else {
-                                field.removeClass("error-field");
+                    <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
+                </form>
+                <ul class="list buttons">
+                    <li><a href="#">Izoh qo'shish</a></li>
+                    <li>|</li>
+                    <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="post-item answer-item answer-form">
+        <form th:action="@{/question/add_answer}" th:object="${newAnswer}" method="POST">
+            <div class="field-row">
+
+                <h3 class="title">Sizning Javobingiz</h3>
+
+                <div class="text-editor">
+
+                    <div class="wmd-panel">
+                        <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                        <textarea class="wmd-input" id="wmd-input" th:field="*{editorContent}">This is the *first*
+                            editor. </textarea>
+                    </div>
+
+                    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                    <input type="hidden" name="questionId" th:value="${question.id}"/>
+                    <textarea id="txt-preview" class="hide" readonly="true"
+                              th:field="*{content}"></textarea>
+
+
+                </div>
+            </div>
+
+            <div class="field-row footer">
+                <input type="submit" class="btn btn-green shdw-2x" value="Javob berish">
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("[type=submit]").on("click", function () {
+                        var hasError = false;
+                        var parent = $(this).closest("form");
+                        parent.find("[type=text], textarea").each(function () {
+                            var field = $(this);
+                            if (!field.attr('readonly')) {
+                                $("#txt-preview").val($("#wmd-preview").html());
+
+                                if ((field.is("input") || field.is("textarea") ) && !field.val()) {
+                                    hasError = true;
+                                    field.addClass("error-field");
+                                } else {
+                                    field.removeClass("error-field");
+                                }
                             }
-                        }
-                    })
-                    if (hasError)
-                        return false;
+                        })
+                        if (hasError)
+                            return false;
+                    });
                 });
-            });
-        </script>
-    </form>
-</div>
+            </script>
+        </form>
+    </div>
 </div>
 
