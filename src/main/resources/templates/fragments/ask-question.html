@@ -7,6 +7,7 @@
         <div class="post-item ask-question">
             <div class="box-content">
                 <form action="#" th:action="@{/ask_question}" th:object="${question}" method="POST">
+                    <input type="hidden" th:field="*{id}">
                     <div class="field-row">
                         <span class="label">Savol sarlavhasi:</span>
 

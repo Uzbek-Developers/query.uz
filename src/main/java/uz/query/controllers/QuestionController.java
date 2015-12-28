@@ -16,6 +16,7 @@ import uz.query.repositories.AnswerRepository;
 import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
+import uz.query.security.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -36,6 +37,8 @@ public class QuestionController {
     private UserRepository userRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private SecurityUtil securityUtil;
 
     @RequestMapping(value = {"/", "/home", "/question/list"})
     public String home(Model model,
@@ -88,8 +91,7 @@ public class QuestionController {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
         question.setTags(list);
-        User u = userRepository.findOne(Long.valueOf(1));
-        question.setOwner(u);
+        question.setOwner(securityUtil.getCurrentUser());
         questionRepository.save(question);
 
         return "redirect:/home";
@@ -97,8 +99,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/add_answer", method = RequestMethod.POST)
     public String addQuestionSubmit(HttpServletRequest request, @ModelAttribute("newAnswer") Answer answer) {
-        User u = userRepository.findOne(Long.valueOf(1));
-        answer.setOwner(u);
+        answer.setOwner(securityUtil.getCurrentUser());
         answer = answerRepository.save(answer);
 
         Long questionId = Long.parseLong(request.getParameter("questionId"));

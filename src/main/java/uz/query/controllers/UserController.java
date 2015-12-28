@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.query.models.RegistrationForm;
 import uz.query.models.User;
 import uz.query.repositories.UserRepository;
+import uz.query.security.SecurityUtil;
 import uz.query.validator.RegistrationValidator;
 
 /**
@@ -16,6 +17,9 @@ import uz.query.validator.RegistrationValidator;
  */
 @Controller
 public class UserController {
+
+    @Autowired
+    private SecurityUtil securityUtil;
 
     @Autowired
     private UserRepository userRepository;
@@ -42,9 +46,9 @@ public class UserController {
         }
         User user = new User();
         user.setEmail(model.getEmail());
-        user.setFullName(model.getFullName());
-        user.setUserName(model.getUserName());
-        user.setPassword(model.getPassword());
+        user.setPassword(securityUtil.encodePassword(model.getPassword()));
+        user.setDisplayName(model.getDisplayName());
+        user.setReputation(0);
         userRepository.save(user);
         return "redirect:/";
     }
@@ -63,6 +67,7 @@ public class UserController {
 
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public String greetingSubmit(@ModelAttribute User user) {
+        user.setPassword(securityUtil.encodePassword(user.getPassword()));
         userRepository.save(user);
         return "redirect:/userlist";
     }

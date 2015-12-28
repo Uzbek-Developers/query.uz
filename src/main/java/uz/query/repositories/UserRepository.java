@@ -10,11 +10,9 @@ import java.util.List;
  * Created by Mirjalol Bahodirov on 11/28/15.
  */
 @Repository
-public interface UserRepository extends BaseRepository<User, Long> {
+public interface UserRepository extends BaseRepository<User, Long>, UserRepositoryCustom {
 
     List<User> findByisDeleted(boolean isDeleted);
-
-    User findByUserName(String UserName);
 
     User findByEmail(String Email);
 }

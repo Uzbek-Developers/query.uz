@@ -17,9 +17,9 @@
 
                         <form class="form-login" th:action="@{/registration}" method="post">
                             <div class="field-row">
-                                <span class="label">Login:</span>
+                                <span class="label">Display Name:</span>
 
-                                <div class="form-field"><input type="text" name="userName" max-length="240"/></div>
+                                <div class="form-field"><input type="text" name="displayName" max-length="240"/></div>
                             </div>
                             <div class="field-row">
                                 <span class="label">Email:</span>
@@ -53,6 +53,10 @@
 
                             </div>
                         </form>
+                        <a th:href="@{/auth/google(scope='profile')}"
+                           class="ml btn btn-block btn-social btn-sm btn-google-plus"><i class="fa fa-google-plus"></i>Google+</a>
+                        <a th:href="@{/auth/facebook}" class="ml btn btn-block btn-social btn-sm btn-facebook"><i
+                                class="fa fa-facebook"></i>Facebook</a>
                     </div>
                 </div>
             </div>

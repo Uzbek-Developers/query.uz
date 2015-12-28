@@ -13,6 +13,7 @@ import uz.query.models.Tag;
 import uz.query.models.User;
 import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
+import uz.query.security.SecurityUtil;
 
 import java.util.List;
 
@@ -27,6 +28,9 @@ public class TagController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SecurityUtil securityUtil;
 
     @RequestMapping(value = "/tag/list")
     public String tags(Model model,
@@ -67,8 +71,7 @@ public class TagController {
 
     @RequestMapping(value = "/tag/add", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Tag tag) {
-        User u = userRepository.findOne(Long.valueOf(1));
-        tag.setOwner(u);
+        tag.setOwner(securityUtil.getCurrentUser());
         tagRepository.save(tag);
 
         return "redirect:/tag/list";

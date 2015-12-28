@@ -24,11 +24,11 @@ public class RegistrationValidator implements Validator {
 
     public void validate(Object target, Errors errors) {
         RegistrationForm registrationForm = (RegistrationForm) target;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName.empty", "Username bo'sh bo'lishi mumkin emas.");
-        String userName = registrationForm.getUserName();
-        if ((userName.length()) > 16) {
-            errors.rejectValue("userName", "userName.tooLong", "UserName 16 simboldan uzun bo'lishi mumkin emas.");
-        }
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName.empty", "Username bo'sh bo'lishi mumkin emas.");
+//        String userName = registrationForm.getUserName();
+//        if ((userName.length()) > 16) {
+//            errors.rejectValue("userName", "userName.tooLong", "UserName 16 simboldan uzun bo'lishi mumkin emas.");
+//        }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty", "Parol bo'sh bo'lishi mumkin emas.");
         if (!(registrationForm.getPassword()).equals(registrationForm
@@ -39,13 +39,14 @@ public class RegistrationValidator implements Validator {
         if (!EmailValidator.getInstance().isValid(registrationForm.getEmail())) {
             errors.rejectValue("email", "email.notValid", "Email manzil xato kiritilgan.");
         } else {
-            User user = userRepository.findByUserName(registrationForm.getUserName());
-            if (user != null)
-                if (user.getId() > 0) {
-                    errors.rejectValue("userName", "userName.notValid", "Bunday username mavjud.");
-
-                }
-            user = userRepository.findByEmail(registrationForm.getEmail());
+//            User user = userRepository.findByUserName(registrationForm.getUserName());
+//            User user = userRepository.findByUserName("");
+//            if (user != null)
+//                if (user.getId() > 0) {
+//                    errors.rejectValue("userName", "userName.notValid", "Bunday username mavjud.");
+//
+//                }
+            User user = userRepository.findByEmail(registrationForm.getEmail());
             if (user != null)
                 if (user.getId() > 0) {
                     errors.rejectValue("email", "email.notValid", "Bunday email mavjud.");

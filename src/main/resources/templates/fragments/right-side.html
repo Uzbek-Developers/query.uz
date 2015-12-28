@@ -1,6 +1,6 @@
 <div xmlns:th="http://www.thymeleaf.org" class="side-wrap" th:fragment="side-wrap">
 <div class="current-site-box">
-<div class="widget-box" th:if="${#httpServletRequest.remoteUser}">
+    <div class="widget-box" th:if="${user}">
     <div class="user-box show-cover">
         <div class="cover-bg">
             <img th:src="@{/images/material-design-rainbow1.png}" alt="photo"/>
@@ -10,7 +10,7 @@
                 <a href="#"><img th:src="@{/images/default-user-avatar.jpg}" alt="user"/></a>
             </div>
             <div class="user-short-content">
-                <a class="name"><span th:text="${#httpServletRequest.remoteUser}"></span></a>
+                <a class="name"><span th:text="${user.displayName}"></span></a>
                 <br/>
                                 <span class="user-score">
                                     <span class="reputation">25,655</span>

@@ -3,6 +3,7 @@ package uz.query.models;
 import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -11,17 +12,13 @@ import javax.persistence.Entity;
 @Entity(name = "my_user")
 public class User extends BaseModel {
 
-    private String fullName;
-    private String userName;
-    private String password;
     private String email;
+    private String displayName;
+    @Column(columnDefinition = "text")
+    private String password;
 
     @ColumnDefault(value = "0")
     private Integer reputation;
-
-    public String getFullName() {
-        return fullName;
-    }
 
     public String getEmail() {
         return email;
@@ -31,16 +28,12 @@ public class User extends BaseModel {
         this.email = email;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getPassword() {

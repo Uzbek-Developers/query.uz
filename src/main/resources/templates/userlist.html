@@ -8,7 +8,7 @@
 <a href="/adduserform">Add User</a>
 <ul>
     <li th:each="user: ${userlist}">
-        <span th:text="${user.fullName+' - '+user.reputation}">User Not Found!</span>
+        <span th:text="${user.displayName+' - '+user.reputation}">User Not Found!</span>
         <a href="#" th:href="'/delete/'+${user.getId()}">x</a>
     </li>
 </ul>
