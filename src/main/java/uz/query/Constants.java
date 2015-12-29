@@ -1,6 +1,7 @@
 package uz.query;
 
 /**
+ *
  * Created by sherali on 12/13/15.
  */
 public interface Constants {

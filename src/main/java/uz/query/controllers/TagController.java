@@ -18,7 +18,7 @@ import uz.query.security.SecurityUtil;
 import java.util.List;
 
 /**
- * Created by sherali on 12/15/15.
+ * Created by sherali on 12/15/15
  */
 @Controller
 public class TagController {
@@ -69,11 +69,29 @@ public class TagController {
     }
 
 
-    @RequestMapping(value = "/tag/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/tag/save", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Tag tag) {
         tag.setOwner(securityUtil.getCurrentUser());
         tagRepository.save(tag);
 
+        return "redirect:/tag/" + tag.getId() + "/info";
+    }
+
+    @RequestMapping(value = "/tag/{id}/info")
+    public String detail(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("tag", tagRepository.findOne(id));
+        return "about-tag";
+    }
+
+    @RequestMapping(value = "/tag/{id}/edit")
+    public String editing(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("tag", tagRepository.findOne(id));
+        return "add_tag";
+    }
+
+    @RequestMapping(value = "/tag/{id}/delete")
+    public String delete(@PathVariable("id") Long id, Model model) {
+        tagRepository.delete(id);
         return "redirect:/tag/list";
     }
 

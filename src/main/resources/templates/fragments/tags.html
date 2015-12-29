@@ -11,8 +11,8 @@
     </div>
     <div class="post-wrap">
         <div class="row">
-            <div class="col-md-3 text" th:each="tag: ${tagPage}">
-                <a href="#" class="tag-link" th:text="${tag.title}"></a>
+            <div class="col-md-3 tag-box" th:each="tag: ${tagPage}">
+                <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
                 <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
                 <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
                 <!--</ul>-->
@@ -29,11 +29,10 @@
 </div>
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="add-tag">
     <div class="post-wrap">
-        <h3 class="title">Yangi teg qo'shish</h3>
-
+        <h3 class="title" th:text="${tag.id > 0} ? 'Tegni tahrirlash' : 'Yangi teg qoshish'"></h3>
         <div class="post-item ask-question">
             <div class="box-content">
-                <form action="#" th:action="@{/tag/add}" th:object="${tag}" method="POST">
+                <form action="#" th:action="@{/tag/save}" th:object="${tag}" method="POST">
                     <div class="field-row">
                         <span class="label">Teg nomi:</span>
 
@@ -41,8 +40,8 @@
                         </div>
                     </div>
                     <div class="field-row">
-                        <span class="label">Qisqa ma'lumot:</span>
-                        <textarea class="textare-comment" th:field="*{shortDescription}"></textarea>
+                        <span class="label">Qisqa ma'lumot:</span><br/>
+                        <textarea class="" cols="100" rows="2" th:field="*{shortDescription}"></textarea>
                     </div>
                     <div class="field-row">
                         <span class="label">Teg haqida to'liqroq: </span>
@@ -81,7 +80,7 @@
                     } else {
                         field.removeClass("error-field");
                     }
-                })
+                });
                 if (hasError)
                     return false;
             });
