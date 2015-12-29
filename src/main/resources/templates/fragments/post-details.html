@@ -30,7 +30,7 @@
 
         <div class="post-status" th:object="${question.postStatus}" th:if="${question.postStatus}">
             <h4 class="title">Ushbu savol
-                <a href="#" th:if="*{owner}" th:text="*{owner.fullName}"></a>
+                <a href="#" th:if="*{owner}" th:text="*{owner.displayName}"></a>
                 tomonidan <a href="#" class="status" th:text="*{type.getTitle()}"></a> statusi bilan
                 belgilandi. Va yuqorida linkga biriktirildi.</h4>
 

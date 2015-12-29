@@ -18,7 +18,8 @@
                        th:text="${question.title}"></a>
 
                     <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
-                        <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
+                        <li th:each="tag: ${question.tags}"><a th:href="'/tag/' + ${tag.id}"
+                                                               th:text="${tag.title}">Java</a></li>
                     </ul>
                     <div class="question-activity">
                         <a href="#" th:text="${question.owner.displayName}">Foydalanuvchi</a>

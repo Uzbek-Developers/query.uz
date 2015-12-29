@@ -123,6 +123,20 @@ public class QuestionController {
         return "redirect:/question/" + questionId;
     }
 
+
+    @RequestMapping(value = "/tag/{id}")
+    public String questionsByTagName(@PathVariable("id") Long id, Model model,
+                                     @PageableDefault(
+                                             size = Constants.SMALL_PAGE_SIZE,
+                                             sort = {"creationDate"},
+                                             direction = Sort.Direction.DESC) Pageable pageable) {
+        List<Tag> tags = new LinkedList<>();
+        tags.add(tagRepository.findOne(id));
+        model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAllByTagsIn(tags, pageable));
+        return "home";
+    }
+
+
     public interface Data {
         String QUESTION_PAGE = "questionPage";
     }

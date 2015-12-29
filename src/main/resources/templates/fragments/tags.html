@@ -11,16 +11,11 @@
     </div>
     <div class="post-wrap">
         <div class="row">
-            <div class="col-md-3 tag-box" th:each="tag: ${tagPage}">
-                <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
-                <!--<ul class="list tag-list" th:each="tag: ${tag.tags}" th:if="${tag.tags.size()}">-->
-                <!--<li><a href="#" th:text="${tag.tagName}">Ajax</a></li>-->
-                <!--</ul>-->
-                <div class="tag-activity">
-                    <a href="#" th:text="${tag.owner.displayName}">Foydalanuvchi</a>
-                    <!--<span class="reputation" th:text="${'('+tag.tagowner.reputation+')'}"></span>-->
-                    tomonidan 5 soat
-                    avval savol berildi
+            <div class="col-md-3" th:each="tag: ${tagPage}">
+                <div class="tag-box">
+                    <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
+
+                    <div class="excerpt" th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
                 </div>
             </div>
         </div>
@@ -30,6 +25,7 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="add-tag">
     <div class="post-wrap">
         <h3 class="title" th:text="${tag.id > 0} ? 'Tegni tahrirlash' : 'Yangi teg qoshish'"></h3>
+
         <div class="post-item ask-question">
             <div class="box-content">
                 <form action="#" th:action="@{/tag/save}" th:object="${tag}" method="POST">

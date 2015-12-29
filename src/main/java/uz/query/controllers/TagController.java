@@ -61,7 +61,7 @@ public class TagController {
         return tagRepository.findByIdIn(idList);
     }
 
-    @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/tagedit", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
         Tag tag = new Tag();
         model.addAttribute("tag", tag);
@@ -69,7 +69,7 @@ public class TagController {
     }
 
 
-    @RequestMapping(value = "/tag/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/tagedit", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Tag tag) {
         tag.setOwner(securityUtil.getCurrentUser());
         tagRepository.save(tag);
