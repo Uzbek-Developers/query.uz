@@ -86,20 +86,23 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/ask_question", method = RequestMethod.POST)
-    public String addQuestionSubmit(@ModelAttribute Question question, HttpServletRequest request) {
+    public String addQuestionSubmit(@ModelAttribute Question formQuestion, HttpServletRequest request) {
+        if (formQuestion.getId() != null) {
+            formQuestion = questionRepository.findOne(formQuestion.getId());
+        }
         String selectedTagList = request.getParameter("tagIdList");
         List<String> ids = Arrays.asList(selectedTagList.split(","));
         List<Tag> list = new LinkedList<>();
         for (String id : ids) {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
-        question.setTags(list);
-        question.setOwner(securityUtil.getCurrentUser());
+        formQuestion.setTags(list);
+        formQuestion.setOwner(securityUtil.getCurrentUser());
 
-        PostStatus status = new PostStatus(u);
-        question.setPostStatus(status);
+        PostStatus status = new PostStatus(securityUtil.getCurrentUser());
+        formQuestion.setPostStatus(status);
 
-        questionRepository.save(question);
+        questionRepository.save(formQuestion);
 
         return "redirect:/home";
     }
