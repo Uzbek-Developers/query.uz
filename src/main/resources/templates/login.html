@@ -15,24 +15,26 @@
                     <div class="post-wrap">
                         <h3 class="title">Kirish</h3>
 
-                        <form class="form-login" th:action="@{/login}" method="post">
+                        <form class="form-login" th:action="@{/login}" method="post" th:object="${user}">
                             <div class="field-row">
                                 <span class="label">Login:</span>
 
-                                <div class="form-field"><input type="text" name="username" max-length="240"/></div>
+                                <div class="form-field"><input type="text" name="email" th:field="*{email}"
+                                                               max-length="240"/></div>
                             </div>
                             <div class="field-row">
                                 <span class="label">Parol:</span>
 
-                                <div class="form-field"><input type="password" name="password" max-length="240"/></div>
+                                <div class="form-field"><input type="password" name="password" th:field="*{password}"
+                                                               max-length="240"/></div>
                             </div>
-                            <div class="field-row" th:if="${param.error}">
-                                Loginda yoki parolda xatolik
-                            </div>
-
-                            <div class="field-row" th:if="${param.logout}">
-                                Siz profilingizdan chiqdingiz, qayta kiring.
-                            </div>
+                            <!--<div class="field-row" th:if="${param.error}">-->
+                            <!--Loginda yoki parolda xatolik-->
+                            <!--</div>-->
+                            <!---->
+                            <!--<div class="field-row" th:if="${param.logout}">-->
+                            <!--Siz profilingizdan chiqdingiz, qayta kiring.-->
+                            <!--</div>-->
 
                             <div class="field-row footer">
                                 <input type="submit" class="btn btn-green shdw-2x" value="Kirish"/>

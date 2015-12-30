@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import uz.query.Constants;
 import uz.query.models.*;
 import uz.query.repositories.AnswerRepository;
@@ -17,11 +15,14 @@ import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
 import uz.query.security.SecurityUtil;
+import uz.query.repositories.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mirjalol Bahodirov on 12/14/15.
@@ -37,6 +38,8 @@ public class QuestionController {
     private UserRepository userRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private VoteRepository voteRepository;
     @Autowired
     private SecurityUtil securityUtil;
 
@@ -122,6 +125,37 @@ public class QuestionController {
 
         return "redirect:/question/" + questionId;
     }
+
+    @RequestMapping(value = "/setVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public String setVote(@RequestParam("rank") String rankVote, @RequestParam("questionId") Long questionId) {
+        int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
+//        Long questionId = Long.parseLong(question);
+        if (rank != 0 && questionId > 0) {
+            User user = userRepository.findOne(Long.valueOf(1));
+            Question question = questionRepository.findOne(questionId);
+
+            Vote myVote = null;
+            if (question.getVotes().size() > 0)
+                myVote = question.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
+            Vote oldVote = myVote;
+            if (myVote != null) {
+                myVote.setRank(rank);
+                myVote = voteRepository.save(myVote);
+                question.getVotes().set(question.getVotes().indexOf(oldVote), myVote);
+            } else {
+                myVote = new Vote();
+                myVote.setOwner(user);
+                myVote.setRank(rank);
+                myVote = voteRepository.save(myVote);
+                question.getVotes().add(myVote);
+            }
+            questionRepository.save(question);
+
+        }
+        return "";
+    }
+
 
 
     @RequestMapping(value = "/tag/{id}")

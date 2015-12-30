@@ -94,7 +94,7 @@
                 },
                 search: function (searchWord) {
                     console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
-                    $.getJSON('/getTagList', {key: searchWord}, function (data) {
+                    $.getJSON('/setVote', {rank: "up", questionId: 1}, function (data) {
 //                        console.log(data);
                         TagSelector.setOptionContent(data);
                     });

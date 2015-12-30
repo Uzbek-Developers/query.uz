@@ -16,13 +16,13 @@ public class Vote extends BaseModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User owner;
     @ColumnDefault(value = "0")
-    private short rank;
+    private int rank;
 
-    public short getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(short rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 

@@ -77,7 +77,7 @@ public class Post extends BaseModel {
         this.votes = votes;
     }
 
-    public short voteRank() {
+    public int voteRank() {
         Stream<Vote> list = votes.stream().filter(v -> v.getOwner().getId() == owner.getId());
         return list.count() == 0 ? 0 : list.findFirst().get().getRank();
     }
