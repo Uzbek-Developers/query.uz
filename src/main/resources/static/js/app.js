@@ -6,11 +6,19 @@ var App = {
         setTimeout(function () {
             App.editorConfig();
             App.validateAddForm();
-
+            App.handlers();
             if (prettyPrint) {
                 $("code").parent("pre").addClass("prettyprint");
                 prettyPrint();
             }
+        });
+    },
+    handlers: function () {
+        $("body").on("click", ".has-dropdown > a", function () {
+            console.log("sdf");
+            $(this).parent().toggleClass("open");
+
+            return false;
         });
     },
     tagSelectorConfig: function () {

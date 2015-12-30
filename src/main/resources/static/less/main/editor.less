@@ -94,7 +94,6 @@
 .box-content,
 .wmd-preview {
   background-color: @color-white;
-  overflow-x: auto;
   .set-padding(10px 0 0);
 
   hr {
@@ -118,6 +117,8 @@
   blockquote {
     border-left: 3px solid @color-gray-medium;
     background: @color-yellow-light;
+    max-width: 100%;
+    overflow: auto;
     .set-padding(10px 10px 1px);
   }
 }

@@ -2,6 +2,7 @@ package uz.query.models.base;
 
 import uz.query.models.User;
 import uz.query.models.Vote;
+import uz.query.models.enums.PostType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,6 +22,9 @@ public class Post extends BaseModel {
     @Column(columnDefinition = "text")
     private String editorContent;
 
+    @Transient
+    private PostType postType = PostType.Article;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User owner;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,6 +32,14 @@ public class Post extends BaseModel {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Vote> votes;
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
+    }
 
     public String getTitle() {
         return title;

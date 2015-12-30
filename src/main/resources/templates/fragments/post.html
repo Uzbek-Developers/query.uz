@@ -1,31 +1,41 @@
-<div xmlns:th="http://www.thymeleaf.org" class="footer clearfix" th:fragment="post-footer">
-    <div class="pull-right">
-        <div class="who-box pull-left">
-            <p class="date">15.05.2015 da savol berildi</p>
-
-            <div th:replace="fragments/user :: box(user = ${question.owner})"></div>
-        </div>
-
-        <div class="who-box pull-right">
-            <p class="date"><a href="#">15.05.2015 da tahrir qilindi</a></p>
-
-            <div th:replace="fragments/user :: box(user=${question.owner})"></div>
-
-        </div>
-    </div>
-    <ul class="list action-list pull-left">
-        <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-        <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
-            <span>Tahrirlash</span></a>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="comment-list">
+    <ul class="list comment-list" class="hide">
+        <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
+            ni o'qib chiqing. <span class="date"><i
+                    class="fa fa-calendar"></i> 21.01.2015</span></li>
+        <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+            berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
+            kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
+                href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+            berish haqida</a> ni o'qib chiqing. <span class="date"><i
+                class="fa fa-calendar"></i> 21.01.2015</span></li>
+        <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
+            Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar!
+                        <span class="date"><i
+                                class="fa fa-calendar"></i> 21.01.2015</span>
         </li>
-        <li onclick="$(this).closest('.footer').find('.popup-wrap').show();"><a href="#"><i class="fa fa-warning"></i>
-            <span>Ogohlantirish</span></a></li>
         <li>
-            <a th:href="@{/question/delete/}+${question.id}">
-                <i class="fa fa-trash"></i>
-                <span>O'chirish</span>
-            </a>
+            <form action="#" class="form-comment">
+
+                <textarea class="textare-comment">Izoh</textarea>
+
+                <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
+            </form>
+            <ul class="list buttons">
+                <li><a href="#">Izoh qo'shish</a></li>
+                <li>|</li>
+                <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
+            </ul>
         </li>
     </ul>
-    <div th:replace="fragments/popups :: popup"></div>
 </div>

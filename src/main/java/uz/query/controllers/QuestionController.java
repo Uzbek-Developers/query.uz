@@ -10,19 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.query.Constants;
 import uz.query.models.*;
-import uz.query.repositories.AnswerRepository;
-import uz.query.repositories.QuestionRepository;
-import uz.query.repositories.TagRepository;
-import uz.query.repositories.UserRepository;
-import uz.query.security.SecurityUtil;
+import uz.query.models.enums.StatusType;
 import uz.query.repositories.*;
+import uz.query.security.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Mirjalol Bahodirov on 12/14/15.
@@ -61,6 +56,7 @@ public class QuestionController {
         PostStatus status = new PostStatus(question.getOwner());
         question.setPostStatus(status);
         model.addAttribute("question", question);
+        model.addAttribute("statusTypeList", StatusType.values());
         model.addAttribute("newAnswer", new Answer());
 
         return "details";
@@ -128,6 +124,26 @@ public class QuestionController {
         return "redirect:/question/" + questionId;
     }
 
+    @RequestMapping(value = "/warnAdministration", method = RequestMethod.POST)
+    public String warnAboutQuestion(HttpServletRequest request) {
+        String reason = request.getParameter("reason");
+
+        String postType = request.getParameter("postType");
+        String statusType = request.getParameter("statusType");
+
+        Long parentId = Long.parseLong(request.getParameter("parentId"));
+        Long postId = Long.parseLong(request.getParameter("postId"));
+//        List<Answer> otherAnswers = q.getAnswers();
+//        otherAnswers.add(answer);
+        Question q = questionRepository.findOne(parentId);
+        q.setStatusType(StatusType.getTypeByName(statusType));
+        q.setReason(reason);
+
+        questionRepository.save(q);
+
+            return "redirect:/question/" + parentId;
+    }
+
     @RequestMapping(value = "/setVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String setVote(@RequestParam("rank") String rankVote, @RequestParam("questionId") Long questionId) {
@@ -157,7 +173,6 @@ public class QuestionController {
         }
         return "";
     }
-
 
 
     @RequestMapping(value = "/question/tagged/{id}")

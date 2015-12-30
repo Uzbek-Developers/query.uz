@@ -11,12 +11,30 @@ public enum StatusType {
     Protected("Himoyalandi"),
     Translated("Tarjima qilindi");
 
+    String name;
     String title;
     String description;
     String url;
 
     StatusType(String title) {
         this.title = title;
+        this.name = this.toString();
+    }
+
+    public static StatusType getTypeByName(String name) {
+        for (StatusType type : StatusType.values()) {
+            if (name.equals(type.getName())) {
+                return type;
+            }
+        }
+        return Opened;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTitle() {

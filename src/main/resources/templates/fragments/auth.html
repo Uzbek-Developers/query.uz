@@ -1,10 +1,11 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="registration (user)">
-    <form class="form-login" th:action="@{/registration}" th:object="${user}"  method="POST">
+    <form class="form-login" th:action="@{/registration}" th:object="${user}" method="POST">
         <div class="field-row">
             <h3 class="title">Ro'yxatdan o'tish</h3>
         </div>
         <div class="field-row">
             <span class="label">Display Name:</span>
+
             <div class="form-field">
                 <input type="text" name="displayName" th:value="*{displayName}"/>
             </div>
@@ -56,7 +57,7 @@
             <span class="label">Login:</span>
 
             <div class="form-field">
-                <input type="text" name="email" th:value="*{email}" max-length="240"/>
+                <input type="text" name="username" th:value="*{email}" max-length="240"/>
             </div>
         </div>
         <div class="field-row">
@@ -66,11 +67,11 @@
                 <input type="password" name="password" th:value="*{password}" max-length="240"/></div>
         </div>
         <div class="field-row" th:if="${param.error}">
-        Loginda yoki parolda xatolik
+            Loginda yoki parolda xatolik
         </div>
 
         <div class="field-row" th:if="${param.logout}">
-        Siz profilingizdan chiqdingiz, qayta kiring.
+            Siz profilingizdan chiqdingiz, qayta kiring.
         </div>
 
         <div class="field-row footer">

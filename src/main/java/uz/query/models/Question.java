@@ -2,6 +2,8 @@ package uz.query.models;
 
 import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.Post;
+import uz.query.models.enums.PostType;
+import uz.query.models.enums.StatusType;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -28,6 +30,12 @@ public class Question extends Post {
     @javax.persistence.Transient
     private PostStatus postStatus;
 
+    private StatusType statusType = StatusType.Dublicated;
+    private String reason;
+
+    public Question() {
+        this.setPostType(PostType.Question);
+    }
     public Integer getSeenCount() {
         return seenCount;
     }
@@ -68,5 +76,20 @@ public class Question extends Post {
         this.postStatus = postStatus;
     }
 
+    public StatusType getStatusType() {
+        return statusType;
+    }
+
+    public void setStatusType(StatusType type) {
+        this.statusType = type;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }
 

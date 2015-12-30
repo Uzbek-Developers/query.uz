@@ -3,6 +3,7 @@ package uz.query.models;
 import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 import uz.query.models.base.Post;
+import uz.query.models.enums.PostType;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,6 +23,9 @@ public class Answer extends Post {
     @OneToOne(fetch = FetchType.LAZY)
     private Question parent;
 
+    public Answer() {
+        this.setPostType(PostType.Answer);
+    }
     public Question getParent() {
         return parent;
     }

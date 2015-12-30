@@ -1,9 +1,11 @@
 <div class="post-wrap" th:fragment="details">
-    <h3 class="title"><a href="#" class="question-link" th:text="${question.title}">Qanday qilib JavaScriptda
-        Internet bor yo'qligini
-        tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
+<h2 class="title">
+    <a href="#" class="question-link" th:text="${question.title}"></a>
+    <span class="status">[ Ko'chilgan ]</span>
+</h2>
 
-    <div class="post-item question-item">
+<div class="post-item question-item">
+    <div class="clearfix">
         <div class="box-feature pull-right">
             <div class="box vote  up"
                  th:classappend="${question.voteRank()>0?'marked-up':question.voteRank()<0?'marked-down':'a'}">
@@ -25,169 +27,209 @@
             <ul class="list tag-list" th:if="${question.tags.size()}">
                 <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
             </ul>
-            <div th:replace="fragments/post :: post-footer"></div>
-        </div>
+            <div class="footer clearfix">
+                <div class="pull-right">
+                    <div class="who-box pull-left">
+                        <p class="date"><span th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span> da
+                            savol
+                            berildi</p>
 
-        <div class="post-status" th:object="${question.postStatus}" th:if="${question.postStatus}">
+                        <div th:replace="fragments/user :: box(user = ${question.owner})"></div>
+                    </div>
+                </div>
+                <ul class="list action-list pull-left">
+                    <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
+                    <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
+                        <span>Tahrirlash</span></a>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">
+                            <i class="fa fa-warning"></i>
+                            <span>Ogohlantirish</span>
+                        </a>
+
+                        <div class="dropdown">
+                            <form th:action="@{/warnAdministration}" th:object="${question}" method="POST">
+                                <div class="field-row">
+                                    <input type="hidden" name="parentId" th:value="${question.getId()}">
+                                    <input type="hidden" name="postId" th:value="${question.getId()}">
+                                    <input type="hidden" name="postType" th:value="${question.postType.name}">
+
+                                    <strong>Bu post haqida quyidagi statuslarni tanlashingiz mumkin</strong>
+                                </div>
+                                <div class="field-row">
+                                    <ul class="flag-list list">
+                                        <li>
+                                            <label><input type="radio" name="spam" id="spam" checked/> Statusni
+                                                belgilash</label>
+
+                                            <div class="form-row">
+                                                <span class="label">Status tipi:</span>
+
+                                                <div class="form-field">
+                                                    <select name="statusType">
+                                                        <option th:each="type : ${statusTypeList}"
+                                                                th:value="${type.name}"
+                                                                th:text="${type.title}"></option>
+                                                    </select>
+                                                </div>
+                                                <span class="label">Status uchun sabab:</span>
+
+                                                <div class="form-field">
+                                                    <input type="text" name="reason"/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                    </ul>
+                                </div>
+                                <div class="field-row">
+                                    Ushbu post haqida
+                                </div>
+                                <div class="field-row">
+                                    <input class="btn btn-orange shdw-1x" type="submit" value="Ogohlantirish"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a th:href="@{/question/delete/}+${question.id}">
+                            <i class="fa fa-trash"></i>
+                            <span>O'chirish</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="post-status" th:object="${question}" th:if="${question}">
             <h4 class="title">Ushbu savol
                 <a href="#" th:if="*{owner}" th:text="*{owner.displayName}"></a>
-                tomonidan <a href="#" class="status" th:text="*{type.getTitle()}"></a> statusi bilan
+                tomonidan <a href="#" class="status" th:text="*{statusType.title}"></a> statusi bilan
                 belgilandi. Va yuqorida linkga biriktirildi.</h4>
 
             <p><strong>Sababi sifatida:</strong> <span th:text="*{reason}"></span></p>
         </div>
-        <ul class="list comment-list hide">
-            <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
-                ni o'qib chiqing. <span class="date"><i
-                        class="fa fa-calendar"></i> 21.01.2015</span></li>
-            <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-                berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
-                kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
-                    href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-                berish haqida</a> ni o'qib chiqing. <span class="date"><i
-                    class="fa fa-calendar"></i> 21.01.2015</span></li>
-            <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
-                Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar!
-                        <span class="date"><i
-                                class="fa fa-calendar"></i> 21.01.2015</span>
-            </li>
-            <li>
-                <form action="#" class="form-comment">
-
-                    <textarea class="textare-comment ">Izoh</textarea>
-
-                    <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
-                </form>
-                <ul class="list buttons">
-                    <li><a href="#">Izoh qo'shish</a></li>
-                    <li>|</li>
-                    <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
-                </ul>
-            </li>
-        </ul>
     </div>
-    <div class="filter-box clearfix">
-        <ul class="list filter-list clearfix pull-left">
-            <li><a href="#">Ovoz </a></li>
-            <li class="active"><a href="#">Oxirgi</a></li>
-            <li><a href="#">Faol</a></li>
-        </ul>
-        <h3 class="title pull-right">24 ta javob</h2>
-    </div>
-    <div class="post-item answer-item" th:each="answer: ${question.answers}">
-        <div class="clearfix">
-            <div class="box-feature pull-right">
-                <div class="box vote up">
-                    <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
-                    <div class="row number-box"><span class="count" th:text="${answer.voteCount}">0</span></div>
-                    <div class="row icons"><i class="fa fa-angle-down"></i></div>
-                </div>
-            </div>
-            <div class="box-content">
-                <div th:uText="${answer.content}"></div>
-                <div th:replace="fragments/post :: post-footer"></div>
+</div>
+
+
+<div class="post-item answer-item" th:each="answer: ${question.answers}">
+    <div class="clearfix">
+        <div class="box-feature pull-right">
+            <div class="box vote up">
+                <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
+                <div class="row number-box"><span class="count" th:text="${answer.voteCount}">0</span></div>
+                <div class="row icons"><i class="fa fa-angle-down"></i></div>
             </div>
         </div>
-        <ul class="list comment-list" class="hide">
-            <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
-                ni o'qib chiqing. <span class="date"><i
-                        class="fa fa-calendar"></i> 21.01.2015</span></li>
-            <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-                berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
-                kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
-                    href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
-                berish haqida</a> ni o'qib chiqing. <span class="date"><i
-                    class="fa fa-calendar"></i> 21.01.2015</span></li>
-            <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
-                Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
-                qilganimni
-                bilmayapman. Iltimos yordam
-                bervoringlar!
-                        <span class="date"><i
-                                class="fa fa-calendar"></i> 21.01.2015</span>
-            </li>
-            <li>
-                <form action="#" class="form-comment">
+        <div class="box-content">
+            <div th:uText="${answer.content}"></div>
+            <div class="footer clearfix">
+                <div class="pull-right">
+                    <div class="who-box pull-left">
+                        <p class="date"><span th:text="${#dates.format(answer.creationDate, 'dd/MM/YYYY')}"></span> da
+                            savol
+                            berildi</p>
 
-                    <textarea class="textare-comment">Izoh</textarea>
-
-                    <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
-                </form>
-                <ul class="list buttons">
-                    <li><a href="#">Izoh qo'shish</a></li>
-                    <li>|</li>
-                    <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="post-item answer-item answer-form">
-        <form th:action="@{/question/add_answer}" th:object="${newAnswer}" method="POST">
-            <div class="field-row">
-
-                <h3 class="title">Sizning Javobingiz</h3>
-
-                <div class="text-editor">
-
-                    <div class="wmd-panel">
-                        <div id="wmd-button-bar" class="wmd-button-bar"></div>
-                        <textarea class="wmd-input" id="wmd-input" th:field="*{editorContent}">This is the *first*
-                            editor. </textarea>
+                        <div th:replace="fragments/user :: box(user = ${answer.owner})"></div>
                     </div>
-
-                    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-                    <input type="hidden" name="questionId" th:value="${question.id}"/>
-                    <textarea id="txt-preview" class="hide" readonly="true"
-                              th:field="*{content}"></textarea>
-
-
                 </div>
-            </div>
+                <ul class="list action-list pull-left">
+                    <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
+                    <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
+                        <span>Tahrirlash</span></a>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">
+                            <i class="fa fa-warning"></i>
+                            <span>Ogohlantirish</span>
+                        </a>
 
-            <div class="field-row footer">
-                <input type="submit" class="btn btn-green shdw-2x" value="Javob berish">
-            </div>
-            <script>
-                $(document).ready(function () {
-                    $("[type=submit]").on("click", function () {
-                        var hasError = false;
-                        var parent = $(this).closest("form");
-                        parent.find("[type=text], textarea").each(function () {
-                            var field = $(this);
-                            if (!field.attr('readonly')) {
-                                $("#txt-preview").val($("#wmd-preview").html());
+                        <div class="dropdown">
+                            <form action="@{/warnAdministration}">
+                                <ul>
+                                    <li>
+                                        <label><input type="radio" name="spam" id="spam"/> Blocklash</label>
 
-                                if ((field.is("input") || field.is("textarea") ) && !field.val()) {
-                                    hasError = true;
-                                    field.addClass("error-field");
-                                } else {
-                                    field.removeClass("error-field");
-                                }
-                            }
-                        })
-                        if (hasError)
-                            return false;
-                    });
-                });
-            </script>
-        </form>
+                                        <div><input type="text" name="statusOfPost"/></div>
+                                    </li>
+                                    <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                    <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                    <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                    <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                </ul>
+                                <p>Ushbu post haqida</p>
+
+                                <p><input class="btn btn-green" type="submit" value="Ogohlantirish"/></p>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a th:href="@{/question/delete/}+${question.id}">
+                            <i class="fa fa-trash"></i>
+                            <span>O'chirish</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
+</div>
+
+
+<div class="post-item answer-item answer-form">
+    <form th:action="@{/question/add_answer}" th:object="${newAnswer}" method="POST">
+        <div class="field-row">
+
+            <h3 class="title">Sizning Javobingiz</h3>
+
+            <div class="text-editor">
+
+                <div class="wmd-panel">
+                    <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                    <textarea class="wmd-input" id="wmd-input" th:field="*{editorContent}">This is the *first*
+                        editor. </textarea>
+                </div>
+
+                <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+                <input type="hidden" name="questionId" th:value="${question.id}"/>
+                <textarea id="txt-preview" class="hide" readonly="true"
+                          th:field="*{content}"></textarea>
+
+
+            </div>
+        </div>
+
+        <div class="field-row footer">
+            <input type="submit" class="btn btn-green shdw-2x" value="Javob berish">
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("[type=submit]").on("click", function () {
+                    var hasError = false;
+                    var parent = $(this).closest("form");
+                    parent.find("[type=text], textarea").each(function () {
+                        var field = $(this);
+                        if (!field.attr('readonly')) {
+                            $("#txt-preview").val($("#wmd-preview").html());
+
+                            if ((field.is("input") || field.is("textarea") ) && !field.val()) {
+                                hasError = true;
+                                field.addClass("error-field");
+                            } else {
+                                field.removeClass("error-field");
+                            }
+                        }
+                    })
+                    if (hasError)
+                        return false;
+                });
+            });
+        </script>
+    </form>
+</div>
 </div>
 
