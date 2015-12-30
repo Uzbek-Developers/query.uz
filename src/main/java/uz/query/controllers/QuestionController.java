@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class QuestionController {
-
+    //region <Repositories>
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
@@ -42,7 +42,9 @@ public class QuestionController {
     private VoteRepository voteRepository;
     @Autowired
     private SecurityUtil securityUtil;
+    //endregion
 
+    //region <Request Mapping methods>
     @RequestMapping(value = {"/", "/home", "/question/list"})
     public String home(Model model,
                        @PageableDefault(
@@ -95,7 +97,7 @@ public class QuestionController {
         }
         String selectedTagList = request.getParameter("tagIdList");
         List<String> ids = Arrays.asList(selectedTagList.split(","));
-        List<Tag> list = new LinkedList<>();
+        List<Tag> list = new LinkedList<Tag>();
         for (String id : ids) {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
@@ -158,7 +160,7 @@ public class QuestionController {
 
 
 
-    @RequestMapping(value = "/tag/{id}")
+    @RequestMapping(value = "/question/tagged/{id}")
     public String questionsByTagName(@PathVariable("id") Long id, Model model,
                                      @PageableDefault(
                                              size = Constants.SMALL_PAGE_SIZE,
@@ -169,6 +171,7 @@ public class QuestionController {
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAllByTagsIn(tags, pageable));
         return "home";
     }
+    //endregion
 
 
     public interface Data {

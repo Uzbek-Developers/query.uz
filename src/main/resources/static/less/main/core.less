@@ -795,8 +795,13 @@ body {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 100%;
-  background: @color-gray-light;
+  left: 0;
+  right: 0;
+  background: @color-gray-transparent;
+  z-index: 5;
+  .title {
+    margin-bottom: .6em;
+  }
   .box {
     position: absolute;
     background: @color-white;
@@ -804,5 +809,6 @@ body {
     margin-left: -250px;
     top: 30%;
     left: 50%;
+    .set-padding(20px);
   }
 }

@@ -4,7 +4,7 @@ package uz.query.models.enums;
  * Created by sherali on 12/28/15.
  */
 public enum StatusType {
-    Opened("Opened"),
+    Opened("Ochildi"),
     OnHold("Uslab turildi"),
     Dublicated("Nusxa olindi"),
     Closed("Yopildi"),

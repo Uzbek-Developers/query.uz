@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div class="footer clearfix" th:fragment="post-footer">
+<div xmlns:th="http://www.thymeleaf.org" class="footer clearfix" th:fragment="post-footer">
     <div class="pull-right">
         <div class="who-box pull-left">
             <p class="date">15.05.2015 da savol berildi</p>
@@ -24,13 +18,14 @@
         <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
             <span>Tahrirlash</span></a>
         </li>
-        <li><a href="#"><i class="fa fa-warning"></i> <span>Ogohlantirish</span></a></li>
-        <li><a th:href="@{/question/delete/}+${question.id}"><i class="fa fa-trash"></i>
-            <span>O'chirish</span></a>
+        <li onclick="$(this).closest('.footer').find('.popup-wrap').show();"><a href="#"><i class="fa fa-warning"></i>
+            <span>Ogohlantirish</span></a></li>
+        <li>
+            <a th:href="@{/question/delete/}+${question.id}">
+                <i class="fa fa-trash"></i>
+                <span>O'chirish</span>
+            </a>
         </li>
     </ul>
-
+    <div th:replace="fragments/popups :: popup"></div>
 </div>
-
-</body>
-</html>

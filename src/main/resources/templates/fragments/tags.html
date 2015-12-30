@@ -1,14 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="tag-list">
-    <div class="filter-box clearfix">
-        <ul class="list filter-list clearfix pull-left">
-            <li><a href="#"><i class="box-count">Java</i> Haqida</a></li>
-            <li class="active"><a href="#"><i class="box-count">522</i> Oxirgi</a></li>
-            <li><a href="#"><span class="fa fa-caret-up"></span> Top</a></li>
-            <li><a href="#">Javobsiz <i class="box-count">522</i> </a></li>
-            <li><a href="#">Qiziq</a></li>
-        </ul>
-        <h3 class="title pull-right">Oxirgi taglar</h3>
-    </div>
+   <div th:replace="fragments/filters :: filter-box"></div>
     <div class="post-wrap">
         <div class="row">
             <div class="col-md-3" th:each="tag: ${tagPage}">
@@ -37,7 +28,7 @@
                     </div>
                     <div class="field-row">
                         <span class="label">Qisqa ma'lumot:</span><br/>
-                        <textarea class="" cols="100" rows="2" th:field="*{shortDescription}"></textarea>
+                        <textarea class="textare" style="width: 100%" th:field="*{shortDescription}" tabindex="2"></textarea>
                     </div>
                     <div class="field-row">
                         <span class="label">Teg haqida to'liqroq: </span>
@@ -45,7 +36,7 @@
                         <div class="text-editor">
                             <div class="wmd-panel">
                                 <div id="wmd-button-bar" class="wmd-button-bar"></div>
-                                <textarea class="wmd-input" id="wmd-input" tabindex="2"
+                                <textarea class="wmd-input" id="wmd-input" tabindex="3"
                                           th:field="*{editorContent}"></textarea>
                             </div>
 
@@ -56,7 +47,7 @@
                         </div>
                     </div>
                     <div class="field-row buttons">
-                        <input type="submit" class="btn btn-green shdw-1x" value="Submit"/>
+                        <input type="submit" tabindex="4" class="btn btn-green shdw-1x" value="Submit"/>
                     </div>
                 </form>
             </div>

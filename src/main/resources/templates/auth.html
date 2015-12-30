@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/init :: head">
+    <title>Query.uz - Ro'xyatdan o'tish ga xush kelibsiz</title>
+</head>
+<body>
+<div th:replace="fragments/init :: header"></div>
+
+<div class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                <div class="">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 content-box">
+                            <div th:replace="fragments/auth :: login(user = ${loginUser})"></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-8">
+                            <div th:replace="fragments/auth :: registration(user = ${registerUser})"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <div th:replace="fragments/right-side :: side-wrap"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/init :: footer"></div>
+</body>
+</html>

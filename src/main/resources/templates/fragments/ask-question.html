@@ -6,7 +6,7 @@
 
         <div class="post-item ask-question">
             <div class="box-content">
-                <form action="#" th:action="@{/ask_question}" th:object="${question}" method="POST">
+                <form th:action="@{/ask_question}" th:object="${question}" method="POST">
                     <input type="hidden" th:field="*{id}">
                     <div class="field-row">
                         <span class="label">Savol sarlavhasi:</span>
@@ -94,7 +94,7 @@
                 },
                 search: function (searchWord) {
                     console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
-                    $.getJSON('/setVote', {rank: "up", questionId: 1}, function (data) {
+                    $.getJSON('/getTagList', {key: searchWord}, function (data) {
 //                        console.log(data);
                         TagSelector.setOptionContent(data);
                     });

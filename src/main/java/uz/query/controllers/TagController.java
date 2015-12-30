@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Controller
 public class TagController {
-
+    //region <Repositories>
     @Autowired
     private TagRepository tagRepository;
 
@@ -31,7 +31,9 @@ public class TagController {
 
     @Autowired
     private SecurityUtil securityUtil;
+    //endregion
 
+    //region <Request Mapping methods>
     @RequestMapping(value = "/tag/list")
     public String tags(Model model,
                        @PageableDefault(
@@ -43,38 +45,10 @@ public class TagController {
         return "tag_list";
     }
 
-    private interface Data {
-        String TAG_PAGE = "tagPage";
-    }
-
-    @RequestMapping(value = "/getTagList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public List<Tag> getTagList(@RequestParam("key") String key) {
-        return tagRepository.findFirst10ByTitleContaining(key);
-//        return tagRepository.findAll();
-    }
-
-    @RequestMapping(value = "/getTagListByIds", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public List<Tag> getTagList(@RequestParam("ids") List<Long> idList) {
-
-        return tagRepository.findByIdIn(idList);
-    }
-
-    @RequestMapping(value = "/tagedit", method = RequestMethod.GET)
+    @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
-        Tag tag = new Tag();
-        model.addAttribute("tag", tag);
-        return "add_tag";
-    }
-
-
-    @RequestMapping(value = "/tagedit", method = RequestMethod.POST)
-    public String addQuestionSubmit(@ModelAttribute Tag tag) {
-        tag.setOwner(securityUtil.getCurrentUser());
-        tagRepository.save(tag);
-
-        return "redirect:/tag/" + tag.getId() + "/info";
+        model.addAttribute("tag", new Tag());
+        return "add-tag";
     }
 
     @RequestMapping(value = "/tag/{id}/info")
@@ -95,4 +69,34 @@ public class TagController {
         return "redirect:/tag/list";
     }
 
+    @RequestMapping(value = {"/tag/save"}, method = RequestMethod.POST)
+    public String addQuestionSubmit(@ModelAttribute Tag tag) {
+        if (tag.getId() != null) {
+            tag = tagRepository.findOne(tag.getId());
+        }
+        tag.setOwner(securityUtil.getCurrentUser());
+        tagRepository.save(tag);
+
+        return "redirect:/tag/" + tag.getId() + "/info";
+    }
+    //endregion
+
+    //region <Methods for AJAX Requests>
+    @RequestMapping(value = "/getTagList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public List<Tag> getTagList(@RequestParam("key") String key) {
+        return tagRepository.findFirst10ByTitleContaining(key);
+    }
+
+    @RequestMapping(value = "/getTagListByIds", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public List<Tag> getTagList(@RequestParam("ids") List<Long> idList) {
+
+        return tagRepository.findByIdIn(idList);
+    }
+    //endregion
+
+    private interface Data {
+        String TAG_PAGE = "tagPage";
+    }
 }

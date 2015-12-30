@@ -37,9 +37,14 @@ textarea, input {
 
 input[type=text],
 input[type=password] {
-  border: 1px solid @color-black;
+  border: 1px solid @color-gray-medium;
   height: 28px;
   .set-padding(0 5px);
+}
+
+.textarea, textarea {
+  border: 1px solid @color-gray-medium;
+  .set-padding(3px);
 }
 
 .error-field {
@@ -97,12 +102,19 @@ a.btn {
 }
 
 .field-row {
+
   .set-padding-margin(0, 15px);
   & + .field-row {
     padding-top: 0;
   }
   &.footer {
 
+  }
+  .title {
+    .set-margin();
+    & + * {
+      padding-top: 10px;
+    }
   }
   .label {
     color: @color-gray-normal;
@@ -115,5 +127,8 @@ a.btn {
     height: auto;
     color: @color-gray;
     .set-padding(5px);
+  }
+  textarea {
+
   }
 }

@@ -37,7 +37,7 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/auth")
                 .permitAll()
                 .and()
                 .logout().logoutUrl("/logout")

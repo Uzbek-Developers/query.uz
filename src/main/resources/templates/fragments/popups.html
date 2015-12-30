@@ -1,9 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<div xmlns:th="http://www.thymeleaf.org" class="popup-wrap" th:fragment="popup" style="display:none;" onclick="$(this).closest('.footer').find('.popup-wrap').hide();">
+    <div class="box">
+        <form action="@{/warnAdministration}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="title">Spam lar</h2>
+                    <ul>
+                        <li>
+                            <label><input type="radio" name="spam" id="spam"/> Blocklash</label>
+                            <div><input type="text" name="statusOfPost"/></div>
+                        </li>
+                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                    </ul>
+                    <p>Ushbu post haqida</p>
 
-</body>
-</html>
+                    <p><input class="btn btn-green" type="submit" value="Ogohlantirish"/></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

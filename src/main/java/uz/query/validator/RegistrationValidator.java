@@ -24,7 +24,7 @@ public class RegistrationValidator implements Validator {
 
     public void validate(Object target, Errors errors) {
         RegistrationForm registrationForm = (RegistrationForm) target;
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "userName.empty", "Username bo'sh bo'lishi mumkin emas.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "displayName", "userName.empty", "Username bo'sh bo'lishi mumkin emas.");
 //        String userName = registrationForm.getUserName();
 //        if ((userName.length()) > 16) {
 //            errors.rejectValue("userName", "userName.tooLong", "UserName 16 simboldan uzun bo'lishi mumkin emas.");
