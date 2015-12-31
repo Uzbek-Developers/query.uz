@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.query.Constants;
 import uz.query.models.*;
+import uz.query.models.enums.FlagType;
 import uz.query.models.enums.StatusType;
 import uz.query.repositories.*;
 import uz.query.security.SecurityUtil;
@@ -46,6 +47,11 @@ public class QuestionController {
                                size = Constants.SMALL_PAGE_SIZE,
                                sort = {"creationDate"},
                                direction = Sort.Direction.DESC) Pageable pageable) {
+        ViewData viewData = new ViewData("Question_List");
+        viewData.setTitle("Savollar ro`yxati");
+        viewData.setMetaKeyword("savollar, savol");
+        viewData.setMetaDescription("Dasturlash bo`yicha oxirgi berilgan savollar ro`yxati");
+        model.addAttribute(Constants.VIEW_DATA, viewData);
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
         return "home";
     }
@@ -57,6 +63,7 @@ public class QuestionController {
         question.setPostStatus(status);
         model.addAttribute("question", question);
         model.addAttribute("statusTypeList", StatusType.values());
+        model.addAttribute("flagTypeList", FlagType.values());
         model.addAttribute("newAnswer", new Answer());
 
         return "details";
@@ -141,7 +148,7 @@ public class QuestionController {
 
         questionRepository.save(q);
 
-            return "redirect:/question/" + parentId;
+        return "redirect:/question/" + parentId;
     }
 
     @RequestMapping(value = "/setVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

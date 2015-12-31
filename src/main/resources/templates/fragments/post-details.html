@@ -1,7 +1,7 @@
 <div class="post-wrap" th:fragment="details">
 <h2 class="title">
     <a href="#" class="question-link" th:text="${question.title}"></a>
-    <span class="status">[ Ko'chilgan ]</span>
+    <span class="status">[ Ko'chirilgan ]</span>
 </h2>
 
 <div class="post-item question-item">
@@ -60,10 +60,12 @@
                                 <div class="field-row">
                                     <ul class="flag-list list">
                                         <li>
-                                            <label><input type="radio" name="spam" id="spam" checked/> Statusni
-                                                belgilash</label>
+                                            <label>
+                                                <input type="radio" name="flag" id="spam" checked/>
+                                                Postga status belgilash
+                                            </label>
 
-                                            <div class="form-row">
+                                            <div class="field-row">
                                                 <span class="label">Status tipi:</span>
 
                                                 <div class="form-field">
@@ -80,10 +82,9 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
-                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
-                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
-                                        <li><label><input type="radio" name="spam" id="spam"/> Bu spam</label></li>
+                                        <li th:each="flag: ${flagTypeList}"><label><input type="radio" name="flag"
+                                                                                          th:text="${flag.description}"/></label>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="field-row">
@@ -104,7 +105,7 @@
                 </ul>
             </div>
         </div>
-        <div class="post-status" th:object="${question}" th:if="${question}">
+        <div class="post-status" th:object="${question}" th:if="${question.statusType.name != 'Opened'}">
             <h4 class="title">Ushbu savol
                 <a href="#" th:if="*{owner}" th:text="*{owner.displayName}"></a>
                 tomonidan <a href="#" class="status" th:text="*{statusType.title}"></a> statusi bilan
@@ -114,6 +115,9 @@
         </div>
     </div>
 </div>
+
+
+<div th:replace="fragments/filters :: filter-box"></div>
 
 
 <div class="post-item answer-item" th:each="answer: ${question.answers}">
@@ -213,7 +217,7 @@
                     var parent = $(this).closest("form");
                     parent.find("[type=text], textarea").each(function () {
                         var field = $(this);
-                        if (!field.attr('readonly')) {
+                        if (!field.attr('readonly') && !field.is(':hidden')) {
                             $("#txt-preview").val($("#wmd-preview").html());
 
                             if ((field.is("input") || field.is("textarea") ) && !field.val()) {

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-    <title>Query.uz - </title>
+    <title th:text="${viewData.title}">Query.uz - savol-javob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword" th:content="${viewData.metaDescription}"/>
+    <meta name="description" th:content="${viewData.metaKeyword}"/>
+    <meta name="robots" content="index/index"/>
+    <meta name="copyright" content="Query.uz jamoasi"/>
     <!--<meta name="keyword" content="${_csrf.headerName}"/>-->
     <!--<meta name="description" content="${_csrf.token}"/>-->
     <!--<link rel="stylesheet" type="text/css" href="../../css/font-awesome.css" th:href="@{/css/font-awesome.css}"/>-->

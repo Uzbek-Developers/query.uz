@@ -1,7 +1,6 @@
 package uz.query;
 
 /**
- *
  * Created by sherali on 12/13/15.
  */
 public interface Constants {
@@ -25,5 +24,9 @@ public interface Constants {
     public static final int SMALL_PAGE_SIZE = 5;
     public static final int MIDDLE_PAGE_SIZE = 30;
     public static final int LARGE_PAGE_SIZE = 50;
+    //endregion
+
+    //region <For request urls>
+    public static final String VIEW_DATA = "viewData";
     //endregion
 }
