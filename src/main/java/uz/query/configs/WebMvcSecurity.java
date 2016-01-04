@@ -29,6 +29,7 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/registration").permitAll()
                 .antMatchers("/tag/**").permitAll()
+                .antMatchers("/tag/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/fonts/**").permitAll()
                 .antMatchers("/images/**").permitAll()

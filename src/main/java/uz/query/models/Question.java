@@ -28,7 +28,7 @@ public class Question extends Post {
     private List<Answer> answers = new LinkedList<Answer>();// LinkedList ko`p yozish uchun tez ishlaydi
     // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
 
-    private StatusType statusType = StatusType.Dublicated;
+    private StatusType statusType = StatusType.Opened;
     private String reason;
     private String statusLink;
 

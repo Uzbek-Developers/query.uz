@@ -231,7 +231,7 @@ body {
   }
 
   .post-wrap {
-    > .title {
+    h2.title {
       .set-padding-margin(0, 10px 15px);
       font-size: 1.1em;
       border-bottom: 1px solid @color-gray-medium;
@@ -268,9 +268,13 @@ body {
         font-size: .85em;
       }
       .text {
+        .title {
+          margin-bottom: 10px;
+          font-weight: normal;
+        }
         .set-padding(15px);
         .question-link {
-          font-size: 1.15em;
+          //          font-size: 1.15em;
         }
         .tag-list {
           float: left;
@@ -282,13 +286,21 @@ body {
         color: @color-gray-medium;
         margin-left: 5px;
       }
+      .warning {
+        color: @color-bronze;
+      }
     }
-
     .post-item {
       @width-vote-box: 100px;
       background: @color-gray-very-light;
       .set-padding-margin(0 0 20px);
 
+      .flag-box {
+        font-size: 0.8em;
+        .set-padding(10px);
+        background: @color-bronze;
+        margin-bottom: 10px;
+      }
       &.answer-item {
         display: block;
         & + .answer-item {

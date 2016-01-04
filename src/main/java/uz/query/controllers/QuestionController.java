@@ -14,6 +14,7 @@ import uz.query.models.enums.FlagType;
 import uz.query.models.enums.StatusType;
 import uz.query.repositories.*;
 import uz.query.security.SecurityUtil;
+import uz.query.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class QuestionController {
         return "home";
     }
 
-    @RequestMapping(value = "/question/{id}")
+    @RequestMapping(value = "/question/{id}/**")
     public String detail(@PathVariable("id") Long id, Model model) {
         Question question = questionRepository.findOne(id);
         boolean isDisabledAddingAnswer = StatusType.isDisabledAddingAnswer(question.getStatusType());
@@ -118,9 +119,14 @@ public class QuestionController {
         for (String id : ids) {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
+
         formQuestion.setTags(list);
         formQuestion.setOwner(securityUtil.getCurrentUser());
+        if (formQuestion.getId() == null) {
+            questionRepository.save(formQuestion);
+        }
 
+        formQuestion.setPostLink(StringUtils.makeLinkFromTitle(formQuestion.getTitle(), "/question/" + formQuestion.getId() + "/"));
 
         questionRepository.save(formQuestion);
 

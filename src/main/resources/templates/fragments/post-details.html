@@ -1,13 +1,16 @@
 <div class="post-wrap" th:fragment="details">
-<h2 class="title">
-    <a href="#" class="question-link" th:text="${question.title}"></a>
-    <span class="status" th:if="${question.statusType.name != 'Opened'}"><i class="fa fa-stop"></i></span>
-</h2>
+
 
 <div class="post-item question-item">
+    <h2 class="title">
+        <a href="#" class="question-link" th:text="${question.title}"></a>
+        <span class="status" th:if="${question.statusType.name != 'Opened'}"><i class="fa fa-stop"></i></span>
+        <span class="warning" th:if="${question.flagType.name != 'None'}"><i class="fa fa-warning"></i></span>
+    </h2>
     <div class="clearfix" th:if="${question.statusType.name != 'Hided'}">
         <div class="box-feature pull-right">
-            <div class="box vote  up"
+            <div th:if="${question.flagType.name=='None'} or ${question.flagType.name!='Danger'} and ${question.flagType.name!='Spam'}">
+            <div class="box vote up"
                  th:classappend="${question.voteRank()>0?'marked-up':question.voteRank()<0?'marked-down':'a'}">
                 <div class="row icons up"><i class="fa fa-angle-up"></i></div>
                 <div class="row number-box">
@@ -19,6 +22,7 @@
                 <div class="row icons"><i class="fa fa-star marked"></i></div>
                 <div class="row number-box"><span class="count" th:text="${question.voteCount}">0</span></div>
             </div>
+            </div>
         </div>
         <div class="box-content">
             <div class="question-linked" th:if="${question.statusLink} and ${question.statusType.name != 'Opened'}">
@@ -26,7 +30,7 @@
             </div>
             <div th:uText="${question.content}"
                  th:if="${question.flagType.name=='None'} or ${question.flagType.name!='Danger'} and ${question.flagType.name!='Spam'}"></div>
-            <div class="flag-box" th:if="${question.flagType.name != 'None'}">
+            <div class="flag-box warning" th:if="${question.flagType.name != 'None'}">
                 <i class="fa fa-warning"></i>
                 <span th:uText="${question.flagType.description}"></span>
             </div>
@@ -202,8 +206,8 @@
 
     <div class="post-item answer-item" th:each="answer: ${question.answers}">
         <div class="clearfix">
-            <div class="box-feature pull-right">
-                <div class="box vote up">
+            <div class="box-feature pull-right" >
+                <div class="box vote up" th:if="${answer.flagType.name =='None'} or ${answer.flagType.name !='Danger'} and ${answer.flagType.name !='Spam'}">
                     <div class="row icons"><i class="fa fa-angle-up marked"></i></div>
                     <div class="row number-box"><span class="count" th:text="${answer.voteCount}">0</span></div>
                     <div class="row icons"><i class="fa fa-angle-down"></i></div>
@@ -212,7 +216,7 @@
             <div class="box-content">
                 <div th:uText="${answer.content}"
                      th:if="${answer.flagType.name =='None'} or ${answer.flagType.name !='Danger'} and ${answer.flagType.name !='Spam'}"></div>
-                <div class="flag-box" th:if="${answer.flagType.name != 'None'}">
+                <div class="flag-box warning" th:if="${answer.flagType.name != 'None'}">
                     <i class="fa fa-warning"></i>
                     <span th:uText="${answer.flagType.description}"></span>
                 </div>

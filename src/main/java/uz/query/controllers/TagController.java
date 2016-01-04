@@ -67,7 +67,7 @@ public class TagController {
 
     @RequestMapping(value = "/tag/{id}/info")
     public String detail(@PathVariable("id") Long id, Model model) {
-        Tag tag = new Tag();
+        Tag tag = tagRepository.findOne(id) ;
 
        ViewData viewData = new ViewData("Tag_View");
         viewData.setTitle(tag.getTitle());
@@ -75,7 +75,7 @@ public class TagController {
         viewData.setMetaDescription(tag.getShortDescription());
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
-        model.addAttribute("tag", tagRepository.findOne(id));
+        model.addAttribute("tag", tag);
         return "about-tag";
     }
 
