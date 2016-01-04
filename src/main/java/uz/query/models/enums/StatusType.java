@@ -8,6 +8,7 @@ public enum StatusType {
     OnHold("Uslab turildi"),
     Dublicated("Nusxa olindi"),
     Closed("Yopildi"),
+    Hided("Yashirildi"),
     Protected("Himoyalandi"),
     Translated("Tarjima qilindi");
 
@@ -29,6 +30,29 @@ public enum StatusType {
         }
         return Opened;
     }
+
+    public static boolean hasQuestionLink() {
+        return true;
+    }
+
+    public static boolean isDisabledAddingAnswer(StatusType type) {
+        boolean isDisabled = true;
+        switch (type) {
+            case Closed:
+            case Dublicated:
+            case OnHold:
+            case Hided:
+            case Translated:
+            case Protected:
+                isDisabled = true;
+                break;
+            default:
+                isDisabled = false;
+                break;
+        }
+        return isDisabled;
+    }
+
     public String getName() {
         return name;
     }

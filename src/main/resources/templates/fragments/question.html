@@ -1,12 +1,16 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="q-list">
-    <div th:replace="fragments/filters :: filter-box"></div>
+    <!--<div th:replace="fragments/filters :: filter-box"></div>-->
     <div class="post-wrap">
         <table class="questions-table">
             <tr th:each="question: ${questionPage}"
                 th:classappend="${question.answers.size()>0}?important:''">
                 <td class="text">
-                    <a th:href="@{/question/}+${question.id}" class="question-link"
-                       th:text="${question.title}"></a>
+                    <h3 class="title">
+                        <a th:href="@{/question/}+${question.id}" class="question-link" th:text="${question.title}"></a>
+                        <span class="status" th:if="${question.statusType.name != 'Opened'}"><i
+                                class="fa fa-warning"></i></span>
+                    </h3>
+
 
                     <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
                         <li th:each="tag: ${question.tags}"><a th:href="'/tag/' + ${tag.id}"
@@ -29,7 +33,7 @@
                 <td class="number answers">
                     <div class="number-box"
                          th:classappend="${question.answers.size()>0}?'has-correct has-answer':''">
-                    <span class="count" th:text="${question.answers.size()}">0</span>
+                        <span class="count" th:text="${question.answers.size()}">0</span>
                         <span class="text">javob</span>
                     </div>
                 </td>

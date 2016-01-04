@@ -17,7 +17,6 @@ public enum PostType {
         this.id = id;
         this.name = this.toString();
     }
-
     public String getId() {
         return id;
     }

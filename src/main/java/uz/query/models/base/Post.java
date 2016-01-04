@@ -2,6 +2,7 @@ package uz.query.models.base;
 
 import uz.query.models.User;
 import uz.query.models.Vote;
+import uz.query.models.enums.FlagType;
 import uz.query.models.enums.PostType;
 
 import javax.persistence.*;
@@ -21,6 +22,8 @@ public class Post extends BaseModel {
     private String content;
     @Column(columnDefinition = "text")
     private String editorContent;
+    private String postLink;
+
 
     @Transient
     private PostType postType = PostType.Article;
@@ -29,6 +32,8 @@ public class Post extends BaseModel {
     private User owner;
     @ManyToOne(fetch = FetchType.LAZY)
     private User editor;
+
+    private FlagType flagType = FlagType.None;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Vote> votes;
@@ -65,6 +70,14 @@ public class Post extends BaseModel {
         this.editorContent = editorContent;
     }
 
+    public String getPostLink() {
+        return postLink;
+    }
+
+    public void setPostLink(String postLink) {
+        this.postLink = postLink;
+    }
+
     public User getOwner() {
         return owner;
     }
@@ -79,6 +92,14 @@ public class Post extends BaseModel {
 
     public void setEditor(User editor) {
         this.editor = editor;
+    }
+
+    public FlagType getFlagType() {
+        return flagType;
+    }
+
+    public void setFlagType(FlagType flagType) {
+        this.flagType = flagType;
     }
 
     public List<Vote> getVotes() {

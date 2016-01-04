@@ -18,6 +18,8 @@ public interface QuestionRepository extends BaseRepository<Question, Long> {
 
     List<Question> findByisDeleted(boolean isDeleted);
 
+    List<Question> findAll();
+
     Page<Question> findAllByTagsIn(Collection<Tag> tags, Pageable pageable);
 
 }

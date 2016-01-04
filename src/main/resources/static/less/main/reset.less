@@ -95,7 +95,8 @@ a.btn {
   background: @color-blue;
   color: @color-white;
 }
-.btn-orange{
+
+.btn-orange {
   background: @color-bronze;
   color: @color-white;
 }
@@ -135,4 +136,31 @@ a.btn {
   textarea {
 
   }
+}
+
+.stat-table {
+  border-spacing: 0 5px;
+  td {
+    vertical-align: top;
+  }
+  .count {
+    color: @color-red;
+    font-weight: bold;
+    background: @color-gray-light;
+    text-align: center;
+    .set-padding(0 10px);
+  }
+  .label {
+    .set-padding(5px);
+    color: @color-gray-normal;
+
+  }
+  .description {
+    color: @color-gray;
+    .set-padding(0 5px)
+  }
+}
+
+.close {
+
 }

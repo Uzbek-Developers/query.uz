@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.query.Constants;
 import uz.query.models.Tag;
 import uz.query.models.User;
+import uz.query.models.ViewData;
 import uz.query.repositories.TagRepository;
 import uz.query.repositories.UserRepository;
 import uz.query.security.SecurityUtil;
@@ -41,18 +42,39 @@ public class TagController {
                                sort = {"creationDate"},
                                direction = Sort.Direction.DESC) Pageable pageable) {
 
+        ViewData viewData = new ViewData("Tag_List");
+        viewData.setTitle("Kalit so'z(teg)lar ro'yxati");
+        viewData.setMetaKeyword("teglar, taglar, java, php, javascript");
+        viewData.setMetaDescription("Query.uzdagi teglar to'plami");
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
         model.addAttribute(Data.TAG_PAGE, tagRepository.findAll(pageable));
         return "tag_list";
     }
 
     @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
+
+        ViewData viewData = new ViewData("Tag_Add");
+        viewData.setTitle("Kalit so'zlarni hosil qilish uchun forma");
+        viewData.setMetaKeyword("tag qo'shish, teg qo'shish, yangi teg, teg hosil qilish, kalit so'z");
+        viewData.setMetaDescription("Kalit so'zlarni hosil qilish uchun forma");
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
         model.addAttribute("tag", new Tag());
         return "add-tag";
     }
 
     @RequestMapping(value = "/tag/{id}/info")
     public String detail(@PathVariable("id") Long id, Model model) {
+        Tag tag = new Tag();
+
+       ViewData viewData = new ViewData("Tag_View");
+        viewData.setTitle(tag.getTitle());
+        viewData.setMetaKeyword(tag.getTitle()+" teg, kalit soz'i, kategoriyasi, tili");
+        viewData.setMetaDescription(tag.getShortDescription());
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
         model.addAttribute("tag", tagRepository.findOne(id));
         return "about-tag";
     }

@@ -49,9 +49,13 @@ public class QuestionController {
                                direction = Sort.Direction.DESC) Pageable pageable) {
         ViewData viewData = new ViewData("Question_List");
         viewData.setTitle("Savollar ro`yxati");
-        viewData.setMetaKeyword("savollar, savol");
+        viewData.setMetaKeyword("savollar ro'yxati, savol - javob, dasturlash tillari, algoritm, dastur, oop");
         viewData.setMetaDescription("Dasturlash bo`yicha oxirgi berilgan savollar ro`yxati");
         model.addAttribute(Constants.VIEW_DATA, viewData);
+
+        List<Question> topQuestions = questionRepository.findAll();
+        model.addAttribute(Data.TOP_QUESTIONS, topQuestions);
+
         model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
         return "home";
     }
@@ -59,8 +63,18 @@ public class QuestionController {
     @RequestMapping(value = "/question/{id}")
     public String detail(@PathVariable("id") Long id, Model model) {
         Question question = questionRepository.findOne(id);
-        PostStatus status = new PostStatus(question.getOwner());
-        question.setPostStatus(status);
+        boolean isDisabledAddingAnswer = StatusType.isDisabledAddingAnswer(question.getStatusType());
+
+        ViewData viewData = new ViewData("Question_View");
+        viewData.setTitle(question.getTitle());
+        viewData.setMetaKeyword(question.getTags().toString());
+        viewData.setMetaDescription(question.getContent());
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
+        List<Question> relatedQuestions = questionRepository.findAll();
+        model.addAttribute(Data.RELATED_QUESTIONS, relatedQuestions);
+
+        model.addAttribute("isDisabledAddingAnswer", isDisabledAddingAnswer);
         model.addAttribute("question", question);
         model.addAttribute("statusTypeList", StatusType.values());
         model.addAttribute("flagTypeList", FlagType.values());
@@ -93,7 +107,7 @@ public class QuestionController {
         return "ask_question";
     }
 
-    @RequestMapping(value = "/ask_question", method = RequestMethod.POST)
+    @RequestMapping(value = "/save_question", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Question formQuestion, HttpServletRequest request) {
         if (formQuestion.getId() != null) {
             formQuestion = questionRepository.findOne(formQuestion.getId());
@@ -107,8 +121,6 @@ public class QuestionController {
         formQuestion.setTags(list);
         formQuestion.setOwner(securityUtil.getCurrentUser());
 
-        PostStatus status = new PostStatus(securityUtil.getCurrentUser());
-        formQuestion.setPostStatus(status);
 
         questionRepository.save(formQuestion);
 
@@ -131,22 +143,50 @@ public class QuestionController {
         return "redirect:/question/" + questionId;
     }
 
-    @RequestMapping(value = "/warnAdministration", method = RequestMethod.POST)
-    public String warnAboutQuestion(HttpServletRequest request) {
+    @RequestMapping(value = "/stateStatusOfQuestion", method = RequestMethod.POST)
+    public String stateStatusOfQuestion(HttpServletRequest request) {
         String reason = request.getParameter("reason");
 
         String postType = request.getParameter("postType");
         String statusType = request.getParameter("statusType");
+        String statusLink = request.getParameter("statusLink");//TODO statusLink va reason keyinchalik textareaga o'zgartirildi
 
         Long parentId = Long.parseLong(request.getParameter("parentId"));
         Long postId = Long.parseLong(request.getParameter("postId"));
-//        List<Answer> otherAnswers = q.getAnswers();
-//        otherAnswers.add(answer);
+
         Question q = questionRepository.findOne(parentId);
         q.setStatusType(StatusType.getTypeByName(statusType));
+        q.setStatusType(StatusType.getTypeByName(statusType));
+        q.setStatusLink(statusLink);
         q.setReason(reason);
 
         questionRepository.save(q);
+
+        return "redirect:/question/" + parentId;
+    }
+
+    @RequestMapping(value = "/warnAdministration", method = RequestMethod.POST)
+    public String warnAboutQuestion(HttpServletRequest request) {
+        String reason = request.getParameter("reason");
+        String flag = request.getParameter("flag");
+
+        Long parentId = Long.parseLong(request.getParameter("parentId"));
+        Long postId = Long.parseLong(request.getParameter("postId"));
+        String postType = request.getParameter("postType");
+
+        Question question = questionRepository.findOne(parentId);
+
+        if (postType.equals("Question")) {
+            question.setFlagType(FlagType.getTypeByName(flag));
+            question.setReason(reason);
+        } else {
+            Answer answer = answerRepository.findOne(postId);
+            answer.setFlagType(FlagType.getTypeByName(flag));
+            answerRepository.save(answer);
+
+        }
+
+        questionRepository.save(question);
 
         return "redirect:/question/" + parentId;
     }
@@ -198,6 +238,8 @@ public class QuestionController {
 
     public interface Data {
         String QUESTION_PAGE = "questionPage";
+        String TOP_QUESTIONS = "topQuestions";
+        String RELATED_QUESTIONS = "relatedQuestions";
     }
 
 }

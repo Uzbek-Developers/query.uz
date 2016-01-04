@@ -15,8 +15,14 @@ var App = {
     },
     handlers: function () {
         $("body").on("click", ".has-dropdown > a", function () {
-            console.log("sdf");
-            $(this).parent().toggleClass("open");
+            $(this).parent()
+                .siblings().removeClass("open")
+                .end().toggleClass("open");
+
+            return false;
+        });
+        $("body").on("click", ".close", function () {
+            $(this).closest(".open").removeClass("open");
 
             return false;
         });

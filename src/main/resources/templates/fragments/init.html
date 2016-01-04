@@ -63,17 +63,17 @@
 
             </div>
             <div class="col-xs-12 col-sm-9">
-                <form action="#" class="form-search pull-left">
-                    <label for="srch">Izlash</label>
-                    <input type="text"/>
-                </form>
+                <!--<form action="#" class="form-search pull-left">-->
+                    <!--<label for="srch">Izlash</label>-->
+                    <!--<input type="text"/>-->
+                <!--</form>-->
                 <ul class="list main-menu pull-right clearfix">
                     <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a
                             th:href="@{/}"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
                     <li th:classappend="${#httpServletRequest.getRequestURI() == '/tags' ? 'active':''}"><a
                             th:href="@{/tag/list}"><i class="fa fa-tag"></i> <span>Taglar</span></a></li>
-                    <li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>
-                    <li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>
+                    <!--<li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>-->
                     <li class="add-question"
                         th:classappend="${#httpServletRequest.getRequestURI() == '/ask_question' ? 'active':''}"><a
                             th:href="@{/ask_question}"><i class="fa fa-plus"></i>
@@ -84,7 +84,7 @@
     </div>
 </div>
 <div th:fragment="pagination (page)">
-    <div class="pagination-wrap" th:if="${page.getTotalPages()>0}">
+    <div class="pagination-wrap" th:if="${page.getTotalPages()>1}">
         <ul class="list pagination-list">
             <li th:if="${page.hasPrevious()}"><a th:href="'?page='+${page.number-1}">Prev</a></li>
             <li th:each="i: ${#numbers.sequence(1, page.getTotalPages())}"
@@ -94,8 +94,8 @@
             </li>
             <li th:if="${page.hasNext()}"><a th:href="'?page='+${page.number+1}">Next</a></li>
         </ul>
-        <p>Siz <a href="#">javob berilmagan savollar</a>ga javob berishingiz mumkin. Undan tashqari
-            <a href="#">tanlagan taglaringiz</a> bo'yicha savollarni ko'rishingiz mumkin.</p>
+        <!--<p>Siz <a href="#">javob berilmagan savollar</a>ga javob berishingiz mumkin. Undan tashqari-->
+            <!--<a href="#">tanlagan taglaringiz</a> bo'yicha savollarni ko'rishingiz mumkin.</p>-->
     </div>
 </div>
 <div class="footer-wrap" th:fragment="footer">

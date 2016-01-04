@@ -1,12 +1,8 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="ask-question">
     <div class="post-wrap">
-        <h3 class="title"><a href="#" class="question-link">Qanday qilib JavaScriptda
-            Internet bor yo'qligini
-            tekshiriladi?</a> <span class="status">[ Ko'chilgan ]</span></h3>
-
         <div class="post-item ask-question">
             <div class="box-content">
-                <form th:action="@{/ask_question}" th:object="${question}" method="POST">
+                <form th:action="@{/save_question}" th:object="${question}" method="POST">
                     <input type="hidden" th:field="*{id}">
                     <div class="field-row">
                         <span class="label">Savol sarlavhasi:</span>

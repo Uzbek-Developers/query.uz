@@ -22,10 +22,10 @@ public class GlobalControllerAdvice {
 
     @ModelAttribute
     public void addUserAttribute(Model model) {
-        ViewData viewData = new ViewData("Home");
-        viewData.setTitle("Dasturlash bo`yicha savol-javoblar loyiha");
-        viewData.setMetaKeyword("savol, javob");
-        viewData.setMetaDescription("Dasturlash bo`yicha savol-javoblar loyiha");
+        ViewData viewData = new ViewData("home");
+        viewData.setTitle("Dasturlash bo`yicha savol-javoblar bo'yicha web loyiha");
+        viewData.setMetaKeyword("savollar, savol, dasturlash tillari, algoritm, dastur, oop, uzbek dastur");
+        viewData.setMetaDescription("Dasturlash bo'yicha savol-javoblar to'plami");
         model.addAttribute(Constants.VIEW_DATA, viewData);
         model.addAttribute(USER, securityUtil.getCurrentUser());
     }
