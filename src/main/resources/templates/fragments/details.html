@@ -386,30 +386,29 @@
             <div th:uText="*{content}"></div>
 
             <p><a th:href="*{parentArticle.postLink}" th:if="${parentArticle}" th:uText="*{parentArticle.title}"></a></p>
-        </div>
-        <div class="footer clearfix">
-            <div class="pull-right">
-                <div class="who-box pull-left">
-                    <p class="date"><span
-                            th:text="${#dates.format(article.creationDate, 'dd/MM/YYYY')}"></span> da
-                        savol
-                        berildi</p>
+            <div class="footer clearfix">
+                <div class="pull-right">
+                    <div class="who-box pull-left">
+                        <p class="date"><span
+                                th:text="${#dates.format(article.creationDate, 'dd/MM/YYYY')}"></span> da
+                            savol
+                            berildi</p>
 
-                    <div th:replace="fragments/user :: box(user = ${article.owner})"></div>
+                        <div th:replace="fragments/user :: box(user = ${article.owner})"></div>
+                    </div>
                 </div>
+                <ul class="list action-list pull-left">
+                    <li><a th:href="@{/article/edit/}+${article.id}"><i class="fa fa-edit"></i>
+                        <span>Tahrirlash</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/article/delete/}+${article.id}">
+                            <i class="fa fa-trash"></i>
+                            <span>O'chirish</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="list action-list pull-left">
-                <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                <li><a th:href="@{/article/edit/}+${article.id}"><i class="fa fa-edit"></i>
-                    <span>Tahrirlash</span></a>
-                </li>
-                <li>
-                    <a th:href="@{/article/delete/}+${article.id}">
-                        <i class="fa fa-trash"></i>
-                        <span>O'chirish</span>
-                    </a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
