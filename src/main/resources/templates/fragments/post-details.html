@@ -203,7 +203,18 @@
 <!--<div th:replace="fragments/filters :: filter-box"></div>-->
 
 <div class="answers-wrap" th:if="${question.statusType.name != 'Hided'}">
-
+    <div xmlns:th="http://www.thymeleaf.org" th:fragment="filter-box">
+        <div class="filter-box clearfix">
+            <!--<ul class="list filter-list clearfix pull-left">-->
+                <!--<li><a href="#"><i class="box-count">Java</i> Haqida</a></li>-->
+                <!--<li class="active"><a href="#"><i class="box-count">522</i> Oxirgi</a></li>-->
+                <!--<li><a href="#"><span class="fa fa-caret-up"></span> Top</a></li>-->
+                <!--<li><a href="#">Javobsiz <i class="box-count">522</i> </a></li>-->
+                <!--<li><a href="#">Qiziq</a></li>-->
+            <!--</ul>-->
+            <h3 class="title pull-right"><strong th:text="${question.answers.size()}">0</strong> ta savol</h3>
+        </div>
+    </div>
     <div class="post-item answer-item" th:each="answer: ${question.answers}">
         <div class="clearfix">
             <div class="box-feature pull-right" >

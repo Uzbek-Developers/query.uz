@@ -1,76 +1,21 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="tag-list">
    <!--<div th:replace="fragments/filters :: filter-box"></div>-->
+    <div xmlns:th="http://www.thymeleaf.org" th:fragment="filter-box">
+        <div class="filter-box clearfix">
+            <h3 class="title pull-right">Teglar</h3>
+        </div>
+    </div>
     <div class="post-wrap">
         <div class="row">
-            <div class="col-md-3" th:each="tag: ${tagPage}">
+            <div class="col-md-3" th:each="tag: ${page}">
                 <div class="tag-box">
                     <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
 
                     <div class="excerpt" th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
                 </div>
             </div>
+
         </div>
-        <div th:include="fragments/init :: pagination (page=${tagPage})"></div>
+        <div th:include="fragments/init :: pagination (page=${page})"></div>
     </div>
-</div>
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="add-tag">
-    <div class="post-wrap">
-        <h3 class="title" th:text="${tag.id > 0} ? 'Tegni tahrirlash' : 'Yangi teg qoshish'"></h3>
-
-        <div class="post-item ask-question">
-            <div class="box-content">
-                <form action="#" th:action="@{/tag/save}" th:object="${tag}" method="POST">
-                    <div class="field-row">
-                        <span class="label">Teg nomi:</span>
-
-                        <div class="form-field"><input type="text" max-length="240" tabindex="1" th:field="*{title}"/>
-                        </div>
-                    </div>
-                    <div class="field-row">
-                        <span class="label">Qisqa ma'lumot:</span><br/>
-                        <textarea class="textare" style="width: 100%" th:field="*{shortDescription}" tabindex="2"></textarea>
-                    </div>
-                    <div class="field-row">
-                        <span class="label">Teg haqida to'liqroq: </span>
-
-                        <div class="text-editor">
-                            <div class="wmd-panel">
-                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
-                                <textarea class="wmd-input" id="wmd-input" tabindex="3"
-                                          th:field="*{editorContent}"></textarea>
-                            </div>
-
-                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-
-                            <textarea id="txt-preview" class="hide" readonly="true"
-                                      th:field="*{content}"></textarea>
-                        </div>
-                    </div>
-                    <div class="field-row buttons">
-                        <input type="submit" tabindex="4" class="btn btn-green shdw-1x" value="Submit"/>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $(document).ready(function () {
-            $("[type=submit]").on("click", function () {
-                var hasError = false;
-                $(".field-row input[type=text],.field-row  textarea[readonly=false]").each(function () {
-                    var field = $(this);
-                    $("#txt-preview").val($("#wmd-preview").html());
-                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
-                        if (!hasError) hasError = !hasError ? true : hasError;
-                        field.addClass("error-field");
-                    } else {
-                        field.removeClass("error-field");
-                    }
-                });
-                if (hasError)
-                    return false;
-            });
-        });
-    </script>
 </div>

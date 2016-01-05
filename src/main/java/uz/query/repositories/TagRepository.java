@@ -1,5 +1,7 @@
 package uz.query.repositories;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import uz.query.models.Tag;
 import uz.query.repositories.base.BaseRepository;

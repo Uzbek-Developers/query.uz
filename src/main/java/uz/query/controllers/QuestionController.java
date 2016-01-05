@@ -57,11 +57,11 @@ public class QuestionController {
         List<Question> topQuestions = questionRepository.findAll();
         model.addAttribute(Data.TOP_QUESTIONS, topQuestions);
 
-        model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAll(pageable));
+        model.addAttribute(Constants.PAGE, questionRepository.findAll(pageable));
         return "home";
     }
 
-    @RequestMapping(value = "/question/{id}/**")
+    @RequestMapping(value = "/question/{id}/{title}")
     public String detail(@PathVariable("id") Long id, Model model) {
         Question question = questionRepository.findOne(id);
         boolean isDisabledAddingAnswer = StatusType.isDisabledAddingAnswer(question.getStatusType());
@@ -86,7 +86,15 @@ public class QuestionController {
 
     @RequestMapping(value = "/question/edit/{id}", method = RequestMethod.GET)
     public String enterAddQuestionForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("question", questionRepository.findOne(id));
+        Question question = questionRepository.findOne(id);
+
+        ViewData viewData = new ViewData("Question_Edit");
+        viewData.setTitle(question.getTitle());
+        viewData.setMetaKeyword(question.getTags().toString());
+        viewData.setMetaDescription(question.getContent());
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
+        model.addAttribute("question", question);
         return "ask_question";
     }
 
@@ -100,11 +108,14 @@ public class QuestionController {
     @RequestMapping(value = "/ask_question", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
         Question question = new Question();
-//        question.setTitle("question title");
-//        question.setContent("question content");
+        ViewData viewData = new ViewData("Question_Add");
+        viewData.setTitle("Savol so'rash");
+        viewData.setMetaKeyword("savol berish, savol qo'shish");
+        viewData.setMetaDescription("Query.uzga dasturlash bo'yicha savol qo'shish, savol berish");
+        model.addAttribute(Constants.VIEW_DATA, viewData);
 
         model.addAttribute("question", question);
-//        model.addAttribute("tagIdList", new String[]{"josd", "v"});
+
         return "ask_question";
     }
 
@@ -236,14 +247,14 @@ public class QuestionController {
                                              direction = Sort.Direction.DESC) Pageable pageable) {
         List<Tag> tags = new LinkedList<>();
         tags.add(tagRepository.findOne(id));
-        model.addAttribute(Data.QUESTION_PAGE, questionRepository.findAllByTagsIn(tags, pageable));
+        model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
         return "home";
     }
     //endregion
 
 
     public interface Data {
-        String QUESTION_PAGE = "questionPage";
+        String PAGE = "page";
         String TOP_QUESTIONS = "topQuestions";
         String RELATED_QUESTIONS = "relatedQuestions";
     }

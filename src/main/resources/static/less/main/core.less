@@ -231,6 +231,13 @@ body {
   }
 
   .post-wrap {
+    .status {
+      color: @color-gray-medium;
+      margin-left: 5px;
+    }
+    .warning {
+      color: @color-bronze;
+    }
     h2.title {
       .set-padding-margin(0, 10px 15px);
       font-size: 1.1em;
@@ -268,26 +275,17 @@ body {
         font-size: .85em;
       }
       .text {
-        .title {
+        h2, h3 {
           margin-bottom: 10px;
           font-weight: normal;
         }
-        .set-padding(15px);
+        .set-padding(10px 15px);
         .question-link {
           //          font-size: 1.15em;
         }
         .tag-list {
           float: left;
         }
-      }
-    }
-    .title {
-      .status {
-        color: @color-gray-medium;
-        margin-left: 5px;
-      }
-      .warning {
-        color: @color-bronze;
       }
     }
     .post-item {

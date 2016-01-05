@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Entity
 @JsonIgnoreProperties({"questions", "owner"})
-@Table(name = "tag")
 public class Tag extends Post {
 
     @ManyToMany(fetch = FetchType.LAZY)

@@ -1,0 +1,266 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="question">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Savolingiz</h3>
+    </div>
+    <div class="post-wrap">
+        <div class="post-item ask-question">
+            <div class="box-content">
+                <form th:action="@{/save_question}" th:object="${question}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="field-row">
+                        <span class="label">Savol sarlavhasi:</span>
+
+                        <div class="form-field"><input type="text" max-length="240" tabindex="1"
+                                                       th:field="*{title}"/></div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Savol matni: </span>
+
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" tabindex="2"
+                                          th:field="*{editorContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+
+                            <textarea id="txt-preview" class="hide" readonly="true"
+                                      th:field="*{content}"></textarea>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Teglarni kiriting:</span>
+
+
+                        <div class="form-field">
+                            <!--<input name="tagNameList" id="tagNameList" type="hidden" th:field="*{tags}"/>-->
+                            <!--<input name="tagIdList" id="tagIdList" type="hidden" value="1,2"/>-->
+                            <input type="hidden" th:field="*{tags}" id="selectedTags"/>
+                            <input type="hidden" name="tagIdList" id="tagIdList"/>
+                            <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+
+                            <div id="tagSelector"></div>
+                        </div>
+                    </div>
+                    <div class="field-row buttons">
+                        <!--<div class="footer">-->
+
+                        <input type="submit" class="btn btn-green shdw-1x" value="Savolni qo'shish"/>
+                        <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
+                        <a href="#">Link</a>
+                        <!--</div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+//            App.tagSelectorConfig();
+            $("[type=submit]").on("click", function () {
+                var hasError = false;
+                $(".field-row input[type=text],.field-row  textarea[readonly=false]").each(function () {
+                    var field = $(".tag-input-box").children("input").is($(this)) ? $(".tag-input-box") : $(this);
+                    $("#txt-preview").val($("#wmd-preview").html());
+
+                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
+                        if (!hasError) hasError = !hasError ? true : hasError;
+                        field.addClass("error-field");
+                    } else {
+                        field.removeClass("error-field");
+                    }
+                })
+                if (hasError)
+                    return false;
+            });
+            var currentSelectedTags = $("#selectedTags").val();
+
+            var TagSelector = $("#tagSelector").tagSelector({
+                selectTag: function (selectedNameList, selectedIdList) {
+                    $("#tagIdList").val(selectedIdList);
+                },
+                init: function () {
+                    if (currentSelectedTags.length) {
+                        console.log(currentSelectedTags);
+                        $.getJSON('/getTagListByIds', {"ids": currentSelectedTags}, function (data) {
+                            console.log(data);
+                            TagSelector.setDefaulTags(data);
+                        });
+                    }
+
+                },
+                search: function (searchWord) {
+                    console.log("API ga junatish uchun kalit so`z ==> ", searchWord);
+                    $.getJSON('/getTagList', {key: searchWord}, function (data) {
+//                        console.log(data);
+                        TagSelector.setOptionContent(data);
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="tag">
+    <div class="post-wrap">
+        <h3 class="title" th:text="${tag.id > 0} ? 'Tegni tahrirlash' : 'Yangi teg qoshish'"></h3>
+
+        <div class="post-item ask-question">
+            <div class="box-content">
+                <form action="#" th:action="@{/tag/save}" th:object="${tag}" method="POST">
+                    <div class="field-row">
+                        <span class="label">Teg nomi:</span>
+
+                        <div class="form-field"><input type="text" max-length="240" tabindex="1" th:field="*{title}"/>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Qisqa ma'lumot:</span><br/>
+                        <textarea class="textare" style="width: 100%" th:field="*{shortDescription}" tabindex="2"></textarea>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Teg haqida to'liqroq: </span>
+
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" tabindex="3"
+                                          th:field="*{editorContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+
+                            <textarea id="txt-preview" class="hide" readonly="true"
+                                      th:field="*{content}"></textarea>
+                        </div>
+                    </div>
+                    <div class="field-row buttons">
+                        <input type="submit" tabindex="4" class="btn btn-green shdw-1x" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("[type=submit]").on("click", function () {
+                var hasError = false;
+                $(".field-row input[type=text],.field-row  textarea[readonly=false]").each(function () {
+                    var field = $(this);
+                    $("#txt-preview").val($("#wmd-preview").html());
+                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
+                        if (!hasError) hasError = !hasError ? true : hasError;
+                        field.addClass("error-field");
+                    } else {
+                        field.removeClass("error-field");
+                    }
+                });
+                if (hasError)
+                    return false;
+            });
+        });
+    </script>
+</div>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="article">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Maqola</h3>
+    </div>
+    <div class="post-wrap">
+        <div class="post-item ask-question">
+            <div class="box-content">
+                <form th:action="@{/article/save}" th:object="${article}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="field-row">
+                        <span class="label">Maqola sarlavhasi:</span>
+
+                        <div class="form-field">
+                            <input type="text" max-length="240" tabindex="1" requeired
+                                                       th:field="*{title}"/>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Maqola matni: </span>
+
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" tabindex="2" requeired
+                                          th:field="*{editorContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+
+                            <textarea id="txt-preview" class="hide" readonly="true"
+                                      th:field="*{content}"></textarea>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">O'zidan yuqori maqolani tanlash:</span>
+
+
+                        <div class="form-field">
+                            <!--<input name="tagNameList" id="tagNameList" type="hidden" th:field="*{tags}"/>-->
+                            <!--<input name="tagIdList" id="tagIdList" type="hidden" value="1,2"/>-->
+                            <input type="hidden" id="selectedTags"/>
+                            <input type="hidden" name="parentId" id="parentId"/>
+                            <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+
+                            <div id="tagSelector"></div>
+                        </div>
+                    </div>
+                    <div class="field-row buttons">
+                        <input type="submit" class="btn btn-green shdw-1x" value="Maqolani qo'shish"/>
+                        <a href="#">Link</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+//            App.tagSelectorConfig();
+            $("[type=submit]").on("click", function () {
+                var hasError = false;
+                $(".field-row input[type=text][requeired],.field-row  textarea[requeired]").each(function () {
+                    var field =  $(this);
+                    $("#txt-preview").val($("#wmd-preview").html());
+
+                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
+                        if (!hasError) hasError = !hasError ? true : hasError;
+                        field.addClass("error-field");
+                    } else {
+                        field.removeClass("error-field");
+                    }
+                })
+                if (hasError)
+                    return false;
+            });
+            var currentSelectedTags = $("#selectedTags").val();
+
+            var TagSelector = $("#tagSelector").tagSelector({
+                selectTag: function (selectedNameList, selectedIdList) {
+                    $("#tagIdList").val(selectedIdList);
+                },
+                init: function () {
+                    if (currentSelectedTags.length) {
+                        console.log(currentSelectedTags);
+                        $.getJSON('/getTagListByIds', {"ids": currentSelectedTags}, function (data) {
+                            console.log(data);
+                            TagSelector.setDefaulTags(data);
+                        });
+                    }
+
+                },
+                search: function (searchWord) {
+                    $.getJSON('/article/getArticlesList', {key: searchWord}, function (data) {
+//                        console.log(data);
+                        TagSelector.setOptionContent(data);
+                    });
+                }
+            });
+        });
+    </script>
+</div>

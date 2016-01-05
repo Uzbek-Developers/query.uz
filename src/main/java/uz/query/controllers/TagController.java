@@ -48,7 +48,7 @@ public class TagController {
         viewData.setMetaDescription("Query.uzdagi teglar to'plami");
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
-        model.addAttribute(Data.TAG_PAGE, tagRepository.findAll(pageable));
+        model.addAttribute(Constants.PAGE, tagRepository.findAll(pageable));
         return "tag_list";
     }
 
@@ -119,6 +119,6 @@ public class TagController {
     //endregion
 
     private interface Data {
-        String TAG_PAGE = "tagPage";
+        String TAG_PAGE = "page";
     }
 }

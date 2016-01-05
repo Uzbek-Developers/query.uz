@@ -13,7 +13,6 @@ import java.util.List;
  * Created by Mirjalol Bahodirov on 12/14/15 with love.
  */
 @Entity
-@Table(name = "question")
 public class Question extends Post {
 
     //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak

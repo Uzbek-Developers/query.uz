@@ -80,6 +80,8 @@
                             th:href="@{/}"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
                     <li th:classappend="${#httpServletRequest.getRequestURI() == '/tags' ? 'active':''}"><a
                             th:href="@{/tag/list}"><i class="fa fa-tag"></i> <span>Taglar</span></a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/help' ? 'active':''}"><a
+                            th:href="@{/help}"><i class="fa fa-info-circle"></i> <span>Yordam</span></a></li>
                     <!--<li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>-->
                     <!--<li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>-->
                     <li class="add-question"

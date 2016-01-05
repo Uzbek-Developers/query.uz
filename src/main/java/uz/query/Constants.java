@@ -21,12 +21,15 @@ public interface Constants {
     //endregion
 
     //region <Post params>
-    public static final int SMALL_PAGE_SIZE = 5;
+    public static final int SMALL_PAGE_SIZE = 15;
     public static final int MIDDLE_PAGE_SIZE = 30;
     public static final int LARGE_PAGE_SIZE = 50;
     //endregion
 
-    //region <For request urls>
+    //region <For model attributes>
+    public static final String PAGE = "page";
     public static final String VIEW_DATA = "viewData";
+    public static final String RULES_LIST = "rulesList";
+    public static final String TAG_LIST = "tagList";
     //endregion
 }

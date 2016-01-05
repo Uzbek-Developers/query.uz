@@ -8,30 +8,21 @@
                 <li><a th:href="@{/auth}">Kirish / Ro'yxatdan o'tish</a></li>
             </ul>
         </div>
-        <div class="widget-box pinned questions content-box">
-            <h3 class="title">Saytimizga hush kelibsiz</h3>
+        <div class="widget-box pinned questions content-box" th:if="${rulesList}">
+            <h3 class="title">Sayt haqida savollar</h3>
             <ul class="list tip-list">
-                <li><a href="#">Ovoz berishim shartmi?</a></li>
-                <li><a href="#">Sayt stackoverflow.com saytidan olinganmi?</a></li>
-                <li><a href="#">Saytda nimalar taqiqlangan?</a></li>
-                <li><a href="#">Nimaga uyga vazifa, Kurs ishini savol qilib berib bulmaydi?</a></li>
-                <li><a href="#">Nimaga uyga vazifa, Kurs ishini savol qilib berib bulmaydi?</a></li>
+                <li th:each="question : ${rulesList}"><a th:href="${question.postLink}" th:text="${question.title}"></a>
+                </li>
             </ul>
         </div>
 
         <div class="widget-box banner" th:if="${user}">
             <a href="#"><img th:src="@{/images/material-design-rainbow1.png}" alt="photo"/></a>
         </div>
-        <div class="widget-box tags" th:if="${user}">
+        <div class="widget-box tags" th:if="${user} and ${tagList}">
             <h3 class="title">Top teglar</h3>
             <ul class="list tag-list">
-                <li><a href="#">Java</a></li>
-                <li><a href="#">JavaScript</a></li>
-                <li><a href="#">C#</a></li>
-                <li><a href="#">C++</a></li>
-                <li><a href="#">database</a></li>
-                <li><a href="#">oracle</a></li>
-                <li><a href="#">ruby</a></li>
+                <li th:each="tag: ${tagList}"><a th:href="${tag.postLink}" th:text="${tag.title}"></a></li>
             </ul>
         </div>
         <div class="widget-box top-questions" th:if="${user} and ${topQuestions}">

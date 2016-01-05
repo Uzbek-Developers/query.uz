@@ -22,4 +22,6 @@ public interface QuestionRepository extends BaseRepository<Question, Long> {
 
     Page<Question> findAllByTagsIn(Collection<Tag> tags, Pageable pageable);
 
+    List<Question> findFirst10ByTagsIn(Collection<Tag> tags);
+
 }
