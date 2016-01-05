@@ -1,0 +1,93 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="question">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Oxirgi savollar</h3>
+    </div>
+    <div class="post-wrap">
+        <table class="questions-table">
+            <tr th:each="question: ${page}"
+                th:classappend="${question.answers.size()>0}?important:''">
+                <td class="text">
+                    <h3 class="title">
+                        <a th:href="${question.postLink}" class="question-link" th:text="${question.title}"></a>
+                        <span class="status" th:if="${question.statusType.name != 'Opened'}"><i
+                                class="fa fa-stop"></i></span>
+                        <span class="warning" th:if="${question.flagType.name != 'None'}"><i class="fa fa-warning"></i></span>
+
+                    </h3>
+
+
+                    <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
+                        <li th:each="tag: ${question.tags}"><a th:href="'/tag/' + ${tag.id}"
+                                                               th:text="${tag.title}">Java</a></li>
+                    </ul>
+                    <div class="question-activity">
+                        <a href="#" th:text="${question.owner.displayName}">Foydalanuvchi</a>
+                        <span class="reputation" th:text="${'('+question.owner.reputation+')'}"></span>
+                        tomonidan <span th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span>
+                        da savol berildi
+                    </div>
+                </td>
+
+                <td class="number votes">
+                    <div class="number-box">
+                        <span class="count" th:text="${question.voteCount}">0</span>
+                        <span class="text">ovoz</span>
+                    </div>
+                </td>
+                <td class="number answers">
+                    <div class="number-box"
+                         th:classappend="${question.answers.size()>0}?'has-correct has-answer':''">
+                        <span class="count" th:text="${question.answers.size()}">0</span>
+                        <span class="text">javob</span>
+                    </div>
+                </td>
+                <td class="number views">
+                    <div class="number-box">
+                        <span class="count" th:text="${question.seenCount}">0</span>
+                        <span class="text">ko'rilgan</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div th:replace="fragments/init :: pagination(page=${page})"></div>
+    </div>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="tag">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Teglar</h3>
+    </div>
+    <div class="post-wrap">
+        <div class="row">
+            <div class="col-md-3" th:each="tag: ${page}">
+                <div class="tag-box">
+                    <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
+
+                    <div class="excerpt" th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
+                </div>
+            </div>
+
+        </div>
+        <div th:include="fragments/init :: pagination (page=${page})"></div>
+    </div>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="article">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Maqolalar</h3>
+    </div>
+    <div class="post-wrap">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="tag-box">
+                    <ul class="list article-list">
+                        <li th:each="item: ${page}">
+                            <a th:href="${item.postLink}" th:text="${item.title}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div th:include="fragments/init :: pagination (page=${page})"></div>
+    </div>
+</div>

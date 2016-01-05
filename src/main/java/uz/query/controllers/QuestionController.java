@@ -58,7 +58,7 @@ public class QuestionController {
         model.addAttribute(Data.TOP_QUESTIONS, topQuestions);
 
         model.addAttribute(Constants.PAGE, questionRepository.findAll(pageable));
-        return "home";
+        return "list-question";
     }
 
     @RequestMapping(value = "/question/{id}/{title}")
@@ -81,7 +81,7 @@ public class QuestionController {
         model.addAttribute("flagTypeList", FlagType.values());
         model.addAttribute("newAnswer", new Answer());
 
-        return "details";
+        return "details-question";
     }
 
     @RequestMapping(value = "/question/edit/{id}", method = RequestMethod.GET)
@@ -95,7 +95,7 @@ public class QuestionController {
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         model.addAttribute("question", question);
-        return "ask_question";
+        return "add-question";
     }
 
     @RequestMapping(value = "/question/delete/{id}")
@@ -116,7 +116,7 @@ public class QuestionController {
 
         model.addAttribute("question", question);
 
-        return "ask_question";
+        return "add-question";
     }
 
     @RequestMapping(value = "/save_question", method = RequestMethod.POST)

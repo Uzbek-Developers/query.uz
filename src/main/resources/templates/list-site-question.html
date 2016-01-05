@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:include="fragments/init :: head">
     <title>Query.uz - HOME ga xush kelibsiz</title>
 </head>
@@ -11,8 +11,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-9">
                 <div class="content-box">
-
-                    <p th:text="'Hello, ' + ${name} + '!'"/>
+                    <div th:include="fragments/list :: question"></div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-3">

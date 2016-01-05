@@ -49,7 +49,7 @@ public class TagController {
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         model.addAttribute(Constants.PAGE, tagRepository.findAll(pageable));
-        return "tag_list";
+        return "list-tag";
     }
 
     @RequestMapping(value = "/tag/add", method = RequestMethod.GET)
@@ -76,7 +76,7 @@ public class TagController {
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         model.addAttribute("tag", tag);
-        return "about-tag";
+        return "details-tag";
     }
 
     @RequestMapping(value = "/tag/{id}/edit")

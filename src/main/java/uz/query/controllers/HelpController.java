@@ -49,7 +49,7 @@ public class HelpController {
         List<Tag> tags = new LinkedList<>();
         tags.add(tagRepository.findOne(Long.valueOf(7)));
         model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
-        return "help";
+        return "list-site-question";
     }
     //endregion
 

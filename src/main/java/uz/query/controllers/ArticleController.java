@@ -54,21 +54,20 @@ public class ArticleController {
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         model.addAttribute(Constants.PAGE, articleRepository.findAll(pageable));
-        return "article_list";
+        return "list-article";
     }
     @RequestMapping(value = "/{id}/{title}")
     public String detail(@PathVariable("id") Long id, Model model) {
         Article article = articleRepository.findOne(id);
 
-        ViewData viewData = new ViewData("Question_View");
+        ViewData viewData = new ViewData("Article_View");
         viewData.setTitle(article.getTitle());
         viewData.setMetaDescription(article.getContent());
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
+        model.addAttribute("article", article);
 
-        model.addAttribute("newAnswer", new Answer());
-
-        return "details";
+        return "details-article";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)

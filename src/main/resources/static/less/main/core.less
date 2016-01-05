@@ -443,32 +443,6 @@ body {
           border: none;
         }
       }
-      .action-list {
-        font-size: .8em;
-
-        > li {
-          float: left;
-          .set-margin(5px);
-          a {
-            text-align: center;
-            color: @color-gray-normal;
-            font-size: 0.8em;
-            &:hover {
-              text-decoration: none;
-              color: @color-blue;
-            }
-          }
-          .fa {
-            font-size: 1.6em;
-            line-height: 1em !important;
-            display: block;
-          }
-          .dropdown {
-            width: 400px;
-            .set-padding(10px);
-          }
-        }
-      }
     }
     .question-activity {
       float: right;
@@ -545,6 +519,43 @@ body {
     }
 
   }
+  .article-list {
+    li {
+      width: 33%;
+      float: left;
+      a {
+        display: block;
+        .set-padding(5px);
+      }
+    }
+  }
+  .action-list {
+    font-size: .8em;
+
+    > li {
+      float: left;
+      .set-margin(5px);
+      a {
+        text-align: center;
+        color: @color-gray-normal;
+        font-size: 0.8em;
+        &:hover {
+          text-decoration: none;
+          color: @color-blue;
+        }
+      }
+      .fa {
+        font-size: 1.6em;
+        line-height: 1em !important;
+        display: block;
+      }
+      .dropdown {
+        width: 400px;
+        .set-padding(10px);
+      }
+    }
+  }
+
   .pagination-wrap {
     .set-padding-margin(0, 10px);
     text-align: center;
