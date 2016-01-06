@@ -214,24 +214,25 @@ public class QuestionController {
         int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
 //        Long questionId = Long.parseLong(question);
         if (rank != 0 && questionId > 0) {
-            User user = userRepository.findOne(Long.valueOf(1));
+            User user = securityUtil.getCurrentUser();
             Question question = questionRepository.findOne(questionId);
 
             Vote myVote = null;
-            if (question.getVotes().size() > 0)
+            if (question.getVotes().size() > 0) {
                 myVote = question.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
+                question.getVotes().remove(myVote);
+            }
             Vote oldVote = myVote;
             if (myVote != null) {
                 myVote.setRank(rank);
                 myVote = voteRepository.save(myVote);
-                question.getVotes().set(question.getVotes().indexOf(oldVote), myVote);
             } else {
                 myVote = new Vote();
                 myVote.setOwner(user);
                 myVote.setRank(rank);
                 myVote = voteRepository.save(myVote);
-                question.getVotes().add(myVote);
             }
+            question.getVotes().add(myVote);
             questionRepository.save(question);
 
         }
