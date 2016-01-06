@@ -52,6 +52,8 @@ public class QuestionController {
         viewData.setTitle("Savollar ro`yxati");
         viewData.setMetaKeyword("savollar ro'yxati, savol - javob, dasturlash tillari, algoritm, dastur, oop");
         viewData.setMetaDescription("Dasturlash bo`yicha oxirgi berilgan savollar ro`yxati");
+        viewData.setViewLink("/question/list");
+
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         List<Question> topQuestions = questionRepository.findAll();
@@ -70,6 +72,7 @@ public class QuestionController {
         viewData.setTitle(question.getTitle());
         viewData.setMetaKeyword(question.getTags().toString());
         viewData.setMetaDescription(question.getContent());
+        viewData.setViewLink(question.getPostLink());
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
         List<Question> relatedQuestions = questionRepository.findAll();
@@ -92,7 +95,10 @@ public class QuestionController {
         viewData.setTitle(question.getTitle());
         viewData.setMetaKeyword(question.getTags().toString());
         viewData.setMetaDescription(question.getContent());
+        viewData.setViewLink(question.getPostLink());
+
         model.addAttribute(Constants.VIEW_DATA, viewData);
+
 
         model.addAttribute("question", question);
         return "add-question";
@@ -112,7 +118,9 @@ public class QuestionController {
         viewData.setTitle("Savol so'rash");
         viewData.setMetaKeyword("savol berish, savol qo'shish");
         viewData.setMetaDescription("Query.uzga dasturlash bo'yicha savol qo'shish, savol berish");
+        viewData.setViewLink("/ask_question");
         model.addAttribute(Constants.VIEW_DATA, viewData);
+
 
         model.addAttribute("question", question);
 

@@ -11,6 +11,7 @@ import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.TagRepository;
 import uz.query.security.SecurityUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,11 +31,12 @@ public class GlobalControllerAdvice {
     private static final String VIEW_DATA = "viewData";
 
     @ModelAttribute
-    public void addUserAttribute(Model model) {
+    public void addUserAttribute(Model model, HttpServletRequest request) {
         ViewData viewData = new ViewData("home");
         viewData.setTitle("Dasturlash bo`yicha savol-javoblar bo'yicha web loyiha");
         viewData.setMetaKeyword("savollar, savol, dasturlash tillari, algoritm, dastur, oop, uzbek dastur");
         viewData.setMetaDescription("Dasturlash bo'yicha savol-javoblar to'plami");
+        viewData.setViewLink(request.getRequestURI());
 
         model.addAttribute(Constants.TAG_LIST, tagRepository.findAll());
 

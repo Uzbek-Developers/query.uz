@@ -364,22 +364,7 @@ body {
         background: @color-white;
         font-size: 1.07em;
 
-        .footer {
-          .set-padding(15px 0 5px);
-          .who-box {
-            width: 215px;
-            font-size: .8em;
-            margin-right: 15px;
-            .user-box {
-              .set-box-shadow(0 0 1px @color-gray-medium);
-              //              background: @color-green;
-            }
-            .date {
-              color: @color-gray-normal;
-              .set-margin(0 0 4px);
-            }
-          }
-        }
+
         pre {
           font-size: 0.85em;
           background: @color-gray-very-light;
@@ -529,31 +514,48 @@ body {
       }
     }
   }
-  .action-list {
-    font-size: .8em;
-
-    > li {
-      float: left;
-      .set-margin(5px);
-      a {
-        text-align: center;
+  .footer {
+    .set-padding(15px 0 5px);
+    .who-box {
+      width: 215px;
+      font-size: .8em;
+      margin-right: 15px;
+      .user-box {
+        .set-box-shadow(0 0 1px @color-gray-medium);
+        //              background: @color-green;
+      }
+      .date {
         color: @color-gray-normal;
-        font-size: 0.8em;
-        &:hover {
-          text-decoration: none;
-          color: @color-blue;
-        }
-      }
-      .fa {
-        font-size: 1.6em;
-        line-height: 1em !important;
-        display: block;
-      }
-      .dropdown {
-        width: 400px;
-        .set-padding(10px);
+        .set-margin(0 0 4px);
       }
     }
+    .action-list {
+      font-size: .8em;
+
+      > li {
+        float: left;
+        .set-margin(5px);
+        a {
+          text-align: center;
+          color: @color-gray-normal;
+          font-size: 0.8em;
+          &:hover {
+            text-decoration: none;
+            color: @color-blue;
+          }
+        }
+        .fa {
+          font-size: 1.6em;
+          line-height: 1em !important;
+          display: block;
+        }
+        .dropdown {
+          width: 400px;
+          .set-padding(10px);
+        }
+      }
+    }
+
   }
 
   .pagination-wrap {
