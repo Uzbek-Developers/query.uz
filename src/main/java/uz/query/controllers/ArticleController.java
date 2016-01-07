@@ -122,7 +122,7 @@ public class ArticleController {
             articleRepository.save(formObj);
         }
 
-        formObj.setPostLink(StringUtils.makeLinkFromTitle(formObj.getTitle(), "/article/" + formObj.getId() + "/"));
+        formObj.setPostLink(StringUtils.makeLinkFromTitle("/article/" + formObj.getId() + "/", formObj.getTitle()));
 
         articleRepository.save(formObj);
 

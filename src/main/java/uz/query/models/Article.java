@@ -1,6 +1,7 @@
 package uz.query.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.Post;
 
 import javax.persistence.*;

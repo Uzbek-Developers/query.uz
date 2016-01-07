@@ -37,6 +37,7 @@ public class UserController {
         model.addAttribute("registerUser", new User());
         return "auth";
     }
+
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public String loginForm(Model model) {
         return "redirect:/";
@@ -57,10 +58,11 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/userlist")
-    public String userlist(Model model) {
-        model.addAttribute("userlist", userRepository.findByisDeleted(false));
-        return "userlist";
+    @RequestMapping(value = {"/user/{id}/{profile}", "/user/{id}"})
+    public String userlist(@PathVariable Long id, Model model) {
+        User user = userRepository.findOne(id);
+        model.addAttribute("user1", user);
+        return "details-user";
     }
 
     @RequestMapping(value = "/adduserform", method = RequestMethod.GET)

@@ -2,16 +2,14 @@
     <div class="current-site-box">
         <div class="widget-box" th:if="${user}">
             <div th:replace="fragments/user :: box(user = ${user})"></div>
-        </div>
-        <div class="widget-box" th:if="!${user}">
-            <ul class="list">
-                <li><a th:href="@{/auth}">Kirish / Ro'yxatdan o'tish</a></li>
+            <ul class="list feature-list">
+                <li><a href="#"></a></li>
             </ul>
         </div>
         <div class="widget-box pinned questions content-box" th:if="${rulesList}">
             <h3 class="title">Sayt haqida savollar</h3>
             <ul class="list tip-list">
-                <li th:each="question : ${rulesList}"><a th:href="${question.postLink}" th:text="${question.title}"></a>
+                <li th:each="question : ${rulesList}"><a th:attr="title=${question.title}" th:href="${question.postLink}" th:text="${question.title}"></a>
                 </li>
             </ul>
         </div>

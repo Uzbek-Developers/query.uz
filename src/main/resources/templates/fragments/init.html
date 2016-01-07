@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-    <title th:text="${viewData.title}">Query.uz - savol-javob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="google-site-verification" content="mOIH_3eGXjEVcGZA-HNLWb6iG26s_ijPb7Vep8MWD7Q" />
+    <title th:text="${viewData.title}">Query.uz - savol-javob</title>
+    <link rel="icon" th:href="@{/favicon.jpg}" type="image/jpg" sizes="16x16"
     <meta name="keyword" th:content="${viewData.metaDescription}"/>
     <meta name="description" th:content="${viewData.metaKeyword}"/>
     <meta name="robots" content="index/index"/>
@@ -80,7 +83,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-3">
                 <div class="brand-box">
-                    <a th:href="@{/}">
+                    <a th:href="@{/}" title="Query.uz - Bosh sahifa">
                         <!--<img src="images/logo-two.png" alt="query.uz" height="40"/>-->
                         <img th:src="@{/images/logo-yellow_white.png}" alt="query.uz" height="32"/>
                         <!--<span>Query</span><span>.</span><span>uz</span> -->
@@ -99,18 +102,30 @@
                 <!--<input type="text"/>-->
                 <!--</form>-->
                 <ul class="list main-menu pull-right clearfix">
-                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a
-                            th:href="@{/}"><i class="fa fa-question"></i> <span>Savollar</span></a></li>
-                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/tags' ? 'active':''}"><a
-                            th:href="@{/tag/list}"><i class="fa fa-tag"></i> <span>Taglar</span></a></li>
-                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/help' ? 'active':''}"><a
-                            th:href="@{/help}"><i class="fa fa-info-circle"></i> <span>Yordam</span></a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
+                        <a th:href="@{/}" title="Savollar"><i class="fa fa-question"></i> <span>Savollar</span></a>
+                    </li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/tag/list' ? 'active':''}">
+                        <a th:href="@{/tag/list}" title="Teglar"><i class="fa fa-tag"></i> <span>Teglar</span></a>
+                    </li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/help' ? 'active':''}">
+                        <a th:href="@{/help}" title="Yordam"><i class="fa fa-info-circle"></i> <span>Yordam</span></a>
+                    </li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth' ? 'active':''}">
+                        <a th:href="@{/auth}" title="Kirish" th:if="!${user}"><i class="fa fa-sign-in" ></i> <span>Kirish</span></a>
+                    </li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth' ? 'active':''}">
+                        <a th:href="@{/user/}+${user.id}" title="Foydalanuvchi" th:if="${user}"><i class="fa fa-user" ></i> <span>Foydalanuchi</span></a>
+                    </li>
                     <!--<li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>-->
                     <!--<li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>-->
                     <li class="add-question"
-                        th:classappend="${#httpServletRequest.getRequestURI() == '/ask_question' ? 'active':''}"><a
-                            th:href="@{/ask_question}"><i class="fa fa-plus"></i>
-                        <span>Savol so'rash</span></a></li>
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/ask_question' ? 'active':''}">
+                        <a th:href="@{/ask_question}" title="Savol so'rash">
+                            <i class="fa fa-plus"></i>
+                            <span>Savol so'rash</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -119,13 +134,15 @@
 <div th:fragment="pagination (page)">
     <div class="pagination-wrap" th:if="${page.getTotalPages()>1}">
         <ul class="list pagination-list">
-            <li th:if="${page.hasPrevious()}"><a th:href="'?page='+${page.number-1}">Prev</a></li>
+            <li th:if="${page.hasPrevious()}"><a th:href="'?page='+${page.number-1}" title="Oldingisi">Oldingisi</a>
+            </li>
             <li th:each="i: ${#numbers.sequence(1, page.getTotalPages())}"
                 th:classappend="${page.getNumber()+1==i}?'active':''"
                 th:disabled="${page.getNumber()+1==i}">
-                <a th:text="${i}" th:href="'?page='+${i-1}">1</a>
+                <a th:text="${i}" th:href="'?page='+${i-1}" th:attr="title=${i}"></a>
             </li>
-            <li th:if="${page.hasNext()}"><a th:href="'?page='+${page.number+1}">Next</a></li>
+            <li th:if="${page.hasNext()}"
+            "><a th:href="'?page='+${page.number+1}" title="Keyingisi">Keyingisi</a></li>
         </ul>
         <!--<p>Siz <a href="#">javob berilmagan savollar</a>ga javob berishingiz mumkin. Undan tashqari-->
         <!--<a href="#">tanlagan taglaringiz</a> bo'yicha savollarni ko'rishingiz mumkin.</p>-->

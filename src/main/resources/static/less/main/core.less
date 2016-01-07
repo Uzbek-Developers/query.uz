@@ -193,6 +193,7 @@ body {
         text-align: center;
         position: relative;
         border-right: 1px solid @color-gray-medium;
+
         a {
           display: block;
           .set-padding(10px 20px);
@@ -219,6 +220,13 @@ body {
             left: 0;
             right: 0;
           }
+        }
+      }
+      &.list-table > li {
+        float: none;
+        border-right: none;
+        & + li {
+          border-left: 1px solid @color-gray-medium;
         }
       }
     }
@@ -287,6 +295,10 @@ body {
           float: left;
         }
       }
+    }
+    &.welcome-box {
+      font-size: 1.15em;
+      text-align: justify;
     }
     .post-item {
       @width-vote-box: 100px;
@@ -363,7 +375,6 @@ body {
       .box-content {
         background: @color-white;
         font-size: 1.07em;
-
 
         pre {
           font-size: 0.85em;
@@ -515,7 +526,6 @@ body {
     }
   }
   .footer {
-    .set-padding(15px 0 5px);
     .who-box {
       width: 215px;
       font-size: .8em;
@@ -733,6 +743,10 @@ body {
   }
 }
 
+.feature-list {
+
+}
+
 .footer-wrap {
   z-index: 1;
   //  .set-padding-margin(-50px 0 0);
@@ -881,4 +895,11 @@ ul.flag-list {
   position: absolute;
   text-align: center;
   .set-padding(5px 10px);
+}
+
+.form-login .footer {
+  text-align: center;
+  [type=submit] {
+    min-width: 50%;
+  }
 }

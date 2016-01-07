@@ -1,8 +1,8 @@
 <div xmlns:th="http://www.thymeleaf.org" class="post-wrap" th:fragment="question">
 
 <div class="post-item question-item">
-    <h2 class="title">
-        <a href="#" class="question-link" th:text="${question.title}"></a>
+    <h2 class="title" th:attr="title=${question.title}">
+        <a href="#" class="question-link" th:text="${question.title}" ></a>
         <span class="status" th:if="${question.statusType.name != 'Opened'}"><i class="fa fa-stop"></i></span>
         <span class="warning" th:if="${question.flagType.name != 'None'}"><i class="fa fa-warning"></i></span>
     </h2>
@@ -35,26 +35,26 @@
                 <span th:uText="${question.flagType.description}"></span>
             </div>
             <ul class="list tag-list" th:if="${question.tags.size()}">
-                <li th:each="tag: ${question.tags}"><a href="#" th:text="${tag.title}">Ajax</a></li>
+                <li th:each="tag: ${question.tags}"><a href="#" th:attr="title=${tag.title}" th:text="${tag.title}">Ajax</a></li>
             </ul>
             <div class="footer clearfix">
                 <div class="pull-right">
                     <div class="who-box pull-left">
-                        <p class="date"><span
-                                th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span> da
-                            savol
-                            berildi</p>
+                        <p class="date">
+                            <span th:text="${#dates.format(question.creationDate, 'dd/MM/YYYY')}"  th:attr="title=${#dates.format(question.creationDate, 'dd/MM/YYYY')}"></span>
+                            da savol  berildi
+                        </p>
 
                         <div th:replace="fragments/user :: box(user = ${question.owner})"></div>
                     </div>
                 </div>
                 <ul class="list action-list pull-left">
-                    <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                    <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
+                    <li><a href="#" title="Ulashish"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
+                    <li><a th:href="@{/question/edit/}+${question.id}" title="Tahrirlash"><i class="fa fa-edit"></i>
                         <span>Tahrirlash</span></a>
                     </li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="#" title="Statuslash">
                             <i class="fa fa-stop"></i>
                             <span>Statuslash</span>
                         </a>
@@ -98,7 +98,7 @@
                         </div>
                     </li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="#" title="Ogohlantirish">
                             <i class="fa fa-warning"></i>
                             <span>Ogohlantirish</span>
                         </a>
@@ -138,7 +138,7 @@
                         </div>
                     </li>
                     <li>
-                        <a th:href="@{/question/delete/}+${question.id}">
+                        <a th:href="@{/question/delete/}+${question.id}" title="O'chirish">
                             <i class="fa fa-trash"></i>
                             <span>O'chirish</span>
                         </a>
@@ -149,10 +149,9 @@
     </div>
     <div class="post-status" th:object="${question}" th:if="${question.statusType.name != 'Opened'}">
         <h4 class="title">Ushbu savol
-            <a href="#" th:if="*{owner}" th:text="*{owner.displayName}"></a>
-            tomonidan
+            <a href="#" th:if="*{owner}" th:attr="title=*{owner.displayName}" th:text="*{owner.displayName}"></a> tomonidan
             <span class="has-dropdown">
-                <a href="#" class="status" th:text="*{statusType.title}"></a>
+                <a href="#" class="status"  th:attr="title=*{statusType.title}" th:text="*{statusType.title}"></a>
 
                 <div class="dropdown">
                     <i class="close fa fa-close"></i>
@@ -192,8 +191,7 @@
                     </form>
                 </div>
             </span>
-            statusi bilan
-            belgilandi. Va yuqorida linkga biriktirildi.
+            statusi bilan belgilandi. Va yuqorida linkga biriktirildi.
         </h4>
 
         <p><strong>Sababi sifatida:</strong> <span th:text="*{reason}"></span></p>
@@ -213,7 +211,7 @@
             <!--<li><a href="#">Javobsiz <i class="box-count">522</i> </a></li>-->
             <!--<li><a href="#">Qiziq</a></li>-->
             <!--</ul>-->
-            <h3 class="title pull-right"><strong th:text="${question.answers.size()}">0</strong> ta savol</h3>
+            <h3 class="title pull-right"><strong th:text="${question.answers.size()}">0</strong> ta javob</h3>
         </div>
     </div>
     <div class="post-item answer-item" th:each="answer: ${question.answers}">
@@ -236,21 +234,21 @@
                 <div class="footer clearfix">
                     <div class="pull-right">
                         <div class="who-box pull-left">
-                            <p class="date"><span th:text="${#dates.format(answer.creationDate, 'dd/MM/YYYY')}"></span>
-                                da
-                                savol
-                                berildi</p>
+                            <p class="date">
+                                <span  th:attr="title=${#dates.format(answer.creationDate, 'dd/MM/YYYY')}"  th:text="${#dates.format(answer.creationDate, 'dd/MM/YYYY')}"></span>
+                                da  savol berildi
+                            </p>
 
                             <div th:replace="fragments/user :: box(user = ${answer.owner})"></div>
                         </div>
                     </div>
                     <ul class="list action-list pull-left">
-                        <li><a href="#"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
-                        <li><a th:href="@{/question/edit/}+${question.id}"><i class="fa fa-edit"></i>
+                        <li><a href="#" title="Ulashish"><i class="fa fa-share"></i> <span>Ulashish</span></a></li>
+                        <li><a th:href="@{/question/edit/}+${question.id}" title="Tahrirlash"><i class="fa fa-edit"></i>
                             <span>Tahrirlash</span></a>
                         </li>
                         <li class="has-dropdown">
-                            <a href="#">
+                            <a href="#" title="Ogohlantirish">
                                 <i class="fa fa-warning"></i>
                                 <span>Ogohlantirish</span>
                             </a>
@@ -290,7 +288,7 @@
                             </div>
                         </li>
                         <li>
-                            <a th:href="@{/question/delete/}+${question.id}">
+                            <a th:href="@{/question/delete/}+${question.id}" title="O'chirish">
                                 <i class="fa fa-trash"></i>
                                 <span>O'chirish</span>
                             </a>
@@ -333,7 +331,7 @@
                     $("[type=submit]").on("click", function () {
                         var hasError = false;
                         var parent = $(this).closest("form");
-                        parent.find("[type=text], textarea").each(function () {
+                        parent.find("[requeired]").each(function () {
                             var field = $(this);
                             if (!field.attr('readonly') && !field.is(':hidden')) {
                                 $("#txt-preview").val($("#wmd-preview").html());
@@ -366,7 +364,8 @@
     <div class="post-wrap">
         <div class="text-wrap">
 
-            <h2>About <a th:href="'/tag/' + ${tag.title}" th:text="${tag.title}" class="post-tag" title="" rel="tag">java</a>
+            <h2>
+                <a th:href="'/tag/' + ${tag.title}" th:text="${tag.title}" class="post-tag"  th:attr="title=${tag.title}" rel="tag">java</a>
             </h2>
 
             <div class="welovestackoverflow" id="wiki-excerpt">
@@ -380,26 +379,34 @@
 
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="article">
     <div class="post-wrap" th:object="${article}">
-        <h2 class="title" th:text="*{title}"></h2>
+        <h2 class="title"
+            th:attr="title=*{title}"
+            th:text="*{title}" ></h2>
+
         <div class="text-wrap">
 
             <div th:uText="*{content}"></div>
 
-            <p><a th:href="*{parentArticle.postLink}" th:if="${parentArticle}" th:uText="*{parentArticle.title}"></a></p>
+            <p>
+                <a th:href="*{parentArticle.postLink}" th:if="${parentArticle}" th:uText="*{parentArticle.title}"></a>
+            </p>
+
             <div class="footer clearfix">
                 <div class="pull-right">
                     <div class="who-box pull-left">
-                        <p class="date"><span
-                                th:text="${#dates.format(article.creationDate, 'dd/MM/YYYY')}"></span> da
-                            savol
-                            berildi</p>
-
+                        <p class="date">
+                            <span th:text="${#dates.format(article.creationDate, 'dd/MM/YYYY')}"></span>
+                            da savol berildi
+                        </p>
                         <div th:replace="fragments/user :: box(user = ${article.owner})"></div>
                     </div>
                 </div>
                 <ul class="list action-list pull-left">
-                    <li><a th:href="@{/article/edit/}+${article.id}"><i class="fa fa-edit"></i>
-                        <span>Tahrirlash</span></a>
+                    <li>
+                        <a th:href="@{/article/edit/}+${article.id}">
+                            <i class="fa fa-edit"></i>
+                            <span>Tahrirlash</span>
+                        </a>
                     </li>
                     <li>
                         <a th:href="@{/article/delete/}+${article.id}">
@@ -412,3 +419,5 @@
         </div>
     </div>
 </div>
+
+

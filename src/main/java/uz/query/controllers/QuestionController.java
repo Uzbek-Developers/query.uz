@@ -49,7 +49,7 @@ public class QuestionController {
                                sort = {"creationDate"},
                                direction = Sort.Direction.DESC) Pageable pageable) {
         ViewData viewData = new ViewData("Question_List");
-        viewData.setTitle("Savollar ro`yxati");
+        viewData.setTitle("Dasturlashga oid savollar to'plami");
         viewData.setMetaKeyword("savollar ro'yxati, savol - javob, dasturlash tillari, algoritm, dastur, oop");
         viewData.setMetaDescription("Dasturlash bo`yicha oxirgi berilgan savollar ro`yxati");
         viewData.setViewLink("/question/list");
@@ -63,7 +63,7 @@ public class QuestionController {
         return "list-question";
     }
 
-    @RequestMapping(value = "/question/{id}/{title}")
+    @RequestMapping(value = {"/question/{id}/{title}", "/question/{id}"})
     public String detail(@PathVariable("id") Long id, Model model) {
         Question question = questionRepository.findOne(id);
         boolean isDisabledAddingAnswer = StatusType.isDisabledAddingAnswer(question.getStatusType());
@@ -145,7 +145,7 @@ public class QuestionController {
             questionRepository.save(formQuestion);
         }
 
-        formQuestion.setPostLink(StringUtils.makeLinkFromTitle(formQuestion.getTitle(), "/question/" + formQuestion.getId() + "/"));
+        formQuestion.setPostLink(StringUtils.makeLinkFromTitle("/question/" + formQuestion.getId() + "/", formQuestion.getTitle()));
 
         questionRepository.save(formQuestion);
 

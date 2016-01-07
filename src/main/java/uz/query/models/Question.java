@@ -24,7 +24,7 @@ public class Question extends Post {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Answer> answers = new LinkedList<Answer>();// LinkedList ko`p yozish uchun tez ishlaydi
+    private List<Answer> answers;// LinkedList ko`p yozish uchun tez ishlaydi
     // hibernate bittalab listga add qiladi. Bu holatda LinkedList bo`lgani ma`qul
 
     private StatusType statusType = StatusType.Opened;

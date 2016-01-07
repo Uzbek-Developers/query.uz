@@ -8,7 +8,7 @@
             <!--<a href="#"><img th:src="@{/images/default-user-avatar.jpg}" alt="user"/></a>-->
             <!--</div>-->
             <!--<div class="user-short-content">-->
-            <a class="name" th:text="*{displayName}">Sharipov Bobur</a>
+            <a th:href="*{link}" class="name" th:attr="title=*{displayName}" th:text="*{displayName}"></a>
             (<span th:text="*{reputation}">0</span>)
 
             <!--<span class="user-score">-->

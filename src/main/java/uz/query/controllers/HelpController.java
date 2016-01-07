@@ -46,9 +46,14 @@ public class HelpController {
         viewData.setMetaDescription("Query.uzga tegishli bo'lgan savollar, takliflar, qoidalar to'plami");
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
-        List<Tag> tags = new LinkedList<>();
-        tags.add(tagRepository.findOne(Long.valueOf(7)));
-        model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
+        if (tagRepository.findOne(Long.valueOf(1)) !=null) {
+
+            List<Tag> tags = new LinkedList<>();
+            tags.add(tagRepository.findOne(Long.valueOf(1)));
+
+            model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
+
+        }
         return "list-site-question";
     }
     //endregion

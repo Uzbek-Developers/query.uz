@@ -7,18 +7,18 @@
             <tr th:each="question: ${page}"
                 th:classappend="${question.answers.size()>0}?important:''">
                 <td class="text">
-                    <h3 class="title">
+                    <h3 class="title" th:attr="title=${question.title}">
                         <a th:href="${question.postLink}" class="question-link" th:text="${question.title}"></a>
                         <span class="status" th:if="${question.statusType.name != 'Opened'}"><i
                                 class="fa fa-stop"></i></span>
                         <span class="warning" th:if="${question.flagType.name != 'None'}"><i class="fa fa-warning"></i></span>
-
                     </h3>
 
 
                     <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
-                        <li th:each="tag: ${question.tags}"><a th:href="'/tag/' + ${tag.id}"
-                                                               th:text="${tag.title}">Java</a></li>
+                        <li th:each="tag: ${question.tags}">
+                            <a th:href="'/tag/' + ${tag.id}" th:attr="title=${tag.title}" th:text="${tag.title}"></a>
+                        </li>
                     </ul>
                     <div class="question-activity">
                         <a href="#" th:text="${question.owner.displayName}">Foydalanuvchi</a>
@@ -61,9 +61,9 @@
         <div class="row">
             <div class="col-md-3" th:each="tag: ${page}">
                 <div class="tag-box">
-                    <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:text="${tag.title}"></a>
+                    <a th:href="'/tag/' + ${tag.id} + '/info'" class="tag-link" th:attr="title=${tag.title}" th:text="${tag.title}"></a>
 
-                    <div class="excerpt" th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
+                    <div class="excerpt" th:attr="title=${#strings.abbreviate(tag.shortDescription,100)}" th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
                 <div class="tag-box">
                     <ul class="list article-list">
                         <li th:each="item: ${page}">
-                            <a th:href="${item.postLink}" th:text="${item.title}"></a>
+                            <a th:href="${item.postLink}" th:attr="title=${item.title}" th:text="${item.title}" ></a>
                         </li>
                     </ul>
                 </div>
@@ -90,4 +90,46 @@
         </div>
         <div th:include="fragments/init :: pagination (page=${page})"></div>
     </div>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="comment">
+    <ul class="list comment-list" class="hide">
+        <li>Qaysi holatligini aniqlashtirish kerak savolda. <a href="#">Savol berish haqida</a>
+            ni o'qib chiqing. <span class="date"><i
+                    class="fa fa-calendar"></i> 21.01.2015</span></li>
+        <li><a href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+            berish haqida</a> ni o'qib chiqing. <a href="#">Qaysi holatligini aniqlashtirish
+            kerak </a> savolda. <a href="#">Savol berish haqida</a> ni o'qib chiqing. <a
+                href="#">Qaysi holatligini aniqlashtirish kerak </a> savolda. <a href="#">Savol
+            berish haqida</a> ni o'qib chiqing. <span class="date"><i
+                class="fa fa-calendar"></i> 21.01.2015</span></li>
+        <li>Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato qilganimni bilmayapman.
+            Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar! Quyidagi kodda nimagadir xatolik chiqyapti. Qayerda xato
+            qilganimni
+            bilmayapman. Iltimos yordam
+            bervoringlar!
+                        <span class="date"><i
+                                class="fa fa-calendar"></i> 21.01.2015</span>
+        </li>
+        <li>
+            <form action="#" class="form-comment">
+
+                <textarea class="textare-comment">Izoh</textarea>
+
+                <p>Eng kamida yana <strong>150</strong> ta simvol yozishingiz kerak. </p>
+            </form>
+            <ul class="list buttons">
+                <li><a href="#">Izoh qo'shish</a></li>
+                <li>|</li>
+                <li><a href="#">Qolgan 5 ta izohni ko'rish</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>

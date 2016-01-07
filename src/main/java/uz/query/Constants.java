@@ -21,7 +21,7 @@ public interface Constants {
     //endregion
 
     //region <Post params>
-    public static final int SMALL_PAGE_SIZE = 15;
+    public static final int SMALL_PAGE_SIZE = 5;
     public static final int MIDDLE_PAGE_SIZE = 30;
     public static final int LARGE_PAGE_SIZE = 50;
     //endregion

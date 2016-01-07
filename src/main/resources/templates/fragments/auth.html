@@ -1,34 +1,38 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="registration (user)">
-    <form class="form-login" th:action="@{/registration}" th:object="${user}" method="POST">
-        <div class="field-row">
-            <h3 class="title">Ro'yxatdan o'tish</h3>
-        </div>
+    <form class="form-login" th:action="@{/registration}" th:object="${user}" method="POST"  th:if="${user}">
+
+        <!--<div class="field-row">-->
+            <!--<img th:src="@{/images/banner/unityjob_banner_programmer_v1.png}" alt="banner"/>-->
+        <!--</div>-->
+        <!--<div class="field-row">-->
+            <!--<h3 class="title">Ro'yxatdan o'tish</h3>-->
+        <!--</div>-->
         <div class="field-row">
             <span class="label">Display Name:</span>
 
             <div class="form-field">
-                <input type="text" name="displayName" th:value="*{displayName}"/>
+                <input type="text" name="displayName" th:value="*{displayName}" required/>
             </div>
         </div>
         <div class="field-row">
             <span class="label">Email:</span>
 
             <div class="form-field">
-                <input type="text" name="email" th:value="*{email}" max-length="240"/>
+                <input type="text" name="email" th:value="*{email}" max-length="240" required/>
             </div>
         </div>
         <div class="field-row">
             <span class="label">Parol:</span>
 
             <div class="form-field">
-                <input type="password" name="password" th:value="*{password}" max-length="240"/>
+                <input type="password" name="password" th:value="*{password}" max-length="240" required/>
             </div>
         </div>
         <div class="field-row">
             <span class="label">Parolni takrorlang:</span>
 
             <div class="form-field">
-                <input type="password" name="confirmPassword" max-length="240"/>
+                <input type="password" name="confirmPassword" max-length="240" required/>
             </div>
         </div>
         <div class="field-row" th:if="${param.error}">
@@ -40,7 +44,7 @@
         </div>
 
         <div class="field-row footer">
-            <input type="submit" class="btn btn-green shdw-2x" value="Ro'yxatdan o'tish"/>
+            <input type="submit" class="btn btn-black shdw-2x" value="Ro'yxatdan o'tish"/>
         </div>
     </form>
     <!--<a th:href="@{/auth/google(scope='profile')}"-->
@@ -48,23 +52,24 @@
     <!--<a th:href="@{/auth/facebook}" class="ml btn btn-block btn-social btn-sm btn-facebook"><i-->
     <!--class="fa fa-facebook"></i>Facebook</a>-->
 </div>
+
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="login (user)">
-    <form class="form-login" th:action="@{/auth}" method="POST" th:object="${user}">
-        <div class="field-row">
-            <h3 class="title">Ro'yxatdan o'tish</h3>
-        </div>
+    <form class="form-login" th:action="@{/auth}" method="POST" th:object="${user}" th:if="${user}">
+        <!--<div class="field-row">-->
+            <!--<h3 class="title">Ro'yxatdan o'tish</h3>-->
+        <!--</div>-->
         <div class="field-row">
             <span class="label">Login:</span>
 
             <div class="form-field">
-                <input type="text" name="username" th:value="*{email}" max-length="240"/>
+                <input type="text" name="username" th:value="*{email}" max-length="240" required/>
             </div>
         </div>
         <div class="field-row">
             <span class="label">Parol:</span>
 
             <div class="form-field">
-                <input type="password" name="password" th:value="*{password}" max-length="240"/></div>
+                <input type="password" name="password" th:value="*{password}" max-length="240" required/></div>
         </div>
         <div class="field-row" th:if="${param.error}">
             Loginda yoki parolda xatolik
@@ -75,7 +80,7 @@
         </div>
 
         <div class="field-row footer">
-            <input type="submit" class="btn btn-green shdw-2x" value="Kirish"/>
+            <input type="submit" class="btn btn-black shdw-2x" value="Kirish"/>
         </div>
     </form>
     <!--<a th:href="@{/auth/google(scope='profile')}"-->

@@ -25,7 +25,8 @@
                                         topishingiz mumkin bo'ladi. Bu sayt <a href="http://stackoverflow.com/">StackOverflow.com</a>
                                         va shu saytning oilasi
                                         bo'lgan <a href="http://stackexchange.com/sites">StackExchange.com</a> saytidan
-                                        ruhlangan holda, Yurtimizga yoshlariga foydali bo'ladi deb <strong>Query.uz</strong>
+                                        ruhlangan holda, Yurtimizga yoshlariga foydali bo'ladi deb
+                                        <strong>Query.uz</strong>
                                         jamoasi ushbu web saytni
                                         sizga taqdim qildi. Imkon qadar dasturlash sohasidagi talabalar,
                                         dasturchilar va kompaniyalarga xizmat qilish maqsad qilingan.
@@ -59,9 +60,15 @@
                                     <h3 class="title">Sayt Qoidalari</h3>
                                     <h4 class="title">Taqiqlanadi</h4>
                                     <ul class="rule-list">
-                                        <li>Dasturlashga tegishli bo'lmagan, siyosiy va boshqalarning parollarini buzish haqidagi savollarni berish</li>
-                                        <li>Keraksiz(bachkana, qo'pol, asabga tegadigan) bo'lgan yozuvlar qoldirish. Saytdagi har bir yozuv boshqalar uchun foydali bo'lishi kerak</li>
-                                        <li>Saytdagi ma'lumotlarni egasidan so'ramasdan yoki muallifini(yoki urlni) ko'rsatmasdan boshqa yerga ko'chirish</li>
+                                        <li>Dasturlashga tegishli bo'lmagan, siyosiy va boshqalarning parollarini buzish
+                                            haqidagi savollarni berish
+                                        </li>
+                                        <li>Keraksiz(bachkana, qo'pol, asabga tegadigan) bo'lgan yozuvlar qoldirish.
+                                            Saytdagi har bir yozuv boshqalar uchun foydali bo'lishi kerak
+                                        </li>
+                                        <li>Saytdagi ma'lumotlarni egasidan so'ramasdan yoki muallifini(yoki urlni)
+                                            ko'rsatmasdan boshqa yerga ko'chirish
+                                        </li>
                                         <li>Savol yozish kerak joyda javob yozish yoki aksincha qilish</li>
                                         <li>Berilgan savolda ortiqcha mavzudan chiqib yozuvlar qoldirish</li>
                                         <li>Saytdan forum sifatida foydalanish</li>
@@ -72,39 +79,18 @@
 
                         </div>
                         <div class="col-xs-12 col-sm-3">
-                            <div class="content-box auth-form" th:if="!${user}">
-                                <div class="filter-box clearfix">
-                                    <script>
-                                        $(document).ready(function () {
-                                            $("#signUp").hide();
+                            <div th:object="${user1}" class="content-box" th:if="${user1}">
+                                <h2 class="name field-row">
+                                    <span  th:text="*{displayName}"></span> (<span th:text="*{reputation}"></span>)
+                                </h2>
+                                <h3 class="job field-row" th:text="*{job}"></h3>
 
-                                            $(".filter-list li a").on("click", function () {
-                                                $(this).parent()
-                                                        .siblings()
-                                                        .removeClass("active")
-                                                        .end()
-                                                        .addClass("active");
-                                                $($(this).attr("href")).siblings().hide().end().show();
-
-                                                return false;
-                                            });
-                                        });
-                                    </script>
-                                    <ul class="list filter-list list-table clearfix">
-                                        <li class="active"><a href="#signIn"><span class="fa fa-"></span>Kirish</a></li>
-                                        <li><a href="#signUp">Ro'yxatdan o'tish</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <div id="signIn" th:include="fragments/auth :: login(user = ${loginUser})"></div>
-                                    <div id="signUp"
-                                         th:include="fragments/auth :: registration(user = ${registerUser})"></div>
-                                </div>
-                            </div>
-                            <div th:object="${user}" th:if="${user}">
-                                <h3 class="title" th:text="*{displayName}"></h3>
-
-                                <h2 class="title" th:text="*{job}"></h2>
+                                <div class="about field-row" th:text="*{about}"></div>
+                                <!--<div th:if="*{skills.size()}">-->
+                                    <!--<ul>-->
+                                        <!--<li th:each="skill: *{skills}" ><a th:href="${skill.postLink}" th:text="${skill.title}"></a></li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
