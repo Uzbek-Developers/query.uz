@@ -114,14 +114,17 @@
                     <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth' ? 'active':''}">
                         <a th:href="@{/auth}" title="Kirish" th:if="!${user}"><i class="fa fa-sign-in" ></i> <span>Kirish</span></a>
                     </li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/article/list' ? 'active':''}">
+                        <a th:href="@{/article/list}" title="Maqolalar"><i class="fa fa-user" ></i> <span>Maqolalar</span></a>
+                    </li>
                     <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth' ? 'active':''}">
-                        <a th:href="@{/user/}+${user.id}" title="Foydalanuvchi" th:if="${user}"><i class="fa fa-user" ></i> <span>Foydalanuchi</span></a>
+                        <a th:href="@{/user/}+${user.id}" title="Foydalanuvchi" th:if="${user}"><i class="fa fa-user" ></i> <span>Foydalanuvchi</span></a>
                     </li>
                     <!--<li><a href="#"><i class="fa fa-user"></i> <span>Foydalanuvchilar</span></a></li>-->
                     <!--<li><a href="#"><i class="fa fa-star"></i> <span>Unvonlar</span></a></li>-->
                     <li class="add-question"
-                        th:classappend="${#httpServletRequest.getRequestURI() == '/ask_question' ? 'active':''}">
-                        <a th:href="@{/ask_question}" title="Savol so'rash">
+                        th:classappend="${#httpServletRequest.getRequestURI() == '/question/add' ? 'active':''}">
+                        <a th:href="@{/question/add}" title="Savol so'rash">
                             <i class="fa fa-plus"></i>
                             <span>Savol so'rash</span>
                         </a>

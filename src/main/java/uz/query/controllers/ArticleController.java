@@ -111,11 +111,6 @@ public class ArticleController {
             formObj = articleRepository.findOne(formObj.getId());
         }
         String selectedTagList = request.getParameter("tagIdList");
-//        List<String> ids = Arrays.asList(selectedTagList.split(","));
-//        List<Tag> list = new LinkedList<Tag>();
-//        for (String id : ids) {
-//            list.add(articleRepository.findOne(Long.valueOf(id)));
-//        }
 
         formObj.setOwner(securityUtil.getCurrentUser());
         if (formObj.getId() == null) {

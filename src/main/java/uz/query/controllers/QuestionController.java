@@ -111,14 +111,14 @@ public class QuestionController {
     }
 
 
-    @RequestMapping(value = "/ask_question", method = RequestMethod.GET)
+    @RequestMapping(value = "/question/add", method = RequestMethod.GET)
     public String enterAddQuestionForm(Model model) {
         Question question = new Question();
         ViewData viewData = new ViewData("Question_Add");
         viewData.setTitle("Savol so'rash");
         viewData.setMetaKeyword("savol berish, savol qo'shish");
         viewData.setMetaDescription("Query.uzga dasturlash bo'yicha savol qo'shish, savol berish");
-        viewData.setViewLink("/ask_question");
+        viewData.setViewLink("/question/add");
         model.addAttribute(Constants.VIEW_DATA, viewData);
 
 

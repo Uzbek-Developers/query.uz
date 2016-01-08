@@ -1,16 +1,26 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="box (user)">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="widget (user)">
     <div class="user-box" th:object="${user}">
-        <div class="cover-bg">
-            <img th:src="@{/images/material-design-rainbow1.png}" alt="photo"/>
-        </div>
+        <!--<div class="cover-bg">-->
+        <!--<img th:src="@{/images/material-design-rainbow1.png}" alt="photo"/>-->
+        <!--</div>-->
         <div class="clearfix">
             <!--<div class="user-image pull-left">-->
             <!--<a href="#"><img th:src="@{/images/default-user-avatar.jpg}" alt="user"/></a>-->
             <!--</div>-->
             <!--<div class="user-short-content">-->
-            <a th:href="*{link}" class="name" th:attr="title=*{displayName}" th:text="*{displayName}"></a>
-            (<span th:text="*{reputation}">0</span>)
-
+            <div class="name-box">
+                <a th:href="*{link}" class="name" th:attr="title=*{displayName}" th:text="*{displayName}"></a>
+                (<span th:text="*{reputation}">0</span>)
+            </div>
+            <ul class="list action-list">
+                <li><a th:href="@{/question/add}"><i class="fa fa-question-circle"></i> Savollarim</a></li>
+                <li><a th:href="@{/question/add}"><i class="fa fa-exclamation-circle"></i> Javoblarim</a></li>
+                <li><a th:href="@{/question/add}"><i class="fa fa-bar-chart-o"></i> Ovozlarim</a></li>
+                <li><a th:href="@{/question/add}"><i class="fa fa-star"></i> Saqlanganlar</a></li>
+                <li><a th:href="@{/question/add}"><i class="fa fa-plus-circle"></i> Savol qo'shish</a></li>
+                <li><a th:href="@{/tag/add}"><i class="fa fa-plus-circle"></i> Teg qo'shish</a></li>
+                <li><a th:href="@{/article/add}"><i class="fa fa-plus-circle"></i> Maqola qo'shish</a></li>
+            </ul>
             <!--<span class="user-score">-->
             <!--<span class="reputation" th:text="*{reputation}">[25,655]</span>-->
             <!--<span class="badge-gold"><i class="fa fa-trophy"></i> 25</span>-->
@@ -42,6 +52,17 @@
             <!--<button class="btn btn-blue">Rezumeni ko'rish</button>-->
             <!--</div>-->
             <!--</div>-->
+        </div>
+    </div>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="box (user)">
+    <div class="user-box" th:object="${user}">
+        <div class="clearfix">
+            <div class="name-box">
+                <a th:href="*{link}" class="name" th:attr="title=*{displayName}" th:text="*{displayName}"></a>
+                (<span th:text="*{reputation}">0</span>)
+            </div>
         </div>
     </div>
 </div>

@@ -516,9 +516,12 @@ body {
 
   }
   .article-list {
+    .set-margin(10px 10px 0);
+    .set-padding(0 0 10px);
     li {
       width: 33%;
-      float: left;
+      display: inline-block;
+      vertical-align: top;
       a {
         display: block;
         .set-padding(5px);
@@ -639,6 +642,31 @@ body {
   &:hover {
     text-decoration: none;
     z-index: 5;
+  }
+  .name-box {
+    .set-padding(7px 10px);
+  }
+  .action-list {
+    > li {
+      color: @color-gray-normal;
+      border-top: 1px solid @color-gray-medium;
+      & + li {
+        border-top: 1px solid @color-gray-medium;
+      }
+      .set-padding(5px 10px);
+      .set-margin();
+      a {
+        color: @color-gray;
+        i {
+          vertical-align: middle;
+        }
+        &:hover {
+          color: @color-blue;
+          text-decoration: none;
+        }
+      }
+    }
+
   }
   .cover-bg {
     height: 40px;

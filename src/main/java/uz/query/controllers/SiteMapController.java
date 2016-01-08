@@ -20,7 +20,7 @@ public class SiteMapController {
         create(xmlUrlSet, "", XmlUrl.Priority.HIGH);
         create(xmlUrlSet, "/auth", XmlUrl.Priority.HIGH);
         create(xmlUrlSet, "/profile", XmlUrl.Priority.HIGH);
-        create(xmlUrlSet, "/ask_question", XmlUrl.Priority.HIGH);
+        create(xmlUrlSet, "/question/add", XmlUrl.Priority.HIGH);
         create(xmlUrlSet, "/help/list", XmlUrl.Priority.HIGH);
         create(xmlUrlSet, "/question/list", XmlUrl.Priority.HIGH);
         create(xmlUrlSet, "/tag/list", XmlUrl.Priority.MEDIUM);
