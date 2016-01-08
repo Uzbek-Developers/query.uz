@@ -111,7 +111,11 @@ public class Post extends BaseModel {
     }
 
     public int voteRank() {
-        Stream<Vote> list = votes.stream().filter(v -> v.getOwner().getId() == owner.getId());
-        return list.count() == 0 ? 0 : list.findFirst().get().getRank();
+        Vote vote = null;
+        if (votes.size() > 0) {
+            vote = votes.stream().filter(v -> v.getOwner().getId() == owner.getId()).findFirst().get();
+        }
+        return vote == null ? 0 : vote.getRank();
+//        return 1;
     }
 }

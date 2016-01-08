@@ -216,33 +216,56 @@ public class QuestionController {
         return "redirect:/question/" + parentId;
     }
 
-    @RequestMapping(value = "/setVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/setQuestionVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String setVote(@RequestParam("rank") String rankVote, @RequestParam("questionId") Long questionId) {
+    public String setQuestionVote(@RequestParam("rank") String rankVote, @RequestParam("id") Long id) {
         int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
 //        Long questionId = Long.parseLong(question);
-        if (rank != 0 && questionId > 0) {
+        if (rank != 0 && id > 0) {
             User user = securityUtil.getCurrentUser();
-            Question question = questionRepository.findOne(questionId);
+            Question question = questionRepository.findOne(id);
 
             Vote myVote = null;
             if (question.getVotes().size() > 0) {
                 myVote = question.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
                 question.getVotes().remove(myVote);
             }
-            Vote oldVote = myVote;
-            if (myVote != null) {
-                myVote.setRank(rank);
-                myVote = voteRepository.save(myVote);
-            } else {
+            if (myVote == null) {
                 myVote = new Vote();
                 myVote.setOwner(user);
-                myVote.setRank(rank);
-                myVote = voteRepository.save(myVote);
             }
+            myVote.setRank(rank);
+            myVote = voteRepository.save(myVote);
             question.getVotes().add(myVote);
+            question.setVoteCount(question.getVoteCount() + rank);
             questionRepository.save(question);
+        }
+        return "";
+    }
 
+    @RequestMapping(value = "/setAnswerVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public String setAnswerVote(@RequestParam("rank") String rankVote, @RequestParam("id") Long id) {
+        int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
+//        Long questionId = Long.parseLong(question);
+        if (rank != 0 && id > 0) {
+            User user = securityUtil.getCurrentUser();
+            Answer answer = answerRepository.findOne(id);
+
+            Vote myVote = null;
+            if (answer.getVotes().size() > 0) {
+                myVote = answer.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
+                answer.getVotes().remove(myVote);
+            }
+            if (myVote == null) {
+                myVote = new Vote();
+                myVote.setOwner(user);
+            }
+            myVote.setRank(rank);
+            myVote = voteRepository.save(myVote);
+            answer.getVotes().add(myVote);
+            answer.setVoteCount(answer.getVoteCount() + rank);
+            answerRepository.save(answer);
         }
         return "";
     }
