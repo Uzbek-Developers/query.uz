@@ -1,7 +1,7 @@
 <div xmlns:th="http://www.thymeleaf.org" class="side-wrap" th:fragment="side-wrap">
     <div class="current-site-box">
         <div class="widget-box" th:if="${user}">
-            <div th:replace="fragments/user :: box(user = ${user})"></div>
+            <div th:replace="fragments/user :: widget(user = ${user})"></div>
             <ul class="list feature-list">
                 <li><a href="#"></a></li>
             </ul>
