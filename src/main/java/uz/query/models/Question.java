@@ -16,10 +16,10 @@ import java.util.List;
 public class Question extends Post {
 
     //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak
-    @ColumnDefault(value = "0")
-    private Integer voteCount = 0;
-    @ColumnDefault(value = "0")
-    private Integer seenCount = 0;
+//    @ColumnDefault(value = "0")
+//    private Integer voteCount = 0;
+//    @ColumnDefault(value = "0")
+//    private Integer seenCount = 0;
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
@@ -35,13 +35,7 @@ public class Question extends Post {
         this.setPostType(PostType.Question);
     }
 
-    public Integer getSeenCount() {
-        return seenCount;
-    }
 
-    public void setSeenCount(Integer seenCount) {
-        this.seenCount = seenCount;
-    }
 
     public List<Tag> getTags() {
         return tags;
@@ -59,13 +53,7 @@ public class Question extends Post {
         this.answers = answers;
     }
 
-    public Integer getVoteCount() {
-        return voteCount;
-    }
 
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
 
     public StatusType getStatusType() {
         return statusType;

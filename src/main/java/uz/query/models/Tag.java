@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Mirjalol Bahodirov on 12/14/15 with love.
  */
 @Entity
-@JsonIgnoreProperties({"questions", "owner"})
+@JsonIgnoreProperties({"questions", "owner", "editorContent"})
 public class Tag extends Post {
 
     @ManyToMany(fetch = FetchType.LAZY)

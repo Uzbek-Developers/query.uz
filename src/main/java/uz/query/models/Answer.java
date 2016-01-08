@@ -15,10 +15,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Answer extends Post {
 
-    @ColumnDefault(value = "0")
-    private Integer voteCount = 0;
-    @ColumnDefault(value = "0")
-    private Integer seenCount = 0;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Question parent;
@@ -26,27 +22,12 @@ public class Answer extends Post {
     public Answer() {
         this.setPostType(PostType.Answer);
     }
+
     public Question getParent() {
         return parent;
     }
 
     public void setParent(Question parent) {
         this.parent = parent;
-    }
-
-    public Integer getSeenCount() {
-        return seenCount;
-    }
-
-    public void setSeenCount(Integer seenCount) {
-        this.seenCount = seenCount;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
     }
 }

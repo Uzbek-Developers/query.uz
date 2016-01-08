@@ -3,9 +3,8 @@ package uz.query.models;
 import org.hibernate.annotations.ColumnDefault;
 import uz.query.models.base.BaseModel;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by sherali on 12/28/15.
@@ -13,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Vote extends BaseModel {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     private User owner;
     @ColumnDefault(value = "0")
     private int rank;

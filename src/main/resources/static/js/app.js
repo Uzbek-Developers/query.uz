@@ -26,6 +26,19 @@ var App = {
 
             return false;
         });
+        $("body").on("click", ".vote-btn", function () {
+            var parent = $(this).closest(".box-feature");
+            var postId = $(this).closest(".box-feature").find("input[name=postId]").val();
+            var postType = $(this).closest(".box-feature").find("input[name=postType]").val();
+            var rankType = $(this).attr("class").indexOf("down") !== -1 ? "down" : "up";
+            $.getJSON('/setVote', {id: postId, postType: postType, rank: rankType}, function (data) {
+                console.log(data);
+                parent.find(".marked-up").removeClass("marked-up");
+                parent.find(".marked-down").removeClass("marked-down");
+                parent.find(".vote").addClass(data.rank > 0 ? 'marked-up' : data.rank < 0 ? 'marked-down' : '');
+                parent.find(".count").text(data.voteCount);
+            });
+        });
     },
     tagSelectorConfig: function () {
         var TagSelector = $("#tagSelector").tagSelector({

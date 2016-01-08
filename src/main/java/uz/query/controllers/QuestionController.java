@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.query.Constants;
 import uz.query.models.*;
+import uz.query.models.base.Post;
 import uz.query.models.enums.FlagType;
+import uz.query.models.enums.PostType;
 import uz.query.models.enums.StatusType;
 import uz.query.repositories.*;
+import uz.query.repositories.base.BaseRepository;
 import uz.query.security.SecurityUtil;
 import uz.query.utils.StringUtils;
 
@@ -39,6 +42,7 @@ public class QuestionController {
     private VoteRepository voteRepository;
     @Autowired
     private SecurityUtil securityUtil;
+
     //endregion
 
     //region <Request Mapping methods>
@@ -228,11 +232,14 @@ public class QuestionController {
             Vote myVote = null;
             if (question.getVotes().size() > 0) {
                 myVote = question.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
-                question.getVotes().remove(myVote);
             }
             if (myVote == null) {
                 myVote = new Vote();
                 myVote.setOwner(user);
+            } else {
+                if (myVote.getRank() == rank)
+                    return "";
+                question.getVotes().remove(myVote);
             }
             myVote.setRank(rank);
             myVote = voteRepository.save(myVote);
@@ -243,31 +250,51 @@ public class QuestionController {
         return "";
     }
 
-    @RequestMapping(value = "/setAnswerVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/setVote", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String setAnswerVote(@RequestParam("rank") String rankVote, @RequestParam("id") Long id) {
+    public Object setAnswerVote(@RequestParam("rank") String rankVote, @RequestParam("id") Long id, @RequestParam("postType") PostType postType) {
+
+        BaseRepository repository;
         int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
 //        Long questionId = Long.parseLong(question);
         if (rank != 0 && id > 0) {
             User user = securityUtil.getCurrentUser();
-            Answer answer = answerRepository.findOne(id);
+
+            if (postType == PostType.Answer)
+                repository = answerRepository;
+            else
+                repository = questionRepository;
+            Post post = (Post) repository.findOne(id);
 
             Vote myVote = null;
-            if (answer.getVotes().size() > 0) {
-                myVote = answer.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
-                answer.getVotes().remove(myVote);
+            if (post.getVotes().size() > 0) {
+                myVote = post.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
+                post.getVotes().remove(myVote);
             }
             if (myVote == null) {
                 myVote = new Vote();
                 myVote.setOwner(user);
+                myVote.setRank(rank);
+
+            } else {
+                post.setVoteCount(post.getVoteCount() - myVote.getRank());
+                if (myVote.getRank() == rank) {
+                    myVote.setRank(0);
+                    voteRepository.delete(myVote);
+                } else myVote.setRank(rank);
             }
-            myVote.setRank(rank);
+            post.setVoteCount(post.getVoteCount() + myVote.getRank());
             myVote = voteRepository.save(myVote);
-            answer.getVotes().add(myVote);
-            answer.setVoteCount(answer.getVoteCount() + rank);
-            answerRepository.save(answer);
+            post.getVotes().add(myVote);
+            repository.save(post);
+            final Vote finalMyVote = myVote;
+            Object result = new Object() {
+                public int rank = finalMyVote.getRank();
+                public int voteCount = post.getVoteCount();
+            };
+            return result;
         }
-        return "";
+        return new Object();
     }
 
 

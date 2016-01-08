@@ -1,0 +1,21 @@
+<div xmlns:th="http://www.thymeleaf.org" class="box-feature pull-right" th:fragment="vote-box (post)">
+    <div th:object="${post}"
+         th:if="${post.flagType.name=='None'} or ${post.flagType.name!='Danger'} and ${post.flagType.name!='Spam'}">
+        <input type="hidden" name="postId" th:value="${post.id}"/>
+        <input type="hidden" name="postType" th:value="${post.postType}"/>
+
+        <div th:text="${user}"></div>
+        <div class="box vote"
+             th:classappend="${post.voteRank(user)>0?'marked-up':post.voteRank(user)<0?'marked-down':''}">
+            <div class="row icons vote-btn up"><i class="fa fa-angle-up"></i></div>
+            <div class="row number-box">
+                <span class="count" th:text="${post.voteCount}"></span>
+            </div>
+            <div class="row icons vote-btn down"><i class="fa fa-angle-down"></i></div>
+        </div>
+        <!--<div class="box bookmark marked">-->
+        <!--<div class="row icons"><i class="fa fa-star marked"></i></div>-->
+        <!--<div class="row number-box"><span class="count" th:text="${post.voteCount}">0</span></div>-->
+        <!--</div>-->
+    </div>
+</div>
