@@ -8,7 +8,6 @@ import uz.query.models.enums.PostType;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by sherali on 12/22/15.
@@ -41,7 +40,7 @@ public class Post extends BaseModel {
 
     private FlagType flagType = FlagType.None;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Vote> votes;
 
     public PostType getPostType() {
@@ -135,9 +134,12 @@ public class Post extends BaseModel {
     public int voteRank(User currentUser) {
         Vote vote = null;
         if (votes.size() > 0 && currentUser != null) {
-            vote = votes.stream().filter(v -> v.getOwner() != null && v.getOwner().getId().equals(currentUser.getId())).findFirst().get();
+            try {
+                vote = votes.stream().filter(v -> v.getOwner() != null && v.getOwner().getId().equals(currentUser.getId())).findFirst().get();
+            } catch (Exception e) {
+                vote = null;
+            }
         }
         return vote == null ? 0 : vote.getRank();
-//        return 1;
     }
 }

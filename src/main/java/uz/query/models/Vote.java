@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Vote extends BaseModel {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User owner;
     @ColumnDefault(value = "0")
     private int rank;

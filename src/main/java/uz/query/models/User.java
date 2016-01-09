@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -22,9 +23,11 @@ public class User extends BaseModel {
     @Column(columnDefinition = "text")
     private String about;
     @Column(columnDefinition = "text")
-    private String password;
+    private String password;    
+
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Tag> skills;
+    @Column(nullable = true)
+    private List<Tag> skills = new LinkedList<>();
 
     @ColumnDefault(value = "0")
     private Integer reputation = 0;

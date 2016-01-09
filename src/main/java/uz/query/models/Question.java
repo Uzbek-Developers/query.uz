@@ -15,12 +15,6 @@ import java.util.List;
 @Entity
 public class Question extends Post {
 
-    //todo quyidagi (voteCount, seenCount)fieldlar yangi logika bilan qayta yozlishi kerak
-//    @ColumnDefault(value = "0")
-//    private Integer voteCount = 0;
-//    @ColumnDefault(value = "0")
-//    private Integer seenCount = 0;
-
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
     @OneToMany(fetch = FetchType.LAZY)

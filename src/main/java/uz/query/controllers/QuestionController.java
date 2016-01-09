@@ -254,28 +254,27 @@ public class QuestionController {
     @ResponseBody
     public Object setAnswerVote(@RequestParam("rank") String rankVote, @RequestParam("id") Long id, @RequestParam("postType") PostType postType) {
 
-        BaseRepository repository;
         int rank = rankVote.equals("up") ? +1 : (rankVote.equals("down") ? -1 : 0);
-//        Long questionId = Long.parseLong(question);
         if (rank != 0 && id > 0) {
-            User user = securityUtil.getCurrentUser();
 
-            if (postType == PostType.Answer)
-                repository = answerRepository;
-            else
-                repository = questionRepository;
+            User user = securityUtil.getCurrentUser();
+            BaseRepository repository = (postType == PostType.Answer) ? answerRepository : questionRepository;
             Post post = (Post) repository.findOne(id);
 
             Vote myVote = null;
             if (post.getVotes().size() > 0) {
-                myVote = post.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
-                post.getVotes().remove(myVote);
+                try {
+                    myVote = post.getVotes().stream().filter(v -> v.getOwner().getId().equals(user.getId())).findFirst().get();
+                } catch (Exception e) {
+                    myVote = null;
+                }
+                if (myVote != null)
+                    post.getVotes().remove(myVote);
             }
             if (myVote == null) {
                 myVote = new Vote();
                 myVote.setOwner(user);
                 myVote.setRank(rank);
-
             } else {
                 post.setVoteCount(post.getVoteCount() - myVote.getRank());
                 if (myVote.getRank() == rank) {
@@ -283,14 +282,18 @@ public class QuestionController {
                     voteRepository.delete(myVote);
                 } else myVote.setRank(rank);
             }
+
             post.setVoteCount(post.getVoteCount() + myVote.getRank());
             myVote = voteRepository.save(myVote);
             post.getVotes().add(myVote);
-            repository.save(post);
+            post = (Post) repository.save(post);
+
             final Vote finalMyVote = myVote;
+            final Post finalPost = post;
+
             Object result = new Object() {
                 public int rank = finalMyVote.getRank();
-                public int voteCount = post.getVoteCount();
+                public int voteCount = finalPost.getVoteCount();
             };
             return result;
         }
