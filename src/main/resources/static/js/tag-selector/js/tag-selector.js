@@ -177,7 +177,7 @@ $(document).ready(function () {
                             html += '<span class="tag-item" data-id="' + array[i].id + '">' + array[i].title + '</span> ';
                             html += '<span class="tag-stat"> x' + array[i].stat + '</span> ';
                             html += '<p class="short-description">' + array[i].shortDesc + '</p> ';
-                            html += '<a class="tag-more" href="' + array[i].moreLink + '">Batafsil</a> ';
+                            html += '<a class="tag-more" href="' + array[i].postLink + '">Batafsil</a> ';
                             html += '</div> ';
                             var box = this.dom.box.clone();
                             box.attr("data-index", i);

@@ -9,7 +9,8 @@
         <div class="widget-box pinned questions content-box" th:if="${rulesList}">
             <h3 class="title">Sayt haqida savollar</h3>
             <ul class="list tip-list">
-                <li th:each="question : ${rulesList}"><a th:attr="title=${question.title}" th:href="${question.postLink}" th:text="${question.title}"></a>
+                <li th:each="question : ${rulesList}"><a th:attr="title=${question.title}"
+                                                         th:href="${question.postLink}" th:text="${question.title}"></a>
                 </li>
             </ul>
         </div>
@@ -20,7 +21,8 @@
         <div class="widget-box tags" th:if="${user} and ${tagList}">
             <h3 class="title">Top teglar</h3>
             <ul class="list tag-list">
-                <li th:each="tag: ${tagList}"><a th:href="${tag.postLink}" th:text="${tag.title}"></a></li>
+                <li th:each="tag: ${tagList}"><a class="tag-item" th:href="${tag.postLink}" th:text="${tag.title}"></a>
+                </li>
             </ul>
         </div>
         <div class="widget-box top-questions" th:if="${user} and ${topQuestions}">
@@ -39,7 +41,8 @@
                 <tr th:each="question : ${relatedQuestions}">
                     <!--<td class="count" th:text="${question.voteCount}">55</td>-->
                     <td class="count">5500</td>
-                    <td class="description"><a href="#" class="question-link" th:text="${question.title}"></a></td>
+                    <td class="description"><a th:href="${question.postLink}" class="question-link"
+                                               th:text="${question.title}"></a></td>
                 </tr>
             </table>
         </div>

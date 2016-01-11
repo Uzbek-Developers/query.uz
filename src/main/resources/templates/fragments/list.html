@@ -17,7 +17,8 @@
 
                     <ul class="list tag-list" th:if="${#lists.size(question.tags)>0}">
                         <li th:each="tag: ${question.tags}">
-                            <a th:href="${tag.postLink}" th:attr="title=${tag.title}" th:text="${tag.title}"></a>
+                            <a th:href="${tag.postLink}" class="tag-item" th:attr="title=${tag.title}"
+                               th:text="${tag.title}"></a>
                         </li>
                     </ul>
                     <div class="question-activity">
@@ -57,15 +58,16 @@
     <div class="filter-box clearfix">
         <h3 class="title pull-right">Teglar</h3>
     </div>
-    <div class="post-wrap">
+    <div class="tag-wrap">
         <div class="row">
-            <div class="col-md-3" th:each="tag: ${page}">
+            <div class="col-xs-12 col-md-3" th:each="tag: ${page}">
                 <div class="tag-box">
-                    <a th:href="${tag.postLink}" class="tag-link" th:attr="title=${tag.title}"
-                       th:text="${tag.title}"></a>
+                    <a th:href="@{/question/tagged/}+${tag.id}" class="tag-item" th:attr="title=${tag.title}"
+                       th:text="${tag.title}"></a> x <span class="tag-stat" th:text="${tag.statisticCount}"></span>
 
-                    <div class="excerpt" th:attr="title=${#strings.abbreviate(tag.shortDescription,100)}"
+                    <div class="short-description" th:attr="title=${#strings.abbreviate(tag.shortDescription,100)}"
                          th:text="${#strings.abbreviate(tag.shortDescription,100)}"></div>
+                    <p><a class="tag-more" th:href="${tag.postLink}">Tag haqida batafsil</a></p>
                 </div>
             </div>
 

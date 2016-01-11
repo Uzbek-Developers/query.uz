@@ -42,7 +42,6 @@ public class QuestionController {
     private VoteRepository voteRepository;
     @Autowired
     private SecurityUtil securityUtil;
-
     //endregion
 
     //region <Request Mapping methods>
@@ -131,10 +130,12 @@ public class QuestionController {
         return "add-question";
     }
 
-    @RequestMapping(value = "/save_question", method = RequestMethod.POST)
+    @RequestMapping(value = "/question/save", method = RequestMethod.POST)
     public String addQuestionSubmit(@ModelAttribute Question formQuestion, HttpServletRequest request) {
-        if (formQuestion.getId() != null) {
-            formQuestion = questionRepository.findOne(formQuestion.getId());
+        Question question = formQuestion;
+        boolean isEdit = formQuestion.getId() != null;
+        if (isEdit) {
+            question = questionRepository.findOne(formQuestion.getId());
         }
         String selectedTagList = request.getParameter("tagIdList");
         List<String> ids = Arrays.asList(selectedTagList.split(","));
@@ -143,33 +144,94 @@ public class QuestionController {
             list.add(tagRepository.findOne(Long.valueOf(id)));
         }
 
-        formQuestion.setTags(list);
-        formQuestion.setOwner(securityUtil.getCurrentUser());
-        if (formQuestion.getId() == null) {
-            questionRepository.save(formQuestion);
+        question.setTitle(formQuestion.getTitle());
+        question.setContent(formQuestion.getContent());
+        question.setEditorContent(formQuestion.getEditorContent());
+        question.setTags(list);
+        if (!isEdit) {
+            question.setOwner(securityUtil.getCurrentUser());
+        } else {
+            if (securityUtil.getCurrentUser() != null && securityUtil.getCurrentUser().getId() != question.getOwner().getId()) {
+                question.setOwner(securityUtil.getCurrentUser());
+            }
+        }
+        questionRepository.save(question);
+
+        if (!isEdit) {
+            question.setPostLink(StringUtils.makeLinkFromTitle("/question/" + question.getId() + "/", question.getTitle()));
+            questionRepository.save(question);
         }
 
-        formQuestion.setPostLink(StringUtils.makeLinkFromTitle("/question/" + formQuestion.getId() + "/", formQuestion.getTitle()));
+        return "redirect:/question/" + question.getId();
+    }
 
-        questionRepository.save(formQuestion);
+    @RequestMapping(value = "/question/answer/save", method = RequestMethod.POST)
+    public String addQuestionSubmit(HttpServletRequest request, @ModelAttribute("newAnswer") Answer formAnswer) {
+        Long questionId = Long.parseLong(request.getParameter("questionId"));
+        Question question = questionRepository.findOne(questionId);
+        boolean isEdit = formAnswer.getId() != null;
+        Answer answer = formAnswer;
+        if (isEdit) {
+            answer = answerRepository.findOne(formAnswer.getId());
+            if (securityUtil.getCurrentUser() != null && answer.getOwner().getId() != securityUtil.getCurrentUser().getId()) {
+                answer.setEditor(securityUtil.getCurrentUser());
+            }
+        } else {
+            answer.setOwner(securityUtil.getCurrentUser());
+        }
+        answer.setContent(formAnswer.getContent());
+        answer.setEditorContent(formAnswer.getEditorContent());
+        answer = answerRepository.save(answer);
 
+        if (!isEdit) {
+            answer.setPostLink(question.getPostLink() + "#" + answer.getId());
+            answerRepository.save(answer);
+
+            List<Answer> otherAnswers = question.getAnswers();
+            otherAnswers.add(answer);
+            questionRepository.save(question);
+        }
+
+
+        return "redirect:/question/" + questionId;
+    }
+
+
+    @RequestMapping(value = "/question/{questionId}/answer/edit/{id}", method = RequestMethod.GET)
+    public String enterAddQuestionForm(@PathVariable("id") Long id, @PathVariable("questionId") Long questionId, HttpServletRequest request, Model model) {
+        Answer answer = answerRepository.findOne(id);
+        Question question = questionRepository.findOne(questionId);
+
+        ViewData viewData = new ViewData("Answer_Edit");
+        viewData.setTitle(question.getTitle() + " - " + answer.getOwner().getDisplayName() + "ning savolidagi javobni tahrirlash");
+        viewData.setMetaKeyword(question.getTags().toString());
+        viewData.setMetaDescription(answer.getContent());
+        viewData.setViewLink(answer.getPostLink());
+
+        model.addAttribute(Constants.VIEW_DATA, viewData);
+
+        model.addAttribute("question", question);
+        model.addAttribute("answer", answer);
+
+        return "edit-answer";
+    }
+
+    @RequestMapping(value = "/question/anwser/delete/{id}")
+    public String deleteAnswer(@PathVariable("id") Long id, Model model) {
+        answerRepository.delete(id);
         return "redirect:/home";
     }
 
-    @RequestMapping(value = "/question/add_answer", method = RequestMethod.POST)
-    public String addQuestionSubmit(HttpServletRequest request, @ModelAttribute("newAnswer") Answer answer) {
-        answer.setOwner(securityUtil.getCurrentUser());
-        answer = answerRepository.save(answer);
-
-        Long questionId = Long.parseLong(request.getParameter("questionId"));
-
-        Question q = questionRepository.findOne(questionId);
-        List<Answer> otherAnswers = q.getAnswers();
-        otherAnswers.add(answer);
-
-        questionRepository.save(q);
-
-        return "redirect:/question/" + questionId;
+    @RequestMapping(value = "/question/tagged/{id}")
+    public String questionsByTagName(@PathVariable("id") Long id, Model model,
+                                     @PageableDefault(
+                                             size = Constants.SMALL_PAGE_SIZE,
+                                             sort = {"creationDate"},
+                                             direction = Sort.Direction.DESC) Pageable pageable) {
+        List<Tag> tags = new LinkedList<>();
+        tags.add(tagRepository.findOne(id));
+        model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
+        return "list-question";
     }
 
     @RequestMapping(value = "/stateStatusOfQuestion", method = RequestMethod.POST)
@@ -178,7 +240,7 @@ public class QuestionController {
 
         String postType = request.getParameter("postType");
         String statusType = request.getParameter("statusType");
-        String statusLink = request.getParameter("statusLink");//TODO statusLink va reason keyinchalik textareaga o'zgartirildi
+        String statusLink = request.getParameter("statusLink");//TODO statusLink va reason keyinchalik textareaga o'zgartiriladi
 
         Long parentId = Long.parseLong(request.getParameter("parentId"));
         Long postId = Long.parseLong(request.getParameter("postId"));
@@ -300,18 +362,6 @@ public class QuestionController {
         return new Object();
     }
 
-
-    @RequestMapping(value = "/question/tagged/{id}")
-    public String questionsByTagName(@PathVariable("id") Long id, Model model,
-                                     @PageableDefault(
-                                             size = Constants.SMALL_PAGE_SIZE,
-                                             sort = {"creationDate"},
-                                             direction = Sort.Direction.DESC) Pageable pageable) {
-        List<Tag> tags = new LinkedList<>();
-        tags.add(tagRepository.findOne(id));
-        model.addAttribute(Constants.PAGE, questionRepository.findAllByTagsIn(tags, pageable));
-        return "home";
-    }
     //endregion
 
 

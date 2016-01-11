@@ -65,7 +65,7 @@ public class TagController {
         return "add-tag";
     }
 
-    @RequestMapping(value = "/tag/{id}/info")
+    @RequestMapping(value = {"/tag/{id}","/tag/{id}/info"})
     public String detail(@PathVariable("id") Long id, Model model) {
         Tag tag = tagRepository.findOne(id) ;
 
@@ -113,7 +113,6 @@ public class TagController {
     @RequestMapping(value = "/getTagListByIds", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<Tag> getTagList(@RequestParam("ids") List<Long> idList) {
-
         return tagRepository.findByIdIn(idList);
     }
     //endregion

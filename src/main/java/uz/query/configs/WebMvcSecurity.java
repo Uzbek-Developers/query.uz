@@ -39,6 +39,7 @@ public class WebMvcSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/less/**").permitAll()
+                .antMatchers("**/edit/{id}","**/add/").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

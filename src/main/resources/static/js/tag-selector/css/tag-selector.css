@@ -79,7 +79,8 @@
 .tag-selector .tag-options .box {
     width: 33.33%;
     cursor: pointer;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     padding: 3px;
 }
 

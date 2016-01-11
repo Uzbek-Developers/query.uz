@@ -139,7 +139,7 @@ public class TempController {
             question1.setOwner(user2);
             List<Tag> tagList1 = new ArrayList<Tag>();
             tagList1.add(tag1);
-            tagList1.add(tag4);
+            tagList1.add(tag2);
             question1.setTags(tagList1);
 
             Answer answer1 = new Answer();
@@ -166,7 +166,7 @@ public class TempController {
 
             List<Tag> tagList2 = new ArrayList<>();
             tagList2.add(tag1);
-            tagList2.add(tag4);
+            tagList2.add(tag2);
             question2.setTags(tagList2);
 
             Answer answer2 = new Answer();
@@ -183,6 +183,33 @@ public class TempController {
 
             answer2.setPostLink(question2.getPostLink() + "#" + answer2.getId());
             answer2 = answerRepository.save(answer2);
+
+            
+            
+            Question question3 = new Question();
+            question3.setTitle("Java 8 dagi yangi imkoniyatlar?");
+            question3.setContent("Avvalgi Java versiyalaridan nimalari bilan farq qiladi? Nimalar o'zgargan");
+            question3.setEditorContent("Avvalgi Java versiyalaridan nimalari bilan farq qiladi? Nimalar o'zgargan");
+            question3.setOwner(user3);
+
+            List<Tag> tagList3 = new ArrayList<>();
+            tagList3.add(tag4);
+            question3.setTags(tagList3);
+
+            Answer answer3 = new Answer();
+            answer3.setContent("Raqamida farq qiladi. :) 7 != 8");
+            answer3.setEditorContent("Raqamida farq qiladi. :) 7 != 8");
+            answer3.setOwner(user2);
+            answer3 = answerRepository.save(answer3);
+            List<Answer> answerList3 = new ArrayList<>();
+            answerList3.add(answer3);
+            question3.setAnswers(answerList3);
+            question3 = questionRepository.save(question3);
+            question3.setPostLink(StringUtils.makeLinkFromTitle("/question/" + question3.getId() + "/", question3.getTitle()));
+            question3 = questionRepository.save(question3);
+
+            answer3.setPostLink(question3.getPostLink() + "#" + answer3.getId());
+            answer3 = answerRepository.save(answer3);
             //endregion
 
             //region <Articles>
@@ -293,8 +320,6 @@ public class TempController {
             articleRepository.save(article12);
             article12.setPostLink(StringUtils.makeLinkFromTitle("/article/" + article12.getId() + "/", article12.getTitle()));
             articleRepository.save(article12);
-
-
             //endregion
         }
 

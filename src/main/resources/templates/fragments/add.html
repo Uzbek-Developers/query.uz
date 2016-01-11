@@ -1,18 +1,19 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="question">
     <div class="filter-box clearfix">
-        <div th:text="${question.id}"></div>
-            <h3 class="title pull-right" th:text="${question.id} ? 'Savolni tahrirlash' : 'Yangi savol qo`shish'"></h3>
+        <h3 class="title pull-right" th:text="${question.id} ? 'Savolni tahrirlash' : 'Yangi savol qo`shish'"></h3>
     </div>
     <div class="post-wrap">
         <div class="post-item ask-question">
             <div class="box-content">
-                <form th:action="@{/save_question}" th:object="${question}" method="POST">
+                <form th:action="@{/question/save}" th:object="${question}" method="POST">
                     <input type="hidden" th:field="*{id}">
+
                     <div class="field-row">
                         <span class="label">Savol sarlavhasi:</span>
 
-                        <div class="form-field"><input type="text" max-length="240" tabindex="1" required
-                                                       th:field="*{title}"/></div>
+                        <div class="form-field">
+                            <input type="text" max-length="240" tabindex="1" required th:field="*{title}"/>
+                        </div>
                     </div>
                     <div class="field-row">
                         <span class="label">Savol matni: </span>
@@ -26,13 +27,11 @@
 
                             <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
 
-                            <textarea id="txt-preview" class="hide" readonly="true"
-                                      th:field="*{content}"></textarea>
+                            <textarea id="txt-preview" class="hide" readonly="true" th:field="*{content}"></textarea>
                         </div>
                     </div>
                     <div class="field-row">
                         <span class="label">Teglarni kiriting:</span>
-
 
                         <div class="form-field">
                             <!--<input name="tagNameList" id="tagNameList" type="hidden" th:field="*{tags}"/>-->
@@ -59,10 +58,9 @@
 
     <script>
         $(document).ready(function () {
-//            App.tagSelectorConfig();
             $("[type=submit]").on("click", function () {
                 var hasError = false;
-                $(".field-row input[type=text],.field-row  textarea[readonly=false]").each(function () {
+                $(".field-row [required], .field-row [name=selectedTags]").each(function () {
                     var field = $(".tag-input-box").children("input").is($(this)) ? $(".tag-input-box") : $(this);
                     $("#txt-preview").val($("#wmd-preview").html());
 
@@ -103,6 +101,72 @@
         });
     </script>
 </div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="answer">
+    <div class="filter-box clearfix">
+        <h3 class="title pull-right">Javobni tahrirlash</h3>
+    </div>
+    <div class="post-wrap">
+        <div class="post-item ask-question">
+            <div class="box-content">
+                <form th:action="@{/question/answer/save}" th:object="${answer}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" name="questionId" th:value="${question.id}">
+
+                    <div class="field-row">
+                        <span class="label">Savol matni: </span>
+                        <h4 class="title" th:text="${question.title}"></h4>
+                    </div>
+                    <div class="field-row">
+                        <span class="label">Javob matni: </span>
+
+                        <div class="text-editor">
+                            <div class="wmd-panel">
+                                <div id="wmd-button-bar" class="wmd-button-bar"></div>
+                                <textarea class="wmd-input" id="wmd-input" tabindex="2" required
+                                          th:field="*{editorContent}"></textarea>
+                            </div>
+
+                            <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+
+                            <textarea id="txt-preview" class="hide" readonly="true" th:field="*{content}"></textarea>
+                        </div>
+                    </div>
+                    <div class="field-row buttons">
+                        <!--<div class="footer">-->
+
+                        <input type="submit" class="btn btn-green shdw-1x" value="Savolni qo'shish"/>
+                        <!--<button type="sumbit" class="btn btn-green shdw-2x">Savol Berish</button>-->
+                        <a href="#">Link</a>
+                        <!--</div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("[type=submit]").on("click", function () {
+                var hasError = false;
+                $(".field-row [required]").each(function () {
+                    var field = $(".tag-input-box").children("input").is($(this)) ? $(".tag-input-box") : $(this);
+                    $("#txt-preview").val($("#wmd-preview").html());
+
+                    if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
+                        if (!hasError) hasError = !hasError ? true : hasError;
+                        field.addClass("error-field");
+                    } else {
+                        field.removeClass("error-field");
+                    }
+                })
+                if (hasError)
+                    return false;
+            });
+        });
+    </script>
+</div>
+
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="tag">
     <div class="filter-box clearfix">
         <h3 class="title" th:text="${tag.id} ? 'Tegni tahrirlash' : 'Yangi teg qo`shish'"></h3>
@@ -121,7 +185,8 @@
                     </div>
                     <div class="field-row">
                         <span class="label">Qisqa ma'lumot:</span><br/>
-                        <textarea class="textare-comment" required th:field="*{shortDescription}" tabindex="2"></textarea>
+                        <textarea class="textare-comment" required th:field="*{shortDescription}"
+                                  tabindex="2"></textarea>
                     </div>
                     <div class="field-row">
                         <span class="label">Teg haqida to'liqroq: </span>
@@ -167,6 +232,7 @@
         });
     </script>
 </div>
+
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="article">
     <div class="filter-box clearfix">
         <div class="filter-box clearfix">
@@ -178,12 +244,13 @@
             <div class="box-content">
                 <form th:action="@{/article/save}" th:object="${article}" method="POST">
                     <input type="hidden" th:field="*{id}">
+
                     <div class="field-row">
                         <span class="label">Maqola sarlavhasi:</span>
 
                         <div class="form-field">
                             <input type="text" max-length="240" tabindex="1" requeired
-                                                       th:field="*{title}"/>
+                                   th:field="*{title}"/>
                         </div>
                     </div>
                     <div class="field-row">
@@ -230,8 +297,8 @@
 //            App.tagSelectorConfig();
             $("[type=submit]").on("click", function () {
                 var hasError = false;
-                $(".field-row input[type=text][requeired],.field-row  textarea[requeired]").each(function () {
-                    var field =  $(this);
+                $(".field-row [requeired]").each(function () {
+                    var field = $(this);
                     $("#txt-preview").val($("#wmd-preview").html());
 
                     if ((field.is("input") || field.is("textarea") ) && !$(this).val() || field.is("div") && !field.parent().attr("data-tags")) {
