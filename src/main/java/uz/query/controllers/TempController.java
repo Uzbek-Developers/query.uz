@@ -147,7 +147,7 @@ public class TempController {
             answer1.setEditorContent("Foydali savolni foydali ekanligini ovozlar bilan tartiblash uchun ham, boshqalarga nafi tegishi uchun ham, o'sha post egasini darajasini bildirish uchun ham ovoz berish shart hisoblanadi! Undan tashqari yanada qiziqroq va aniqroq savollar yoki javob berishga qiziqtirish, rag'batlantirish bo'ladi.");
             answer1.setOwner(user3);
             answer1 = answerRepository.save(answer1);
-            List<Answer> answerList1 = new ArrayList<>();
+            List<Answer> answerList1 = new ArrayList<>();   
             answerList1.add(answer1);
             question1.setAnswers(answerList1);
             question1 = questionRepository.save(question1);
@@ -210,6 +210,77 @@ public class TempController {
 
             answer3.setPostLink(question3.getPostLink() + "#" + answer3.getId());
             answer3 = answerRepository.save(answer3);
+
+
+
+            Question question4 = new Question();
+            question4.setTitle("Javada primitiv ma'lumot tiplari");
+            question4.setContent("<p>Javadagi primitiv asl ma'nosi nima?</p>\n" +
+                    "\n" +
+                    "<p>Nima uchun \"primitiv ma'lumot TIP(TYPE)i\" deb  nomlangan?</p>");
+            question4.setEditorContent("Javadagi primitiv asl ma'nosi nima?\n" +
+                    "\n" +
+                    "Nima uchun \"primitiv ma'lumot TIP(TYPE)i\" deb  nomlangan?");
+            question4.setOwner(user2);
+
+            List<Tag> tagList4 = new ArrayList<>();
+            tagList4.add(tag4);
+            question4.setTags(tagList4);
+
+            Answer answer4 = new Answer();
+            answer4.setContent("<p>Javada, har qanday o'zgaruvchi o'z tipiga ega bo'ladi. Bu yerda 2 turdagi tip bor: ishora(reference) tiplar va primitiv(primitive) tiplar. Ishora(reference) tiplar objectlarga bog'lanadi. Primitiv tiplar esa to'g'ridan-to'g'ri qiymatni o'z ichiga oladi. </p>\n" +
+                    "\n" +
+                    "<p>Primitiv tiplarni 4 guruhga ham bo'lsa bo'ladi:</p>\n" +
+                    "\n" +
+                    "<ol>\n" +
+                    "<li><strong>Butun</strong> qiymatlar uchun:  byte, short, int  va long</li>\n" +
+                    "<li><strong>Haqiqiy</strong> qiymatlar uchun:  float va double</li>\n" +
+                    "<li><strong>Simvolli</strong> qiymatlar uchun: char (harflar va raqamlar kabi)</li>\n" +
+                    "<li><strong>Mantiqiy</strong> qiymatlar uchun: boolean (true/false qiymatlarni o'zida aks ettiradi)</li>\n" +
+                    "</ol>\n" +
+                    "\n" +
+                    "<p>Javada 8 ta primitiv tiplar mavjud: </p>\n" +
+                    "\n" +
+                    "<ul>\n" +
+                    "<li><strong>int</strong> -  32 bit(4 bayt)li butun son</li>\n" +
+                    "<li><strong>short</strong> - 16 bit(2 bayt)li butun son</li>\n" +
+                    "<li><strong>long</strong> - 64 bit(8 bayt)li butun son</li>\n" +
+                    "<li><strong>byte</strong> - 8 bit(1 bayt)li butun son</li>\n" +
+                    "<li><strong>float</strong> - 32 bit(4 bayt) haqiqiy son</li>\n" +
+                    "<li><strong>double</strong> - 64 bit(8 bayt)li haqiyqiy son</li>\n" +
+                    "<li><strong>char</strong> - 16 bitli Unicode encoding scheme dan foydaluvchi simvollar </li>\n" +
+                    "<li><strong>boolean</strong> - true(rost) va false(yolg'on) qiymat</li>\n" +
+                    "</ul>");
+            answer4.setEditorContent("Javada, har qanday o'zgaruvchi o'z tipiga ega bo'ladi. Bu yerda 2 turdagi tip bor: ishora(reference) tiplar va primitiv(primitive) tiplar. Ishora(reference) tiplar objectlarga bog'lanadi. Primitiv tiplar esa to'g'ridan-to'g'ri qiymatni o'z ichiga oladi. \n" +
+                    "\n" +
+                    "Primitiv tiplarni 4 guruhga ham bo'lsa bo'ladi:\n" +
+                    "\n" +
+                    " 1. **Butun** qiymatlar uchun:  byte, short, int  va long\n" +
+                    " 2. **Haqiqiy** qiymatlar uchun:  float va double\n" +
+                    " 3. **Simvolli** qiymatlar uchun: char (harflar va raqamlar kabi)\n" +
+                    " 4. **Mantiqiy** qiymatlar uchun: boolean (true/false qiymatlarni o'zida aks ettiradi)\n" +
+                    "\n" +
+                    "Javada 8 ta primitiv tiplar mavjud: \n" +
+                    "\n" +
+                    " - **int** -  32 bit(4 bayt)li butun son\n" +
+                    " - **short** - 16 bit(2 bayt)li butun son\n" +
+                    " - **long** - 64 bit(8 bayt)li butun son\n" +
+                    " - **byte** - 8 bit(1 bayt)li butun son\n" +
+                    " - **float** - 32 bit(4 bayt) haqiqiy son\n" +
+                    " - **double** - 64 bit(8 bayt)li haqiyqiy son\n" +
+                    " - **char** - 16 bitli Unicode encoding scheme dan foydaluvchi simvollar \n" +
+                    " - **boolean** - true(rost) va false(yolg'on) qiymat\n");
+            answer4.setOwner(user1);
+            answer4 = answerRepository.save(answer4);
+            List<Answer> answerList4 = new ArrayList<>();
+            answerList4.add(answer4);
+            question4.setAnswers(answerList4);
+            question4 = questionRepository.save(question4);
+            question4.setPostLink(StringUtils.makeLinkFromTitle("/question/" + question4.getId() + "/", question4.getTitle()));
+            question4 = questionRepository.save(question4);
+
+            answer4.setPostLink(question4.getPostLink() + "#" + answer4.getId());
+            answer4 = answerRepository.save(answer4);
             //endregion
 
             //region <Articles>

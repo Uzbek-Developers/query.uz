@@ -24,4 +24,6 @@ public interface QuestionRepository extends BaseRepository<Question, Long> {
 
     List<Question> findFirst10ByTagsIn(Collection<Tag> tags);
 
+    List<Question> findAllByOwnerId(Long id);
+
 }

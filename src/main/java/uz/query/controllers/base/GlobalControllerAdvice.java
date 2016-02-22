@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import uz.query.Constants;
 import uz.query.models.Tag;
 import uz.query.models.ViewData;
+import uz.query.repositories.AnswerRepository;
 import uz.query.repositories.QuestionRepository;
 import uz.query.repositories.TagRepository;
+import uz.query.repositories.VoteRepository;
 import uz.query.security.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,10 @@ import java.util.List;
 public class GlobalControllerAdvice {
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private AnswerRepository answerRepository;
+    @Autowired
+    private VoteRepository voteRepository;
     @Autowired
     private TagRepository tagRepository;
     @Autowired
@@ -39,9 +45,14 @@ public class GlobalControllerAdvice {
         viewData.setViewLink(request.getRequestURI());
 
         model.addAttribute(Constants.TAG_LIST, tagRepository.findAll());
+        if (securityUtil.getCurrentUser() != null) {
+            model.addAttribute(Constants.USER_QUESTION_LIST, questionRepository.findAllByOwnerId(securityUtil.getCurrentUser().getId()));
+            model.addAttribute(Constants.USER_ANSWER_LIST, answerRepository.findAllByOwnerId(securityUtil.getCurrentUser().getId()));
+            model.addAttribute(Constants.USER_VOTE_LIST, voteRepository.findAllByOwnerId(securityUtil.getCurrentUser().getId()));
+        }
 
         List<Tag> tags = new LinkedList<>();
-        Tag tag = tagRepository.findOne(Long.valueOf(1));//sayt haqidagi oxirgi 10 savollar uchun tagning id isi
+        Tag tag = tagRepository.findOne((long) 1);//sayt haqidagi oxirgi 10 savollar uchun tagning id isi
         if (tag != null) {
             tags.add(tag);
             model.addAttribute(Constants.RULES_LIST, questionRepository.findFirst10ByTagsIn(tags));

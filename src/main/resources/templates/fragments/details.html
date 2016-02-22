@@ -164,7 +164,7 @@
 </div>
 <div class="post-status" th:object="${question}" th:if="${question.statusType.name != 'Opened'}">
     <h4 class="title">Ushbu savol
-        <a href="#" th:if="*{owner}" th:attr="title=*{owner.displayName}" th:text="*{owner.displayName}"></a>
+        <a href="#" th:if="*{owner}" th:attr="title=${user.displayName}" th:text="${user.displayName}"></a>
         tomonidan
             <span class="has-dropdown">
                 <a href="#" class="status" th:attr="title=*{statusType.title}" th:text="*{statusType.title}"></a>
@@ -340,7 +340,7 @@
             <p class="message flag-box"><i class="fa fa-warning"></i> Javob yozish uchun <a th:href="@{/auth}">Royxatdan
                 o'ting yoki kiring</a>.</p>
         </div>
-        <form th:action="@{/question/answer/add}" th:object="${newAnswer}" method="POST" th:if="${user}">
+        <form th:action="@{/question/answer/save}" th:object="${newAnswer}" method="POST" th:if="${user}">
             <div class="field-row">
                 <div class="text-editor">
 

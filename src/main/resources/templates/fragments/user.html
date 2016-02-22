@@ -13,10 +13,20 @@
                 (<span th:text="*{reputation}">0</span>)
             </div>
             <ul class="list action-list">
-                <li><a th:href="@{/question/add}"><i class="fa fa-question-circle"></i> Savollarim</a></li>
-                <li><a th:href="@{/question/add}"><i class="fa fa-exclamation-circle"></i> Javoblarim</a></li>
-                <li><a th:href="@{/question/add}"><i class="fa fa-bar-chart-o"></i> Ovozlarim</a></li>
-                <li><a th:href="@{/question/add}"><i class="fa fa-star"></i> Saqlanganlar</a></li>
+                <li>
+                    <a th:href="@{/question/add}"><i class="fa fa-question-circle"></i> Savollarim</a>
+                    (<span th:if="${userQuestionList}" th:text="${userQuestionList.size()}"></span>)
+                </li>
+
+                <li>
+                    <a th:href="@{/question/add}"><i class="fa fa-exclamation-circle"></i> Javoblarim</a>
+                    (<span th:if="${userAnswerList}" th:text="${userAnswerList.size()}"></span>)
+                </li>
+                <li>
+                    <a th:href="@{/question/add}"><i class="fa fa-bar-chart-o"></i> Ovozlarim</a>
+                    (<span th:if="${userVoteList}" th:text="${userVoteList.size()}"></span>)
+                </li>
+                <!--<li><a th:href="@{/question/add}"><i class="fa fa-star"></i> Saqlanganlar</a></li>-->
                 <li><a th:href="@{/question/add}"><i class="fa fa-plus-circle"></i> Savol qo'shish</a></li>
                 <li><a th:href="@{/tag/add}"><i class="fa fa-plus-circle"></i> Teg qo'shish</a></li>
                 <li><a th:href="@{/article/add}"><i class="fa fa-plus-circle"></i> Maqola qo'shish</a></li>

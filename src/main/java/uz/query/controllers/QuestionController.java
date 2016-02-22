@@ -66,7 +66,7 @@ public class QuestionController {
         return "list-question";
     }
 
-    @RequestMapping(value = {"/question/{id}/{title}", "/question/{id}"})
+        @RequestMapping(value = {"/question/{id}/{title}", "/question/{id}"})
     public String detail(@PathVariable("id") Long id, Model model) {
         Question question = questionRepository.findOne(id);
         boolean isDisabledAddingAnswer = StatusType.isDisabledAddingAnswer(question.getStatusType());
@@ -323,6 +323,9 @@ public class QuestionController {
             BaseRepository repository = (postType == PostType.Answer) ? answerRepository : questionRepository;
             Post post = (Post) repository.findOne(id);
 
+//            if (post instanceof Answer) {
+//TODO postType fieldni olib tashlab, o'rniga shuni quyish kerak edi
+//            }
             Vote myVote = null;
             if (post.getVotes().size() > 0) {
                 try {

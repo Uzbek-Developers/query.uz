@@ -31,5 +31,8 @@ public interface Constants {
     public static final String VIEW_DATA = "viewData";
     public static final String RULES_LIST = "rulesList";
     public static final String TAG_LIST = "tagList";
+    public static final String USER_QUESTION_LIST = "userQuestionList";
+    public static final String USER_ANSWER_LIST = "userAnswerList";
+    public static final String USER_VOTE_LIST = "userVoteList";
     //endregion
 }
